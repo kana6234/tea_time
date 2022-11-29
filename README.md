@@ -13,6 +13,9 @@
 ### 主な利用シーン
 茶葉や紅茶のお店、紅茶を使ったレシピを探したい時、紅茶について知りたい時、自分の紅茶についての情報を投稿する時
 
+## 実装機能リスト
+https://docs.google.com/spreadsheets/d/1CbSTYdlJOse2aLDVhJ1EFx8rLQBcWhuiX7aGlNg8klk/edit?usp=sharing
+
 ## 設計書
 
 ## 開発環境
