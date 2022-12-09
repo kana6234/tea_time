@@ -1,1 +1,17 @@
-プロフィール編集ページ
+<p>プロフィール編集</p>
+<%= form_with model: @user, url: users_information_path do |f| %>
+  <%= f.label :name, "ユーザー名" %>
+  <%= f.text_field :name, autofocus: true %>
+
+  <%= f.label :email, "メールアドレス" %>
+  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+  <%= f.label :profile_image, "プロフィール画像" %>
+  <%= f.file_field :profile_image, accept: "image/*" %>
+
+  <%= f.label :introduction, "自己紹介" %>
+  <%= f.text_area :introduction, autofocus: true %>
+
+  <%= f.submit "変更を保存" %>
+  <%= link_to "退会する", users_unsubscribe_path %>
+<% end %>
