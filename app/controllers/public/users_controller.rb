@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :check_guest, only:[:update, :withdraw]
   def show
     @user = User.find(params[:id])
   end

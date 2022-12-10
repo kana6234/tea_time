@@ -3,9 +3,15 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+
+  devise_scope :user do
+    post 'guest_sign_in' => 'public/sessions#guest_sign_in'
+  end
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
+
   scope module: :public do
     root 'homes#top'
     get 'users/information/edit' => 'users#edit'

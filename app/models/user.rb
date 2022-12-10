@@ -16,4 +16,12 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  def self.guest
+    find_or_create_by!(email: 'guest@gmail.com') do |user|
+      user.name = 'ゲスト'
+      user.password = SecureRandom.urlsafe_base64
+      # user.confirmed_at = Time.now
+    end
+  end
 end
