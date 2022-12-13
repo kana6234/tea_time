@@ -1,22 +1,45 @@
 class Public::RecipesController < ApplicationController
   def new
+    @recipe = Recipe.new
+    @recipe.build_post
+    @recipe.steps.build
+    @recipe.materials.build
   end
-  
+
   def create
+    @recipe = Recipe.create(recipe_params)
+    @recipe.post.user_id = current_user.id
+    if @recipe.save
+      redirect_to recipe_path(@recipe.id)
+    else
+      render :new
+    end
   end
-  
+
   def index
+    @recipe = Recipe.all
   end
-  
+
   def show
+    @recipe = Recipe.find(params[:id])
+    @materials = @recipe.materials
+    @steps = @recipe.steps
   end
-  
+
   def edit
   end
-  
+
   def update
   end
-  
+
   def destroy
+  end
+
+  private
+  def recipe_params
+    params.require(:recipe).permit(:serves,
+    post_attributes: [:id, :title, :catchphrase, :thumbnail_image, :introduction],
+    steps_attributes: [:id, :no, :content],
+    materials_attributes: [:id, :name, :quantity])
   end
 end

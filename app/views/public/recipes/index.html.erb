@@ -1,1 +1,10 @@
 レシピ一覧画面
+<% @recipe.each do |recipe| %>
+  <%= link_to recipe_path(recipe.id) do %>
+    <%= recipe.post.title %>
+    <%= recipe.post.catchphrase %>
+    <%= image_tag recipe.post.thumbnail_image %>
+    <%= recipe.post.introduction %>
+    <%= recipe.post.user.name %>
+  <% end %>
+<% end %>

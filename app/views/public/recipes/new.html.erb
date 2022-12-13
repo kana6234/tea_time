@@ -1,1 +1,28 @@
 レシピ投稿画面
+
+<%= form_with model: @recipe do |f| %>
+  <%= f.fields_for :post do |p| %>
+    <%= p.label :title, "タイトル" %>
+    <%= p.text_field :title %>
+    <%= p.label :catchphrase, "キャッチコピー" %>
+    <%= p.text_field :catchphrase %>
+    <%= p.label :thumbnail_image, "サムネイル画像" %>
+    <%= p.file_field :thumbnail_image, accept: "image/*" %>
+    <%= p.label :introduction, "紹介文" %>
+    <%= p.text_area :introduction %>
+  <% end %>
+  <%= f.text_field :serves %>
+  <%= f.label :serves, "人前" %>
+  <%= f.fields_for :materials do |m| %>
+    <%= m.label :name, "材料名" %>
+    <%= m.text_field :name %>
+    <%= m.label :quantity, "分量" %>
+    <%= m.text_field :quantity %>
+  <% end %>
+  <%= f.fields_for :steps do |s| %>
+    <%= s.text_field :no, value: "1" %>
+    <%= s.label :content, "内容" %>
+    <%= s.text_field :content %>
+  <% end %>
+  <%= f.submit "新規登録" %>
+<% end %>

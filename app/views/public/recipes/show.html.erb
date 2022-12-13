@@ -1,1 +1,15 @@
 レシピ詳細画面
+  <%= @recipe.post.user.name %>
+  <%= @recipe.post.title %>
+  <%= @recipe.post.catchphrase %>
+  <%= image_tag @recipe.post.thumbnail_image %>
+  <%= @recipe.post.introduction %>
+  <%= @recipe.serves %>
+  <% @materials.each do |material| %>
+    <%= material.name %>
+    <%= material.quantity %>
+  <% end %>
+  <% @steps.each do |step| %>
+    <%= step.no %>
+    <%= step.content %>
+  <% end %>
