@@ -60,3 +60,5 @@ gem 'devise'
 gem 'net-smtp'
 
 gem 'pry-byebug', group: :development
+
+gem 'cocoon'
