@@ -13,3 +13,5 @@
     <%= step.no %>
     <%= step.content %>
   <% end %>
+  <%= link_to '編集する', edit_recipe_path(@recipe.id) %>
+  <%= link_to '削除する', recipe_path(@recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

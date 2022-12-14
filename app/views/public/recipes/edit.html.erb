@@ -1,1 +1,27 @@
 レシピ情報編集画面
+
+<%= form_with model: @recipe do |f| %>
+  <%= f.fields_for :post do |p| %>
+    <%= p.label :title, "タイトル" %>
+    <%= p.text_field :title %>
+    <%= p.label :catchphrase, "キャッチコピー" %>
+    <%= p.text_field :catchphrase %>
+    <%= p.label :thumbnail_image, "サムネイル画像" %>
+    <%= p.file_field :thumbnail_image, accept: "image/*" %>
+    <%= p.label :introduction, "紹介文" %>
+    <%= p.text_area :introduction %>
+  <% end %>
+  <%= f.text_field :serves %>
+  <%= f.label :serves, "人前" %>
+  <%= f.fields_for :materials do |m| %>
+    <%= render "material_fields", f: m %>
+  <% end %>
+  <div id="detail-association-insertion-point-material"></div>
+    <%= link_to_add_association "追加ボタン", f, :materials, data: {association_insertion_node: '#detail-association-insertion-point-material', association_insertion_method: 'after'} %>
+  <%= f.fields_for :steps do |s| %>
+    <%= render "step_fields", f: s %>
+  <% end %>
+  <div id="detail-association-insertion-point-step"></div>
+  <%= link_to_add_association "追加ボタン", f, :steps, data: {association_insertion_node: '#detail-association-insertion-point-step', association_insertion_method: 'after'} %>
+  <%= f.submit "保存する" %>
+<% end %>
