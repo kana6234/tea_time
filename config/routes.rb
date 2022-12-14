@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get 'users/unsubscribe'
     patch 'users/withdraw'
     resources :users, only:[:show]
-    resources :recipes, :shops, :videos
+    resources :recipes, :shops, :items
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

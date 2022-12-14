@@ -1,1 +1,17 @@
 商品詳細画面
+
+  <%= image_tag @item.post.thumbnail_image %>
+  <% if @item.images.attached? %>
+    <% @item.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
+  <% end %>
+  <%= @item.post.user.name %>
+  <%= @item.post.title %>
+  <%= @item.post.catchphrase %>
+  <%= @item.post.introduction %>
+  <%= @item.website %>
+  <% if @item.post.user_id == current_user.id %>
+  <%= link_to '編集する', edit_item_path(@item.id) %>
+  <%= link_to '削除する', item_path(@item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>

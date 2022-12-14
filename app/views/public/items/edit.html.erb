@@ -1,1 +1,19 @@
 商品情報編集画面
+
+<%= form_with model: @item do |f| %>
+  <%= f.fields_for :post do |p| %>
+    <%= p.label :title, "タイトル" %>
+    <%= p.text_field :title %>
+    <%= p.label :catchphrase, "キャッチコピー" %>
+    <%= p.text_field :catchphrase %>
+    <%= p.label :thumbnail_image, "サムネイル画像" %>
+    <%= p.file_field :thumbnail_image, accept: "image/*" %>
+    <%= p.label :introduction, "紹介文" %>
+    <%= p.text_area :introduction %>
+  <% end %>
+  <%= f.label :website, "商品URL" %>
+  <%= f.text_field :website %>
+  <%= f.label :images, "商品画像" %>
+  <%= f.file_field :images, multiple: true %>
+  <%= f.submit "保存する" %>
+<% end %>
