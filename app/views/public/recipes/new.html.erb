@@ -14,15 +14,14 @@
   <%= f.text_field :serves %>
   <%= f.label :serves, "人前" %>
   <%= f.fields_for :materials do |m| %>
-    <%= m.label :name, "材料名" %>
-    <%= m.text_field :name %>
-    <%= m.label :quantity, "分量" %>
-    <%= m.text_field :quantity %>
+    <%= render "material_fields", f: m %>
   <% end %>
+  <div id="detail-association-insertion-point-material"></div>
+    <%= link_to_add_association "追加ボタン", f, :materials, data: {association_insertion_node: '#detail-association-insertion-point-material', association_insertion_method: 'after'} %>
   <%= f.fields_for :steps do |s| %>
-    <%= s.text_field :no, value: "1" %>
-    <%= s.label :content, "内容" %>
-    <%= s.text_field :content %>
+    <%= render "step_fields", f: s %>
   <% end %>
+  <div id="detail-association-insertion-point-step"></div>
+  <%= link_to_add_association "追加ボタン", f, :steps, data: {association_insertion_node: '#detail-association-insertion-point-step', association_insertion_method: 'after'} %>
   <%= f.submit "新規登録" %>
 <% end %>
