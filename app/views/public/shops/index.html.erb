@@ -1,1 +1,12 @@
 お店一覧画面
+<% @shops.each do |shop| %>
+  <%= link_to shop_path(shop.id) do %>
+    <%= shop.post.title %>
+    <%= shop.post.catchphrase %>
+    <%= image_tag shop.post.thumbnail_image %>
+    <%= shop.post.introduction %>
+  <% end %>
+  <%= link_to user_path(shop.post.user.id) do %>
+    <%= shop.post.user.name %>
+  <% end %>
+<% end %>

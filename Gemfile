@@ -62,3 +62,9 @@ gem 'net-smtp'
 gem 'pry-byebug', group: :development
 
 gem 'cocoon'
+
+gem 'jp_prefecture'
+
+gem "geocoder"
+
+gem 'dotenv-rails'

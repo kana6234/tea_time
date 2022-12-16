@@ -1,1 +1,32 @@
 お店投稿画面
+<%= form_with model: @shop do |f| %>
+  <%= f.fields_for :post do |p| %>
+    <%= p.label :title, "タイトル" %>
+    <%= p.text_field :title %>
+    <%= p.label :catchphrase, "キャッチコピー" %>
+    <%= p.text_field :catchphrase %>
+    <%= p.label :thumbnail_image, "サムネイル画像" %>
+    <%= p.file_field :thumbnail_image, accept: "image/*" %>
+    <%= p.label :introduction, "紹介文" %>
+    <%= p.text_area :introduction %>
+  <% end %>
+  <%= f.label :images, "写真" %>
+  <%= f.file_field :images, multiple: true %>
+  <%= f.label :shop_name, "店舗名" %>
+  <%= f.text_field :shop_name %>
+  <%= f.label :website, "ホームページ" %>
+  <%= f.text_field :website %>
+  <%= f.label :postcode, "郵便番号", autocomplete: 'postcode' %>
+  <%= f.text_field :postcode %>
+  <%= f.label :prefecture_name, "都道府県" %>
+  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
+  <%= f.label :address, "住所" %>
+  <%= f.text_field :address %>
+
+  <%= f.fields_for :business_hours do |b| %>
+    <%= render "business_hour_fields", f: b %>
+  <% end %>
+  <div id="detail-association-insertion-point-business_hour"></div>
+    <%= link_to_add_association "追加ボタン", f, :business_hours, data: {association_insertion_node: '#detail-association-insertion-point-business_hour', association_insertion_method: 'after'} %>
+  <%= f.submit "新期登録" %>
+<% end %>

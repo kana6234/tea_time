@@ -88,8 +88,13 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.11.0)
     ffi (1.15.5)
+    geocoder (1.8.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -100,6 +105,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jp_prefecture (1.1.1)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -244,8 +250,11 @@ DEPENDENCIES
   capybara (>= 3.26)
   cocoon
   devise
+  dotenv-rails
+  geocoder
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  jp_prefecture
   listen (~> 3.3)
   net-smtp
   pry-byebug
