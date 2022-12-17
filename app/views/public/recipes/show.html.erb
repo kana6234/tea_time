@@ -1,5 +1,5 @@
 レシピ詳細画面
-  <%= @recipe.post.user.name %>
+  <%= render 'public/users/link', user: @recipe.post.user %>
   <%= @recipe.post.title %>
   <%= @recipe.post.catchphrase %>
   <%= image_tag @recipe.post.thumbnail_image %>

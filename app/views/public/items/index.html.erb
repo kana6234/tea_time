@@ -1,1 +1,8 @@
 商品一覧画面
+<%= render 'search_form' %>
+<% @items.each do |item| %>
+  <%= link_to item_path(item.id) do %>
+    <%= render 'public/posts/list', post: item.post %>
+  <% end %>
+  <%= render 'public/users/link', user: item.post.user %>
+<% end %>

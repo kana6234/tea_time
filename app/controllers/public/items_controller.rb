@@ -15,7 +15,7 @@ class Public::ItemsController < ApplicationController
   end
 
   def index
-    @item = Item.all
+    @items = Item.all
   end
 
   def show
@@ -39,6 +39,15 @@ class Public::ItemsController < ApplicationController
     item = Item.find(params[:id])
     item.destroy
     redirect_to items_path
+  end
+
+  def search
+    if params[:keyword].present?
+      post = Post.where(postable_type: "Item")
+      @posts = post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%")
+    else
+     redirect_to items_path
+    end
   end
 
   private

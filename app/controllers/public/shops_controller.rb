@@ -43,6 +43,15 @@ class Public::ShopsController < ApplicationController
     redirect_to shops_path
   end
 
+  def search
+    if params[:keyword].present?
+      post = Post.where(postable_type: "Shop")
+      @posts = post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%")
+    else
+     redirect_to shops_path
+    end
+  end
+
   private
   def shop_params
     params.require(:shop).permit(:shop_name, :website, :postcode, :prefecture_code, :address, :latitude, :longitude, images: [],

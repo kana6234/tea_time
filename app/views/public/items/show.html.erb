@@ -6,7 +6,7 @@
       <%= image_tag image %>
     <% end %>
   <% end %>
-  <%= @item.post.user.name %>
+  <%= render 'public/users/link', user: @item.post.user %>
   <%= @item.post.title %>
   <%= @item.post.catchphrase %>
   <%= @item.post.introduction %>

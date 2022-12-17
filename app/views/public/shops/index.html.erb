@@ -1,12 +1,8 @@
 お店一覧画面
+<%= render 'search_form' %>
 <% @shops.each do |shop| %>
   <%= link_to shop_path(shop.id) do %>
-    <%= shop.post.title %>
-    <%= shop.post.catchphrase %>
-    <%= image_tag shop.post.thumbnail_image %>
-    <%= shop.post.introduction %>
+    <%= render 'public/posts/list', post: shop.post %>
   <% end %>
-  <%= link_to user_path(shop.post.user.id) do %>
-    <%= shop.post.user.name %>
-  <% end %>
+  <%= render 'public/users/link', user: shop.post.user %>
 <% end %>

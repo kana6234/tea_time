@@ -17,7 +17,7 @@ class Public::RecipesController < ApplicationController
   end
 
   def index
-    @recipe = Recipe.all
+    @recipes = Recipe.all
   end
 
   def show
@@ -43,6 +43,15 @@ class Public::RecipesController < ApplicationController
     recipe = Recipe.find(params[:id])
     recipe.destroy
     redirect_to recipes_path
+  end
+
+  def search
+    if params[:keyword].present?
+      post = Post.where(postable_type: "Recipe")
+      @posts = post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%")
+    else
+      redirect_to recipes_path
+    end
   end
 
   private

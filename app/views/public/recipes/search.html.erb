@@ -1,0 +1,7 @@
+レシピ一覧画面
+<%= render 'search_form' %>
+<% @posts.each do |post| %>
+  <%= link_to recipe_path(post.postable.id) do %>
+    <%= render 'public/posts/list', post: post %>
+  <% end %>
+<% end %>
