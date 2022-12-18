@@ -7,7 +7,7 @@ class Public::RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
+    @recipe = Recipe.new(recipe_params)
     @recipe.post.user_id = current_user.id
     if @recipe.save
       redirect_to recipe_path(@recipe.id)

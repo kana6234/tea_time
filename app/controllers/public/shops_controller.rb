@@ -6,7 +6,7 @@ class Public::ShopsController < ApplicationController
   end
 
   def create
-    @shop = Shop.create(shop_params)
+    @shop = Shop.new(shop_params)
     @shop.post.user_id = current_user.id
     if @shop.save
       redirect_to shop_path(@shop.id)
