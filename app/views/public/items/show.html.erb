@@ -9,6 +9,9 @@
   <%= render 'public/users/link', user: @item.post.user %>
   <%= @item.post.title %>
   <%= @item.post.catchphrase %>
+  <% @item.post.post_tags.each do |post_tag| %>
+    <%= post_tag.tag.name %>
+  <% end %>
   <%= @item.post.introduction %>
   <%= @item.website %>
   <% if @item.post.user_id == current_user.id %>

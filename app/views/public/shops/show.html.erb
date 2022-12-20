@@ -8,9 +8,12 @@
   <%= render 'public/users/link', user: @shop.post.user %>
   <%= @shop.post.title %>
   <%= @shop.post.catchphrase %>
+  <% @shop.post.post_tags.each do |post_tag| %>
+    <%= post_tag.tag.name %>
+  <% end %>
   <%= @shop.post.introduction %>
   <%= @shop.website %>
-  <% @business_hours.each do |business_hour| %>
+  <%  @shop.business_hours.each do |business_hour| %>
     <%= l business_hour.start_at %>
     <%= l business_hour.finish_at %>
   <% end %>

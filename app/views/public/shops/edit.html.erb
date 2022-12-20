@@ -10,6 +10,8 @@
     <%= p.label :introduction, "紹介文" %>
     <%= p.text_area :introduction %>
   <% end %>
+  <%= f.label :tag_names, "タグ" %>
+  <%= f.text_field :tag_names %>
   <%= f.label :images, "写真" %>
   <%= f.file_field :images, multiple: true %>
   <%= f.label :shop_name, "店舗名" %>

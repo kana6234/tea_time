@@ -1,3 +1,6 @@
 <%= image_tag post.thumbnail_image %>
 <%= post.title %>
 <%= post.catchphrase %>
+<% post.post_tags.each do |post_tag| %>
+  <%= post_tag.tag.name %>
+<% end %>

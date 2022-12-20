@@ -2,14 +2,13 @@ class Shop < ApplicationRecord
   has_many_attached :images
   has_one :post, as: :postable, dependent: :destroy
   has_many :business_hours, dependent: :destroy
+  has_many :post_tags, through: :post
   accepts_nested_attributes_for :post, :business_hours, allow_destroy: true, update_only: true
 
   validates :shop_name, presence: true
   validates :postcode, presence: true
   validates :prefecture_code, presence: true
   validates :address, presence: true
-  validates :latitude, presence: true
-  validates :longitude, presence: true
   validates :post, presence: true
   validates :business_hours, presence: true
 

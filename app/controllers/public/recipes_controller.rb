@@ -9,7 +9,9 @@ class Public::RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.post.user_id = current_user.id
-    if @recipe.save
+    if params[:recipe][:tag_names].present? && @recipe.save
+      sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
+      @recipe.post.save_tags(sent_tag_names)
       redirect_to recipe_path(@recipe.id)
     else
       render :new
@@ -22,8 +24,6 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    @materials = @recipe.materials
-    @steps = @recipe.steps
   end
 
   def edit
@@ -32,7 +32,9 @@ class Public::RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    if @recipe.update(recipe_params)
+    if params[:recipe][:tag_names].present? && @recipe.update(recipe_params)
+      sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
+      @recipe.post.save_tags(sent_tag_names)
       redirect_to recipe_path(@recipe.id)
     else
       render :edit

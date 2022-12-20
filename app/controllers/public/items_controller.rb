@@ -7,7 +7,9 @@ class Public::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.post.user_id = current_user.id
-    if @item.save
+    if params[:item][:tag_names].present? && @item.save
+      sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
+      @item.post.save_tags(sent_tag_names)
       redirect_to item_path(@item.id)
     else
       render :new
@@ -28,7 +30,9 @@ class Public::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if @item.update(item_params)
+    if params[:item][:tag_names].present? && @item.update(item_params)
+      sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
+      @item.post.save_tags(sent_tag_names)
       redirect_to item_path(@item.id)
     else
       render :edit

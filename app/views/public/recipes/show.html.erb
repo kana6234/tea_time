@@ -2,14 +2,17 @@
   <%= render 'public/users/link', user: @recipe.post.user %>
   <%= @recipe.post.title %>
   <%= @recipe.post.catchphrase %>
-  <%= image_tag @recipe.post.thumbnail_image %>
+  <% @recipe.post.post_tags.each do |post_tag| %>
+    <%= post_tag.tag.name %>
+  <% end %>
   <%= @recipe.post.introduction %>
+  <%= image_tag @recipe.post.thumbnail_image %>
   <%= @recipe.serves %>
-  <% @materials.each do |material| %>
+  <% @recipe.materials.each do |material| %>
     <%= material.name %>
     <%= material.quantity %>
   <% end %>
-  <% @steps.each do |step| %>
+  <% @recipe.steps.each do |step| %>
     <%= step.no %>
     <%= step.content %>
   <% end %>

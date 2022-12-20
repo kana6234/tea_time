@@ -8,7 +8,9 @@ class Public::ShopsController < ApplicationController
   def create
     @shop = Shop.new(shop_params)
     @shop.post.user_id = current_user.id
-    if @shop.save
+    if params[:shop][:tag_names].present? && @shop.save
+      sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
+      @shop.post.save_tags(sent_tag_names)
       redirect_to shop_path(@shop.id)
     else
       render :new
@@ -21,7 +23,6 @@ class Public::ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
-    @business_hours = @shop.business_hours
   end
 
   def edit
@@ -30,7 +31,9 @@ class Public::ShopsController < ApplicationController
 
   def update
     @shop = Shop.find(params[:id])
-    if @shop.update(shop_params)
+    if params[:shop][:tag_names].present? && @shop.update(shop_params)
+      sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
+      @shop.post.save_tags(sent_tag_names)
       redirect_to shop_path(@shop.id)
     else
       render :edit
