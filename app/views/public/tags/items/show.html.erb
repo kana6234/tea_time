@@ -1,0 +1,6 @@
+<%= render 'public/items/search_form' %>
+<% @posts.each do |post| %>
+  <%= link_to item_path(post.postable.id) do %>
+    <%= render 'public/posts/list', post: post %>
+  <% end %>
+<% end %>

@@ -49,7 +49,7 @@ class Public::RecipesController < ApplicationController
 
   def search
     if params[:keyword].present?
-      post = Post.where(postable_type: "Recipe")
+      post = Post.seach_recipe
       @posts = post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%")
     else
       redirect_to recipes_path

@@ -10,7 +10,7 @@
   <%= @item.post.title %>
   <%= @item.post.catchphrase %>
   <% @item.post.post_tags.each do |post_tag| %>
-    <%= post_tag.tag.name %>
+    <%= link_to post_tag.tag.name, tags_item_path(post_tag.tag.id) %>
   <% end %>
   <%= @item.post.introduction %>
   <%= @item.website %>

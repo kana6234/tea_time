@@ -27,4 +27,18 @@ class Post < ApplicationRecord
       PostTag.create!(post_id: self.id, tag_id: new_tag.id)
     end
   end
+
+  class << self
+    def seach_recipe
+      self.where(postable_type: "Recipe")
+    end
+
+    def seach_shop
+      self.where(postable_type: "Shop")
+    end
+
+    def seach_item
+      self.where(postable_type: "Item")
+    end
+  end
 end

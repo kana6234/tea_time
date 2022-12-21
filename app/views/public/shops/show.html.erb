@@ -9,7 +9,7 @@
   <%= @shop.post.title %>
   <%= @shop.post.catchphrase %>
   <% @shop.post.post_tags.each do |post_tag| %>
-    <%= post_tag.tag.name %>
+    <%= link_to post_tag.tag.name, tags_shop_path(post_tag.tag.id) %>
   <% end %>
   <%= @shop.post.introduction %>
   <%= @shop.website %>

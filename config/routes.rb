@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     get 'shops/search'
     get 'items/search'
     resources :recipes, :shops, :items
+    namespace :tags do
+      resources :recipes, :shops, :items, only:[:index, :show]
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
