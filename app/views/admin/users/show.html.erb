@@ -1,0 +1,7 @@
+<%= @user.id %>
+<%= @user.name %>
+<%= image_tag @user.profile_image %>
+<%= @user.email %>
+<%= @user.introduction %>
+<%= @user.is_deleted ? "退会" : "有効" %>
+<%= link_to "編集する", edit_admin_user_path(@user.id) %>

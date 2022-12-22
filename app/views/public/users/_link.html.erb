@@ -1,4 +1,4 @@
 <%= link_to user_path(user.id) do %>
-  <%= image_tag user.profile_image %>
+  <%= image_tag user.get_profile_image(50, 50) %>
   <%= user.name %>
 <% end %>
