@@ -12,7 +12,6 @@
     <%= link_to post_tag.tag.name, tags_shop_path(post_tag.tag.id) %>
   <% end %>
   <%= @shop.post.introduction %>
-  <%= @shop.website %>
   <%  @shop.business_hours.each do |business_hour| %>
     <%= l business_hour.start_at %>
     <%= l business_hour.finish_at %>

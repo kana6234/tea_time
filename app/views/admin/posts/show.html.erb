@@ -1,0 +1,41 @@
+<%= @post.id %>
+<%= @post.title %>
+<%= @post.catchphrase %>
+<% @post.post_tags.each do |post_tag| %>
+  <%= post_tag.tag.name %>
+<% end %>
+<%= @post.introduction %>
+<%= link_to @post.user.name, admin_user_path(@post.user.id) %>
+<%= image_tag @post.thumbnail_image %>
+
+<% if @post.postable_type == "Recipe" %>
+  <%= @post.postable.serves %>
+  <% @post.postable.materials.each do |material| %>
+    <%= material.name %>
+    <%= material.quantity %>
+  <% end %>
+  <% @post.postable.steps.each do |step| %>
+    <%= step.no %>
+    <%= step.content %>
+  <% end %>
+<% elsif @post.postable_type == "Shop" %>
+  <% if @post.postable.images.attached? %>
+    <% @post.postable.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
+  <% end %>
+  <%  @post.postable.business_hours.each do |business_hour| %>
+    <%= l business_hour.start_at %>
+    <%= l business_hour.finish_at %>
+  <% end %>
+  <%= @post.postable.website %>
+  <%= @post.postable.prefecture_name + @post.postable.address %>
+<% else %>
+  <% if @post.postable.images.attached? %>
+    <% @post.postable.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
+  <% end %>
+  <%= @post.postable.website %>
+<% end %>
+<%= link_to '削除する', admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

@@ -1,0 +1,12 @@
+<% @posts.each do |post| %>
+    <%= post.id %>
+    <%= link_to admin_post_path(post.id) do %>
+      <%= image_tag post.thumbnail_image %>
+      <%= post.title %>
+    <% end %>
+      <%= post.catchphrase %>
+      <% post.post_tags.each do |post_tag| %>
+        <%= post_tag.tag.name %>
+      <% end %>
+      <%= post.user.name %>
+<% end %>
