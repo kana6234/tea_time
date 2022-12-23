@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :postable, polymorphic: true, optional: true
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :postable_type, presence: true
   validates :title, presence: true

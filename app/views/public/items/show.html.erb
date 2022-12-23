@@ -8,6 +8,15 @@
   <% end %>
   <%= render 'public/users/link', user: @item.post.user %>
   <%= @item.post.title %>
+  <% if current_user.already_favorited?(@item.post) %>
+    <%= link_to favorites_path(@item.post), method: :delete do %>
+      ♥<%= @item.post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to favorites_path(@item.post), method: :post do %>
+      ♡<%= @item.post.favorites.count %>
+    <% end %>
+  <% end %>
   <%= @item.post.catchphrase %>
   <% @item.post.post_tags.each do |post_tag| %>
     <%= link_to post_tag.tag.name, tags_item_path(post_tag.tag.id) %>

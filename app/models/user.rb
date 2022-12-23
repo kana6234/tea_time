@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true
@@ -20,6 +21,10 @@ class User < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def already_favorited?(post)
+    self.favorites.exists?(post_id: post.id)
   end
 
   def self.guest

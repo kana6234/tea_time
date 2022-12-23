@@ -7,6 +7,15 @@
   <% end %>
   <%= render 'public/users/link', user: @shop.post.user %>
   <%= @shop.post.title %>
+  <% if current_user.already_favorited?(@shop.post) %>
+    <%= link_to favorites_path(@shop.post), method: :delete do %>
+      ♥<%= @shop.post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to favorites_path(@shop.post), method: :post do %>
+      ♡<%= @shop.post.favorites.count %>
+    <% end %>
+  <% end %>
   <%= @shop.post.catchphrase %>
   <% @shop.post.post_tags.each do |post_tag| %>
     <%= link_to post_tag.tag.name, tags_shop_path(post_tag.tag.id) %>

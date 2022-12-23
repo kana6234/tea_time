@@ -1,6 +1,15 @@
 レシピ詳細画面
   <%= render 'public/users/link', user: @recipe.post.user %>
   <%= @recipe.post.title %>
+  <% if current_user.already_favorited?(@recipe.post) %>
+    <%= link_to favorites_path(@recipe.post), method: :delete do %>
+      ♥<%= @recipe.post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to favorites_path(@recipe.post), method: :post do %>
+      ♡<%= @recipe.post.favorites.count %>
+    <% end %>
+  <% end %>
   <%= @recipe.post.catchphrase %>
   <% @recipe.post.post_tags.each do |post_tag| %>
     <%= link_to post_tag.tag.name, tags_recipe_path(post_tag.tag.id) %>
