@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  has_one :post, as: :postable, dependent: :destroy
+  belongs_to :post, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :materials, dependent: :destroy
   has_many :post_tags, through: :post

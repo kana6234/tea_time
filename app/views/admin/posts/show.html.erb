@@ -8,34 +8,34 @@
 <%= link_to @post.user.name, admin_user_path(@post.user.id) %>
 <%= image_tag @post.thumbnail_image %>
 
-<% if @post.postable_type == "Recipe" %>
-  <%= @post.postable.serves %>
-  <% @post.postable.materials.each do |material| %>
+<% if @post.recipe.present? %>
+  <%= @post.recipe.serves %>
+  <% @post.recipe.materials.each do |material| %>
     <%= material.name %>
     <%= material.quantity %>
   <% end %>
-  <% @post.postable.steps.each do |step| %>
+  <% @post.recipe.steps.each do |step| %>
     <%= step.no %>
     <%= step.content %>
   <% end %>
-<% elsif @post.postable_type == "Shop" %>
-  <% if @post.postable.images.attached? %>
-    <% @post.postable.images.each do |image| %>
+<% elsif @post.shop.present? %>
+  <% if @post.shop.images.attached? %>
+    <% @post.shop.images.each do |image| %>
       <%= image_tag image %>
     <% end %>
   <% end %>
-  <%  @post.postable.business_hours.each do |business_hour| %>
+  <%  @post.shop.business_hours.each do |business_hour| %>
     <%= l business_hour.start_at %>
     <%= l business_hour.finish_at %>
   <% end %>
-  <%= @post.postable.website %>
-  <%= @post.postable.prefecture_name + @post.postable.address %>
+  <%= @post.shop.website %>
+  <%= @post.shop.prefecture_name + @post.shop.address %>
 <% else %>
-  <% if @post.postable.images.attached? %>
-    <% @post.postable.images.each do |image| %>
+  <% if @post.item.images.attached? %>
+    <% @post.item.images.each do |image| %>
       <%= image_tag image %>
     <% end %>
   <% end %>
-  <%= @post.postable.website %>
+  <%= @post.item.website %>
 <% end %>
 <%= link_to '削除する', admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

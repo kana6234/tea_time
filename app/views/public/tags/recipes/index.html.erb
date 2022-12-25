@@ -1,4 +1,4 @@
 <% @tags.each do |tag| %>
   <%= link_to tag.name, tags_recipe_path(tag.id) %>
-  <%= tag.posts.seach_recipe.size %>
+  <%= tag.recipes.size %>
 <% end %>

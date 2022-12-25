@@ -1,7 +1,7 @@
 商品投稿画面
 
 <%= form_with model: @item do |f| %>
-  <%= f.fields_for :post do |p| %>
+  <%= f.fields_for :post_attributes do |p| %>
     <%= p.label :title, "タイトル" %>
     <%= p.text_field :title %>
     <%= p.label :catchphrase, "キャッチコピー" %>

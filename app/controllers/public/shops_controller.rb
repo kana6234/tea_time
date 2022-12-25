@@ -48,8 +48,8 @@ class Public::ShopsController < ApplicationController
 
   def search
     if params[:keyword].present?
-      post = Post.seach_shop
-      @posts = post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%")
+      shops = Shop.pluck(:post_id)
+      @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: shops)
     else
      redirect_to shops_path
     end

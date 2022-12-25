@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_24_074452) do
+ActiveRecord::Schema.define(version: 2022_12_24_113156) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_12_24_074452) do
     t.text "website", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "post_id", null: false
   end
 
   create_table "materials", force: :cascade do |t|
@@ -98,8 +99,6 @@ ActiveRecord::Schema.define(version: 2022_12_24_074452) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "postable_id", null: false
-    t.string "postable_type", null: false
     t.string "title", null: false
     t.string "catchphrase", null: false
     t.text "introduction", null: false
@@ -111,6 +110,7 @@ ActiveRecord::Schema.define(version: 2022_12_24_074452) do
     t.integer "serves", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "post_id", null: false
   end
 
   create_table "shops", force: :cascade do |t|
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2022_12_24_074452) do
     t.float "longitude", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "post_id", null: false
   end
 
   create_table "steps", force: :cascade do |t|

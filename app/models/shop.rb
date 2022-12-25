@@ -1,6 +1,6 @@
 class Shop < ApplicationRecord
   has_many_attached :images
-  has_one :post, as: :postable, dependent: :destroy
+  belongs_to :post, dependent: :destroy
   has_many :business_hours, dependent: :destroy
   has_many :post_tags, through: :post
   accepts_nested_attributes_for :post, :business_hours, allow_destroy: true, update_only: true

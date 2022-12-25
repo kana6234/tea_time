@@ -1,14 +1,14 @@
 <% @favorite_posts.each do |post| %>
-  <% if post.postable_type == "Recipe" %>
-    <%= link_to recipe_path(post.postable.id) do %>
+  <% if post.recipe.present? %>
+    <%= link_to recipe_path(post.recipe.id) do %>
       <%= render 'public/posts/list', post: post %>
     <% end %>
-  <% elsif post.postable_type == "Shop" %>
-    <%= link_to shop_path(post.postable.id) do %>
+  <% elsif post.shop.present? %>
+    <%= link_to shop_path(post.shop.id) do %>
       <%= render 'public/posts/list', post: post %>
     <% end %>
   <% else %>
-    <%= link_to item_path(post.postable.id) do %>
+    <%= link_to item_path(post.item.id) do %>
       <%= render 'public/posts/list', post: post %>
     <% end %>
   <% end %>

@@ -1,7 +1,7 @@
 お店一覧画面
 <%= render 'search_form' %>
 <% @posts.each do |post| %>
-  <%= link_to shop_path(post.postable.id) do %>
+  <%= link_to shop_path(post.shop.id) do %>
     <%= render 'public/posts/list', post: post %>
   <% end %>
 <% end %>

@@ -1,6 +1,6 @@
 <%= render 'public/shops/search_form' %>
-<% @posts.each do |post| %>
-  <%= link_to shop_path(post.postable.id) do %>
-    <%= render 'public/posts/list', post: post %>
+<% @shops.each do |shop| %>
+  <%= link_to shop_path(shop.id) do %>
+    <%= render 'public/posts/list', post: shop.post %>
   <% end %>
 <% end %>

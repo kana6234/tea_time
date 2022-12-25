@@ -47,8 +47,8 @@ class Public::ItemsController < ApplicationController
 
   def search
     if params[:keyword].present?
-      post = Post.seach_item
-      @posts = post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%")
+      items = Item.pluck(:post_id)
+      @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: items)
     else
      redirect_to items_path
     end

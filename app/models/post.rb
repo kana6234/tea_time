@@ -1,13 +1,14 @@
 class Post < ApplicationRecord
   has_one_attached :thumbnail_image
   belongs_to :user
-  belongs_to :postable, polymorphic: true, optional: true
+  has_one :recipe, dependent: :destroy
+  has_one :shop, dependent: :destroy
+  has_one :item, dependent: :destroy
   has_many :post_tags, dependent: :destroy
-  has_many :tags, through: :post_tags, dependent: :destroy
+  has_many :tags, through: :post_tags
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
-  validates :postable_type, presence: true
   validates :title, presence: true
   validates :catchphrase, presence: true
   validates :introduction, presence: true
@@ -27,20 +28,6 @@ class Post < ApplicationRecord
     new_tag_names.each do |new_tag_name|
       new_tag = Tag.find_or_create_by(name: new_tag_name)
       PostTag.create!(post_id: self.id, tag_id: new_tag.id)
-    end
-  end
-
-  class << self
-    def seach_recipe
-      self.where(postable_type: "Recipe")
-    end
-
-    def seach_shop
-      self.where(postable_type: "Shop")
-    end
-
-    def seach_item
-      self.where(postable_type: "Item")
     end
   end
 end
