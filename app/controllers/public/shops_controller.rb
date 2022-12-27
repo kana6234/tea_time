@@ -23,6 +23,7 @@ class Public::ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def edit

@@ -22,9 +22,10 @@ Rails.application.routes.draw do
     get 'recipes/search'
     get 'shops/search'
     get 'items/search'
-    resources :recipes, :shops, :items
+    resources :recipes, :shops, :items do
+      resource :post_comments, only:[:create, :destroy]
+    end
     resource :favorites, only:[:create, :show, :destroy]
-    resource :post_comments, only:[:create, :destroy]
     namespace :tags do
       resources :recipes, :shops, :items, only:[:index, :show]
     end
