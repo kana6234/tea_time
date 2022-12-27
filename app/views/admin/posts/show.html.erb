@@ -39,3 +39,13 @@
   <%= @post.item.website %>
 <% end %>
 <%= link_to '削除する', admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+コメント<%= @post.post_comments.count %>件
+  <% @post.post_comments.each do |post_comment| %>
+    <%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %>
+    <%= post_comment.comment %>
+    <% if post_comment.comment_image.attached? %>
+      <%= image_tag post_comment.comment_image %>
+    <% end %>
+    <%= link_to "削除", item_post_comments_path(@post, post_comment), method: :delete %>
+  <% end %>
