@@ -7,6 +7,7 @@
     <% end %>
   <% end %>
   <%= render 'public/users/link', user: @item.post.user %>
+  <%= @item.created_at.strftime('%Y/%m/%d') %>
   <%= @item.post.title %>
   <% if current_user.already_favorited?(@item.post) %>
     <%= link_to favorites_path(@item.post), method: :delete do %>
@@ -25,7 +26,6 @@
   <%= @item.website %>
   <% if @item.post.user_id == current_user.id %>
   <%= link_to '編集する', edit_item_path(@item.id) %>
-  <%= link_to '削除する', item_path(@item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 
   コメント<%= @item.post_comments.count %>件

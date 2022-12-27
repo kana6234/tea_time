@@ -32,3 +32,4 @@
     <%= link_to_add_association "追加ボタン", f, :business_hours, data: {association_insertion_node: '#detail-association-insertion-point-business_hour', association_insertion_method: 'after'} %>
   <%= f.submit "保存する" %>
 <% end %>
+<%= link_to '削除する', shop_path(@shop.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

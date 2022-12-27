@@ -27,3 +27,4 @@
   <%= link_to_add_association "追加ボタン", f, :steps, data: {association_insertion_node: '#detail-association-insertion-point-step', association_insertion_method: 'after'} %>
   <%= f.submit "保存する" %>
 <% end %>
+<%= link_to '削除する', recipe_path(@recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
