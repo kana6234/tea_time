@@ -1,0 +1,9 @@
+質問詳細画面
+
+  <%= render 'public/users/link', user: @question.user %>
+  <%= @question.created_at.strftime('%Y/%m/%d') %>
+  <%= @question.content %>
+  <% @question.question_tags.each do |question_tag| %>
+    <%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id) %>
+  <% end %>
+  <%= link_to '削除する', question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

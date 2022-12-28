@@ -1,0 +1,8 @@
+商品投稿画面
+
+<%= form_with model: @question do |f| %>
+  <%= f.text_field :content, placeholder: "質問内容" %>
+  <%= f.label :tag_names, "タグ" %>
+  <%= f.text_field :tag_names %>
+  <%= f.submit "質問する" %>
+<% end %>

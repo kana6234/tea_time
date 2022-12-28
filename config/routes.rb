@@ -27,8 +27,10 @@ Rails.application.routes.draw do
     end
     resource :favorites, only:[:create, :show, :destroy]
     namespace :tags do
-      resources :recipes, :shops, :items, only:[:index, :show]
+      resources :recipes, :shops, :items, :questions, only:[:index, :show]
     end
+    get 'questions/search'
+    resources :questions, only:[:new, :create, :index, :show, :destroy]
   end
   namespace :admin do
     get 'top' => 'homes#top'

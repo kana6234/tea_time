@@ -1,0 +1,6 @@
+<%= question.content %>
+<% question.question_tags.each do |question_tag| %>
+  <%= question_tag.tag.name %>
+<% end %>
+<%= question.created_at.strftime('%Y/%m/%d') %>
+<%= render 'public/users/link', user: question.user %>

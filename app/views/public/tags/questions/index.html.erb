@@ -1,0 +1,4 @@
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, tags_question_path(tag.id) %>
+  <%= tag.questions.size %>
+<% end %>

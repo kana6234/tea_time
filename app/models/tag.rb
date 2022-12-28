@@ -4,6 +4,8 @@ class Tag < ApplicationRecord
   has_many :recipes, through: :posts, dependent: :destroy
   has_many :shops, through: :posts, dependent: :destroy
   has_many :items, through: :posts, dependent: :destroy
+  has_many :question_tags, dependent: :destroy
+  has_many :questions, through: :question_tags, dependent: :destroy
 
   validates :name, presence: true
 end
