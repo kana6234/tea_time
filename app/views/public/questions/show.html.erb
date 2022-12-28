@@ -6,4 +6,20 @@
   <% @question.question_tags.each do |question_tag| %>
     <%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id) %>
   <% end %>
-  <%= link_to '削除する', question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% if @question.user == current_user %>
+    <%= link_to '削除する', question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
+
+回答<%= @question.answers.count %>件
+  <% @question.answers.each do |answer| %>
+    <%= render 'public/users/link', user: answer.user %>
+    <%= answer.created_at.strftime('%Y/%m/%d') %>
+    <%= answer.content %>
+    <% if answer.user == current_user %>
+      <%= link_to "削除", question_answers_path(@question, answer), method: :delete %>
+    <% end %>
+  <% end %>
+  <%= form_with model: [@question, @answer] do |f| %>
+    <%= f.text_area :content, placeholder: "回答内容" %>
+    <%= f.submit "回答する" %>
+  <% end %>

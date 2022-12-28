@@ -30,7 +30,9 @@ Rails.application.routes.draw do
       resources :recipes, :shops, :items, :questions, only:[:index, :show]
     end
     get 'questions/search'
-    resources :questions, only:[:new, :create, :index, :show, :destroy]
+    resources :questions, only:[:new, :create, :index, :show, :destroy] do
+      resource :answers, only:[:create, :destroy]
+    end
   end
   namespace :admin do
     get 'top' => 'homes#top'
