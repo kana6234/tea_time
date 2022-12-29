@@ -4,6 +4,7 @@ class Question < ApplicationRecord
   has_many :tags, through: :question_tags
   has_many :answers, dependent: :destroy
   has_many :question_likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates :content, presence: true
 

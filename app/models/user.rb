@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :question_likes, dependent: :destroy
   has_many :answer_likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true
@@ -38,6 +39,10 @@ class User < ApplicationRecord
 
   def already_answer_liked?(answer)
     self.answer_likes.exists?(answer_id: answer.id)
+  end
+
+  def already_bookmarked?(question)
+    self.bookmarks.exists?(question_id: question.id)
   end
 
   def self.guest
