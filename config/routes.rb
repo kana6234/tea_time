@@ -31,10 +31,12 @@ Rails.application.routes.draw do
     end
     get 'questions/search'
     resources :questions, only:[:new, :create, :index, :show, :destroy] do
-      resource :answers, only:[:create, :destroy]
+      resources :answers, only:[:create, :destroy]
     end
     resource :posts, only:[:show]
     resource :answers, only:[:show]
+    resource :question_likes, only:[:create, :destroy]
+    resource :answer_likes, only:[:create, :destroy]
   end
   namespace :admin do
     get 'top' => 'homes#top'

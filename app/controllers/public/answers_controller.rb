@@ -12,7 +12,7 @@ class Public::AnswersController < ApplicationController
   end
 
   def destroy
-    Answer.find(params[:format]).destroy
+    Answer.find(params[:id]).destroy
     redirect_to question_path(params[:question_id])
   end
 

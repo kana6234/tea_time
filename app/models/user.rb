@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :question_likes, dependent: :destroy
+  has_many :answer_likes, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true
@@ -28,6 +30,14 @@ class User < ApplicationRecord
 
   def already_favorited?(post)
     self.favorites.exists?(post_id: post.id)
+  end
+
+  def already_question_liked?(question)
+    self.question_likes.exists?(question_id: question.id)
+  end
+
+  def already_answer_liked?(answer)
+    self.answer_likes.exists?(answer_id: answer.id)
   end
 
   def self.guest
