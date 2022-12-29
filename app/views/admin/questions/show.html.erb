@@ -1,0 +1,17 @@
+<%= @question.id %>
+<%= link_to @question.user.name, admin_user_path(@question.user.id) %>
+<%= @question.created_at.strftime('%Y/%m/%d') %>
+<%= @question.content %>
+<% @question.question_tags.each do |question_tag| %>
+  <%= question_tag.tag.name %>
+<% end %>
+<%= link_to '削除する', admin_question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+回答<%= @question.answers.count %>件
+<% @question.answers.each do |answer| %>
+  <%= answer.id %>
+  <%= link_to answer.user.name, admin_user_path(answer.user.id) %>
+  <%= answer.created_at.strftime('%Y/%m/%d') %>
+  <%= answer.content %>
+  <%= link_to "削除", admin_question_answer_path(@question, answer), method: :delete %>
+<% end %>

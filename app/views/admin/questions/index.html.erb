@@ -1,0 +1,11 @@
+<% @questions.each do |question| %>
+  <%= question.id %>
+  <%= link_to admin_question_path(question.id) do %>
+    <%= question.content %>
+  <% end %>
+  <% question.question_tags.each do |question_tag| %>
+    <%= question_tag.tag.name %>
+  <% end %>
+  <%= question.created_at.strftime('%Y/%m/%d') %>
+  <%= question.user.name %>
+<% end %>

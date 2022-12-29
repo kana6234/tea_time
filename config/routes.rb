@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     resources :posts, only:[:show, :destroy] do
       resources :post_comments, only:[:destroy]
     end
+    resources :questions, only:[:index, :show, :destroy] do
+      resources :answers, only:[:destroy]
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
