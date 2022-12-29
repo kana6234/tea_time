@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get 'shops/search'
     get 'items/search'
     resources :recipes, :shops, :items do
-      resource :post_comments, only:[:create, :destroy]
+      resources :post_comments, only:[:create, :destroy]
     end
     resource :favorites, only:[:create, :show, :destroy]
     namespace :tags do
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     get 'top' => 'homes#top'
     resources :users, only:[:index, :show, :edit, :update]
     resources :posts, only:[:show, :destroy] do
-      resource :post_comments, only:[:destroy]
+      resources :post_comments, only:[:destroy]
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

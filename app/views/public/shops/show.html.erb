@@ -73,7 +73,7 @@
       <%= image_tag post_comment.comment_image %>
     <% end %>
     <% if post_comment.user == current_user %>
-      <%= link_to "削除", shop_post_comments_path(@shop, post_comment), method: :delete %>
+      <%= link_to "削除", shop_post_comment_path(@shop, post_comment), method: :delete %>
     <% end %>
   <% end %>
   <%= form_with model: [@shop, @post_comment] do |f| %>

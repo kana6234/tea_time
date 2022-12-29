@@ -47,5 +47,5 @@
     <% if post_comment.comment_image.attached? %>
       <%= image_tag post_comment.comment_image %>
     <% end %>
-    <%= link_to "削除", item_post_comments_path(@post, post_comment), method: :delete %>
+    <%= link_to "削除", item_post_comment_path(@post, post_comment), method: :delete %>
   <% end %>
