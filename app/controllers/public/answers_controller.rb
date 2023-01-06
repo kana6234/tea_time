@@ -2,7 +2,9 @@ class Public::AnswersController < ApplicationController
   def create
     answer = current_user.answers.new(answer_params)
     answer.question_id = params[:question_id]
-    answer.save
+    if answer.save
+      answer.create_notification_answer!(current_user)
+    end
     redirect_to question_path(params[:question_id])
   end
 

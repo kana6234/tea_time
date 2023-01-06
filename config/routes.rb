@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resource :question_likes, only:[:create, :destroy]
     resource :answer_likes, only:[:create, :destroy]
     resource :bookmarks, only:[:create, :show, :destroy]
+    resource :notifications, only:[:show]
   end
   namespace :admin do
     get 'top' => 'homes#top'

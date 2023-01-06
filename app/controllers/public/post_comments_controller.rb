@@ -7,9 +7,11 @@ class Public::PostCommentsController < ApplicationController
     else
       postable = Item.find(params[:item_id])
     end
-      comment = current_user.post_comments.new(post_comment_params)
-      comment.post_id = postable.post_id
-      comment.save
+    post_comment = current_user.post_comments.new(post_comment_params)
+    post_comment.post_id = postable.post_id
+    if post_comment.save
+      post_comment.create_notification_post_comment!(current_user)
+    end
     redirect_back(fallback_location: root_path)
   end
 

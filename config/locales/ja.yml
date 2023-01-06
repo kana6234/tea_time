@@ -3,6 +3,6 @@ ja:
     formats:
       default: "%H:%M"
   activerecord:
-  errors:
-    messages:
-      record_invalid: "バリデーションに失敗しました: %{errors}"
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"

@@ -1,6 +1,7 @@
 class Public::BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.create!(question_id: params[:format])
+    @bookmark.create_notification_bookmark!(current_user)
     redirect_back(fallback_location: root_path)
   end
 

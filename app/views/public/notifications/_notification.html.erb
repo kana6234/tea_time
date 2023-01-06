@@ -1,0 +1,41 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+<%= link_to user_path(visitor.id) do %>
+  <%= image_tag visitor.get_profile_image(50, 50) %>
+  <%= visitor.name %>
+<% end %>
+さんが
+<% case notification.action %>
+<% when 'favorite' %>
+　<% if notification.post.recipe.present? %>
+    <%= link_to "あなたの投稿", recipe_path(notification.post.recipe.id) %>
+  <% elsif notification.post.shop.present? %>
+    <%= link_to "あなたの投稿", shop_path(notification.post.shop.id) %>
+  <% else %>
+    <%= link_to "あなたの投稿", item_path(notification.post.item.id) %>
+  <% end %>
+  をいいねしました
+<% when 'post_comment' %>
+　<% if notification.post.recipe.present? %>
+    <%= link_to "あなたの投稿", recipe_path(notification.post.recipe.id) %>
+  <% elsif notification.post.shop.present? %>
+    <%= link_to "あなたの投稿", shop_path(notification.post.shop.id) %>
+  <% else %>
+    <%= link_to "あなたの投稿", item_path(notification.post.item.id) %>
+  <% end %>
+  にコメントしました
+  <%= PostComment.find_by(id: notification.post_comment_id)&.comment %>
+<% when 'question_like' %>
+  <%= link_to "あなたの質問", question_path(notification.question.id) %>
+  に共感しました
+<% when 'answer' %>
+  <%= link_to "あなたの質問", question_path(notification.answer.question_id) %>
+  に回答しました
+  <%= Answer.find_by(id: notification.answer_id)&.content %>
+<% when 'answer_like' %>
+  <%= link_to "あなたの回答", question_path(notification.answer.question_id) %>
+  にナイスしました
+<% when 'bookmark' %>
+  <%= link_to "あなたの質問", question_path(notification.question.id) %>
+  をブックマークしました
+<% end %>

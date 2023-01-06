@@ -5,6 +5,7 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :question_likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :content, presence: true
 

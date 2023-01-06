@@ -16,6 +16,7 @@
         <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
       <% elsif user_signed_in? %>
         <%= link_to '投稿する', new_recipe_path %>
+        <%= link_to '通知', notifications_path %>
         <%= link_to current_user.name, user_path(current_user.id) %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       <% else %>
