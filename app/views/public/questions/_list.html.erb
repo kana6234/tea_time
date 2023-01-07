@@ -4,12 +4,4 @@
 <% end %>
 <%= question.created_at.strftime('%Y/%m/%d') %>
 <%= render 'public/users/link', user: question.user %>
-<% if current_user.already_bookmarked?(question) %>
-  <%= link_to bookmarks_path(question), method: :delete do %>
-    ♥<%= question.bookmarks.count %>
-  <% end %>
-<% else %>
-  <%= link_to bookmarks_path(question), method: :post do %>
-    ♡<%= question.bookmarks.count %>
-  <% end %>
-<% end %>
+<%= render 'public/bookmarks/btn', question: question %>

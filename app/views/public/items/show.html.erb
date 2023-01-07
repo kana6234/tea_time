@@ -9,22 +9,14 @@
   <%= render 'public/users/link', user: @item.post.user %>
   <%= @item.created_at.strftime('%Y/%m/%d') %>
   <%= @item.post.title %>
-  <% if current_user.already_favorited?(@item.post) %>
-    <%= link_to favorites_path(@item.post), method: :delete do %>
-      ♥<%= @item.post.favorites.count %>
-    <% end %>
-  <% else %>
-    <%= link_to favorites_path(@item.post), method: :post do %>
-      ♡<%= @item.post.favorites.count %>
-    <% end %>
-  <% end %>
+  <%= render 'public/favorites/btn', post: @item.post %>
   <%= @item.post.catchphrase %>
   <% @item.post.post_tags.each do |post_tag| %>
     <%= link_to post_tag.tag.name, tags_item_path(post_tag.tag.id) %>
   <% end %>
   <%= @item.post.introduction %>
   <%= @item.website %>
-  <% if @item.post.user_id == current_user.id %>
+  <% if @item.post.user == current_user %>
   <%= link_to '編集する', edit_item_path(@item.id) %>
   <% end %>
 

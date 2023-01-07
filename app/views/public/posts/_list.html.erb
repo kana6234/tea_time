@@ -4,12 +4,4 @@
 <% post.post_tags.each do |post_tag| %>
   <%= post_tag.tag.name %>
 <% end %>
-<% if current_user.already_favorited?(post) %>
-  <%= link_to favorites_path(post), method: :delete do %>
-    ♥<%= post.favorites.count %>
-  <% end %>
-<% else %>
-  <%= link_to favorites_path(post), method: :post do %>
-    ♡<%= post.favorites.count %>
-  <% end %>
-<% end %>
+<%= render 'public/favorites/btn', post: post %>

@@ -3,7 +3,11 @@
   <%= render 'public/users/link', user: @question.user %>
   <%= @question.created_at.strftime('%Y/%m/%d') %>
   <%= @question.content %>
-  <% if current_user.already_question_liked?(@question) %>
+  <% if !user_signed_in? %>
+    <%= link_to new_user_session_path do %>
+      ♡<%= @question.question_likes.count %>
+    <% end %>
+  <% elsif current_user.already_question_liked?(@question) %>
     <%= link_to question_likes_path(@question), method: :delete do %>
       ♥<%= @question.question_likes.count %>
     <% end %>
@@ -12,15 +16,7 @@
       ♡<%= @question.question_likes.count %>
     <% end %>
   <% end %>
-  <% if current_user.already_bookmarked?(@question) %>
-    <%= link_to bookmarks_path(@question), method: :delete do %>
-      ♥<%= @question.bookmarks.count %>
-    <% end %>
-  <% else %>
-    <%= link_to bookmarks_path(@question), method: :post do %>
-      ♡<%= @question.bookmarks.count %>
-    <% end %>
-  <% end %>
+  <%= render 'public/bookmarks/btn', question: @question %>
   <% @question.question_tags.each do |question_tag| %>
     <%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id) %>
   <% end %>
@@ -33,7 +29,11 @@
     <%= render 'public/users/link', user: answer.user %>
     <%= answer.created_at.strftime('%Y/%m/%d') %>
     <%= answer.content %>
-    <% if current_user.already_answer_liked?(answer) %>
+  <% if !user_signed_in? %>
+    <%= link_to new_user_session_path do %>
+      ♡<%= answer.answer_likes.count %>
+    <% end %>
+  <% elsif current_user.already_answer_liked?(answer) %>
     <%= link_to answer_likes_path(answer), method: :delete do %>
       ♥<%= answer.answer_likes.count %>
     <% end %>

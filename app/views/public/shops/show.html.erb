@@ -8,15 +8,7 @@
   <%= render 'public/users/link', user: @shop.post.user %>
   <%= @shop.created_at.strftime('%Y/%m/%d') %>
   <%= @shop.post.title %>
-  <% if current_user.already_favorited?(@shop.post) %>
-    <%= link_to favorites_path(@shop.post), method: :delete do %>
-      ♥<%= @shop.post.favorites.count %>
-    <% end %>
-  <% else %>
-    <%= link_to favorites_path(@shop.post), method: :post do %>
-      ♡<%= @shop.post.favorites.count %>
-    <% end %>
-  <% end %>
+  <%= render 'public/favorites/btn', post: @shop.post %>
   <%= @shop.post.catchphrase %>
   <% @shop.post.post_tags.each do |post_tag| %>
     <%= link_to post_tag.tag.name, tags_shop_path(post_tag.tag.id) %>
@@ -60,7 +52,7 @@
    </style>
    <div id="map"></div>
 
-  <% if @shop.post.user_id == current_user.id %>
+  <% if @shop.post.user == current_user %>
   <%= link_to '編集する', edit_shop_path(@shop.id) %>
   <% end %>
 

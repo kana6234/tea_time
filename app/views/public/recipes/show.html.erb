@@ -2,15 +2,7 @@
   <%= render 'public/users/link', user: @recipe.post.user %>
   <%= @recipe.created_at.strftime('%Y/%m/%d') %>
   <%= @recipe.post.title %>
-  <% if current_user.already_favorited?(@recipe.post) %>
-    <%= link_to favorites_path(@recipe.post), method: :delete do %>
-      ♥<%= @recipe.post.favorites.count %>
-    <% end %>
-  <% else %>
-    <%= link_to favorites_path(@recipe.post), method: :post do %>
-      ♡<%= @recipe.post.favorites.count %>
-    <% end %>
-  <% end %>
+  <%= render 'public/favorites/btn', post: @recipe.post %>
   <%= @recipe.post.catchphrase %>
   <% @recipe.post.post_tags.each do |post_tag| %>
     <%= link_to post_tag.tag.name, tags_recipe_path(post_tag.tag.id) %>
@@ -26,7 +18,7 @@
     <%= step.no %>
     <%= step.content %>
   <% end %>
-  <% if @recipe.post.user_id == current_user.id %>
+  <% if @recipe.post.user == current_user %>
   <%= link_to '編集する', edit_recipe_path(@recipe.id) %>
   <% end %>
 
