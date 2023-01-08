@@ -1,4 +1,5 @@
 class Public::ShopsController < Public::BaseController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   def new
     @shop = Shop.new
     @shop.build_post
@@ -61,5 +62,12 @@ class Public::ShopsController < Public::BaseController
     params.require(:shop).permit(:shop_name, :website, :postcode, :prefecture_code, :address, :latitude, :longitude, images: [],
     post_attributes: [:id, :title, :catchphrase, :thumbnail_image, :introduction],
     business_hours_attributes: [:id, :start_at, :finish_at, :_destroy])
+  end
+
+  def is_matching_login_user
+    shop = Shop.find_by(id: params[:id])
+    if current_user.id != shop.post.user_id
+      redirect_to shops_path
+    end
   end
 end

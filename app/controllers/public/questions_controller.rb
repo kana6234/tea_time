@@ -1,4 +1,5 @@
 class Public::QuestionsController < Public::BaseController
+  before_action :is_matching_login_user, only: [:destroy]
   def new
     @question = Question.new
   end
@@ -40,5 +41,12 @@ class Public::QuestionsController < Public::BaseController
   private
   def question_params
     params.require(:question).permit(:content)
+  end
+
+  def is_matching_login_user
+    question = Question.find_by(id: params[:id])
+    if current_user.id != question.user_id
+      redirect_to questions_path
+    end
   end
 end

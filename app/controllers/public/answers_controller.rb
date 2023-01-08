@@ -1,4 +1,5 @@
 class Public::AnswersController < Public::BaseController
+  before_action :is_matching_login_user, only: [:destroy]
   def create
     answer = current_user.answers.new(answer_params)
     answer.question_id = params[:question_id]
@@ -22,5 +23,12 @@ class Public::AnswersController < Public::BaseController
 
   def answer_params
     params.require(:answer).permit(:content)
+  end
+
+  def is_matching_login_user
+    answer = Answer.find_by(id: params[:id])
+    if current_user.id != answer.user_id
+      redirect_to question_path(params[:question_id])
+    end
   end
 end

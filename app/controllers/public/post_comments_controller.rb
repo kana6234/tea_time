@@ -1,4 +1,5 @@
 class Public::PostCommentsController < Public::BaseController
+  before_action :is_matching_login_user, only: [:destroy]
   def create
     if params[:recipe_id].present?
       postable = Recipe.find(params[:recipe_id])
@@ -24,5 +25,12 @@ class Public::PostCommentsController < Public::BaseController
 
   def post_comment_params
     params.require(:post_comment).permit(:comment, :comment_image)
+  end
+
+  def is_matching_login_user
+    post_comment = PostComment.find_by(id: params[:id])
+    if current_user.id != post_comment.user_id
+      redirect_back(fallback_location: root_path)
+    end
   end
 end

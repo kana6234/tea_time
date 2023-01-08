@@ -1,4 +1,5 @@
 class Public::RecipesController < Public::BaseController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   def new
     @recipe = Recipe.new
     @recipe.build_post
@@ -63,5 +64,12 @@ class Public::RecipesController < Public::BaseController
     post_attributes: [:id, :title, :catchphrase, :thumbnail_image, :introduction],
     steps_attributes: [:id, :no, :content, :_destroy],
     materials_attributes: [:id, :name, :quantity, :_destroy])
+  end
+
+  def is_matching_login_user
+    recipe = Recipe.find_by(id: params[:id])
+    if current_user.id != recipe.post.user_id
+      redirect_to recipes_path
+    end
   end
 end

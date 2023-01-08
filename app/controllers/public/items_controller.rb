@@ -1,4 +1,5 @@
 class Public::ItemsController < Public::BaseController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   def new
     @item = Item.new
     @item.build_post
@@ -59,5 +60,12 @@ class Public::ItemsController < Public::BaseController
   def item_params
     params.require(:item).permit(:website, images: [],
     post_attributes: [:id, :title, :catchphrase, :thumbnail_image, :introduction])
+  end
+
+  def is_matching_login_user
+    item = Item.find_by(id: params[:id])
+    if current_user.id != item.post.user_id
+      redirect_to items_path
+    end
   end
 end
