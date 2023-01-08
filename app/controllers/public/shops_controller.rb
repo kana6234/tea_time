@@ -1,4 +1,4 @@
-class Public::ShopsController < ApplicationController
+class Public::ShopsController < Public::BaseController
   def new
     @shop = Shop.new
     @shop.build_post

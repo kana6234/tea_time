@@ -1,4 +1,4 @@
-class Admin::HomesController < ApplicationController
+class Admin::HomesController < Admin::BaseController
   def top
     @posts = Post.all
   end

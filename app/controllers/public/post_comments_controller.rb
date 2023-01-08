@@ -1,4 +1,4 @@
-class Public::PostCommentsController < ApplicationController
+class Public::PostCommentsController < Public::BaseController
   def create
     if params[:recipe_id].present?
       postable = Recipe.find(params[:recipe_id])

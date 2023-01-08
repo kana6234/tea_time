@@ -1,4 +1,4 @@
-class Public::NotificationsController < ApplicationController
+class Public::NotificationsController < Public::BaseController
   def show
     notifications = current_user.passive_notifications.all
     notifications.update(is_checked: true)

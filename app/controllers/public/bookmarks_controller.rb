@@ -1,4 +1,4 @@
-class Public::BookmarksController < ApplicationController
+class Public::BookmarksController < Public::BaseController
   def create
     @bookmark = current_user.bookmarks.create!(question_id: params[:format])
     @bookmark.create_notification_bookmark!(current_user)

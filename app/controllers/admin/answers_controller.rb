@@ -1,6 +1,5 @@
-class Admin::AnswersController < ApplicationController
+class Admin::AnswersController < Admin::BaseController
   def destroy
-    binding.pry
     Answer.find(params[:id]).destroy
     redirect_to admin_question_path(params[:question_id])
   end

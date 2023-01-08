@@ -5,10 +5,10 @@
 <% if @user == current_user %>
     <p><%= link_to "プロフィール編集", users_information_edit_path %></p>
 <% end %>
-<%= link_to posts_path do %>
+<%= link_to user_posts_path(@user.id) do %>
   投稿数:<%= @user.posts.count %>
 <% end %>
-<%= link_to answers_path do %>
+<%= link_to user_answers_path(@user.id) do %>
   回答数:<%= @user.answers.count %>
 <% end %>
 <%= link_to "いいね一覧", favorites_path %>

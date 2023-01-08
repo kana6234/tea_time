@@ -1,4 +1,4 @@
-class Public::AnswerLikesController < ApplicationController
+class Public::AnswerLikesController < Public::BaseController
   def create
     @answer_like = current_user.answer_likes.create!(answer_id: params[:format])
     @answer_like.create_notification_answer_like!(current_user)

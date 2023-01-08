@@ -18,7 +18,10 @@ Rails.application.routes.draw do
     patch 'users/information' => 'users#update'
     get 'users/unsubscribe'
     patch 'users/withdraw'
-    resources :users, only:[:show]
+    resources :users, only:[:show] do
+      resource :posts, only:[:show]
+      resource :answers, only:[:show]
+    end
     get 'recipes/search'
     get 'shops/search'
     get 'items/search'
@@ -33,8 +36,6 @@ Rails.application.routes.draw do
     resources :questions, only:[:new, :create, :index, :show, :destroy] do
       resources :answers, only:[:create, :destroy]
     end
-    resource :posts, only:[:show]
-    resource :answers, only:[:show]
     resource :question_likes, only:[:create, :destroy]
     resource :answer_likes, only:[:create, :destroy]
     resource :bookmarks, only:[:create, :show, :destroy]

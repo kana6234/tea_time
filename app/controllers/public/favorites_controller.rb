@@ -1,4 +1,4 @@
-class Public::FavoritesController < ApplicationController
+class Public::FavoritesController < Public::BaseController
   def create
     @favorite = current_user.favorites.create!(post_id: params[:format])
     @favorite.create_notification_favorite!(current_user)

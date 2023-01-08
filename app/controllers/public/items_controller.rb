@@ -1,4 +1,4 @@
-class Public::ItemsController < ApplicationController
+class Public::ItemsController < Public::BaseController
   def new
     @item = Item.new
     @item.build_post

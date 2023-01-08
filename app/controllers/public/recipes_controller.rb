@@ -1,4 +1,4 @@
-class Public::RecipesController < ApplicationController
+class Public::RecipesController < Public::BaseController
   def new
     @recipe = Recipe.new
     @recipe.build_post
