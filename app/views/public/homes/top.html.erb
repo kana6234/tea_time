@@ -1,1 +1,17 @@
-<%= link_to '紅茶のレシピ>', recipes_path %>
+<div class="top_img text-center">
+  <h1 class="top_img_content">
+    紅茶と共にある生活を
+  </h1>
+</div>
+<div class="container mt-3 mt-sm-5">
+  <div class="row">
+    <div class="col text-center">
+      <ul>
+        <li class="mb-3 mb-sm-5"><h4><%= link_to '紅茶のレシピ>', recipes_path, class: "text-dark" %></h4></li>
+        <li class="mb-3 mb-sm-5"><h4><%= link_to '紅茶のお店>', shops_path, class: "text-dark" %></h4></li>
+        <li class="mb-3 mb-sm-5"><h4><%= link_to '茶葉、紅茶用品>', items_path, class: "text-dark" %></h4></li>
+        <li class="mb-3 mb-sm-5"><h4><%= link_to 'Q&A>', questions_path, class: "text-dark" %></h4></li>
+      </ul>
+    </div>
+  </div>
+</div>
