@@ -37,6 +37,9 @@ li{
   padding: 164px 0px;
   font-size: 60px;}
 
+.border-bottom{
+  border-bottom: 2px solid #f15f24 !important;}
+
 h1, h4{
   font-family: 'komorebi-gothic', sans-serif;}
 
@@ -135,6 +138,11 @@ header{
       margin-left: 0;
       font-size: 18px;}
   }
+
+/*field*/
+.field{
+  margin-bottom: 20px;
+}
 
 /*fonts*/
 @font-face{
