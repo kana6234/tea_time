@@ -1,30 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>TeaTime</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <title>TEA TIME</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/c20f320e9b.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <header>
-      <% if admin_signed_in? %>
-        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-      <% elsif user_signed_in? %>
-        <%= link_to '投稿する', new_recipe_path %>
-        <%= link_to '通知', notifications_path %>
-        <%= link_to current_user.name, user_path(current_user.id) %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to '新規登録', new_user_registration_path %>
-        <%= link_to 'ログイン', new_user_session_path %>
-        <%= link_to 'ゲストログイン', guest_sign_in_path, method: :post %>
-      <% end %>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light  bg-light p-0">
+        <a class="navbar-brand ml-3" href="/">
+          <%= image_tag 'logo.png', size: "60x60" %>
+        </a>
+        <% if admin_signed_in? %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto pt-4 pr-4">
+              <li class="nav-item"><%= link_to '会員一覧', admin_users_path, class: "navber-text" %></li>
+              <li class="nav-item"><%= link_to '投稿一覧', admin_top_path, class: "navber-text" %></li>
+              <li class="nav-item"><%= link_to 'Q&A一覧', admin_questions_path, class: "navber-text" %></li>
+              <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "navber-text" %></li>
+            </ul>
+          </div>
+        <% elsif user_signed_in? %>
+          <div class="nav_header">
+            <%= link_to notifications_path, class: "mt-2 mr-3" do %>
+              <i class="fa-solid fa-bell fa-lg"></i>
+            <% end %>
+            <div class="el_humburger">
+              <%= image_tag current_user.get_profile_image(40, 40), class: "rounded-circle" %>
+              <%= current_user.name %>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="nav_header el_humburger text-light">
+              <i class="fa-regular fa-circle-xmark fa-3x"></i>
+            </div>
+            <div class="nav_inner">
+              <div class="nav-item"><%= link_to '自分のページ', user_path(current_user), class: "text-light" %></div>
+              <div class="nav-item"><%= link_to 'プロフィール編集', users_information_edit_path, class: "text-light" %></div>
+              <div class="nav-item"><%= link_to 'いいね一覧', favorites_path, class: "text-light" %></div>
+              <div class="nav-item"><%= link_to 'Q&Aブックマーク一覧', bookmarks_path, class: "text-light" %></div>
+              <div class="nav-item"><%= link_to '投稿履歴一覧', user_posts_path(current_user), class: "text-light" %></div>
+              <div class="nav-item"><%= link_to '回答履歴一覧', user_answers_path(current_user), class: "text-light" %></div>
+              <div class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "text-light" %></div>
+            </div>
+            <div class="hamburger-demo-cover"></div>
+          </div>
+        <% else %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto pt-4 pr-4">
+              <li class="nav-item"><%= link_to '新規登録', new_user_registration_path, class: "navber-text" %></li>
+              <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "navber-text" %></li>
+              <li class="nav-item"><%= link_to 'ゲストログイン', guest_sign_in_path, method: :post, class: "navber-text" %></li>
+            </ul>
+          </div>
+        <% end %>
+      </nav>
     </header>
     <%= yield %>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous">
+    </script>
   </body>
 </html>
