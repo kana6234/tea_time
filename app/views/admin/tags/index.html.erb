@@ -1,0 +1,6 @@
+<% @tags.each do |tag| %>
+  <%= tag.id %>
+  <%= tag.name %>
+  <%= tag.posts.size %>
+  <%= link_to "削除", admin_tag_path(tag.id), method: :delete, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<% end %>
