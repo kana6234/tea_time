@@ -19,6 +19,7 @@ class Public::ItemsController < Public::BaseController
 
   def index
     @items = Item.all
+    @tags = Tag.where(tea_name: true)
   end
 
   def show

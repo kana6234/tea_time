@@ -1,4 +1,5 @@
 商品一覧画面
+<%= render 'public/tags/tea_name_list', tags: @tags %>
 <%= render 'search_form' %>
 <% @items.each do |item| %>
   <%= link_to item_path(item.id) do %>

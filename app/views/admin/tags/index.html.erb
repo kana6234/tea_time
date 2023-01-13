@@ -1,4 +1,11 @@
 <% @tags.each do |tag| %>
+  <% if tag.tea_name? %>
+    <%= link_to admin_tag_path(tag, tag: {tea_name: false}), method: :patch do %>
+      <i class="fa-solid fa-leaf"></i>
+    <% end %>
+  <% else %>
+    <%= link_to "＋", admin_tag_path(tag, tag: {tea_name: true}), method: :patch %>
+  <% end %>
   <%= tag.id %>
   <%= tag.name %>
   <%= tag.posts.size %>

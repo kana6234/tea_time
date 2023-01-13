@@ -1,0 +1,4 @@
+紅茶の種類
+<% tags.each do |tag| %>
+  <%= link_to tag.name, tags_item_path(tag.id) %>
+<% end %>

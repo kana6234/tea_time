@@ -21,6 +21,7 @@ class Public::RecipesController < Public::BaseController
 
   def index
     @recipes = Recipe.all
+    @tags = Tag.where(tea_name: true)
   end
 
   def show
