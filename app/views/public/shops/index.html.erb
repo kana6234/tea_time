@@ -1,6 +1,7 @@
 <div class="container">
   <h4 class="row text-center title">紅茶のお店</h4>
   <%= render 'search_form' %>
+  <%= @shops.count %>件
   <div class="row">
     <div class="col-sm-8 mr-sm-3">
       <% @shops.each do |shop| %>
