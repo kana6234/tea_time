@@ -1,4 +1,11 @@
-<%= form_with url: items_search_path, local: true, method: :get do |f| %>
-  <%= f.text_field :keyword %>
-  <%= f.submit "検索" %>
-<% end %>
+<div class="row mb-4">
+  <div class="col-8 col-sm-7 offset-sm-1">
+    <%= form_with url: items_search_path, local: true, method: :get, class: "search_form" do |f| %>
+        <%= f.text_field :keyword, class: "form-control" %>
+        <button type="submit" class="btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    <% end %>
+  </div>
+  <%= link_to "タグ一覧", tags_items_path, class: "mx-auto ml-sm-5 btn btn-outline-success text-dark" %>
+</div>

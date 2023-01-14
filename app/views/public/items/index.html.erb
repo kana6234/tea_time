@@ -1,9 +1,14 @@
-商品一覧画面
-<%= render 'public/tags/tea_name_list', tags: @tags %>
-<%= render 'search_form' %>
-<% @items.each do |item| %>
-  <%= link_to item_path(item.id) do %>
-    <%= render 'public/posts/list', post: item.post %>
-  <% end %>
-  <%= render 'public/users/link', user: item.post.user %>
-<% end %>
+<div class="container">
+  <h4 class="row text-center title">茶葉、紅茶用品</h4>
+  <%= render 'search_form' %>
+  <div class="row">
+    <div class="col-sm-8 mr-sm-3">
+      <% @items.each do |item| %>
+        <%= link_to item_path(item.id), class: "text-dark" do %>
+          <%= render 'public/posts/list', post: item.post %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render 'public/tags/tea_name_list', tags: @tags %>
+  </div>
+</div>

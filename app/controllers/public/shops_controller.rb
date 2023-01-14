@@ -20,6 +20,7 @@ class Public::ShopsController < Public::BaseController
 
   def index
     @shops = Shop.all
+    @prefectures = Shop.select(:prefecture_code).distinct
   end
 
   def show
@@ -55,6 +56,11 @@ class Public::ShopsController < Public::BaseController
     else
      redirect_to shops_path
     end
+  end
+
+  def prefecture
+    @shops = Shop.where(prefecture_code: params[:format])
+    @prefectures = Shop.select(:prefecture_code).distinct
   end
 
   private

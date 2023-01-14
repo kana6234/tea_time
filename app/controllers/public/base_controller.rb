@@ -1,5 +1,5 @@
 class Public::BaseController < ApplicationController
-  before_action :authenticate_user!, if: :use_auth? , except: [:index, :search]
+  before_action :authenticate_user!, if: :use_auth? , except: [:index, :search, :prefecture]
   def use_auth?
     if action_name == 'show'
       if controller_name == 'favorites' || controller_name == 'bookmarks'

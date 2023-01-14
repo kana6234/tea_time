@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
     get 'recipes/search'
     get 'shops/search'
+    get 'shops/prefecture'
     get 'items/search'
     resources :recipes, :shops, :items do
       resources :post_comments, only:[:create, :destroy]
