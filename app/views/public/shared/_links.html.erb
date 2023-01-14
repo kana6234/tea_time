@@ -1,12 +1,12 @@
 <%- if controller_name != 'sessions' %>
-  <h4 class="d-inline-block my-4 px-3 border-bottom">既に登録済みの方</h4>
+  <h4 class="border-bottom">既に登録済みの方</h4>
   <div class="ml-3 ml-sm-5">
     <u><%= link_to "こちら", new_session_path(resource_name) %></u> からログインしてください
   </div>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <h4 class="d-inline-block my-4 px-3 border-bottom">登録済みでない方</h4>
+  <h4 class="border-bottom">登録済みでない方</h4>
     <div class="ml-3 ml-sm-5">
       <u><%= link_to "こちら", new_registration_path(resource_name) %></u>　から新規登録を行なってください。
     </div>

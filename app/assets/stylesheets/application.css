@@ -38,7 +38,26 @@ li{
   font-size: 60px;}
 
 .border-bottom{
-  border-bottom: 2px solid #f15f24 !important;}
+  border-bottom: 2px solid #f15f24 !important;
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+  display: inline-block;}
+
+.title{
+  margin: 1.5rem 0;
+  display: block;}
+
+.search_form{
+  display: flex;
+  height: 30px;}
+
+.small-text{
+  font-size: 10px;}
+
+.favorite-btn {
+ color: #808080;}
+.unfavorite-btn {
+ color: #e54747;}
 
 h1, h4{
   font-family: 'komorebi-gothic', sans-serif;}

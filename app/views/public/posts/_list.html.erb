@@ -1,7 +1,27 @@
-<%= image_tag post.thumbnail_image %>
-<%= post.title %>
-<%= post.catchphrase %>
-<% post.post_tags.each do |post_tag| %>
-  <%= post_tag.tag.name %>
-<% end %>
-<%= render 'public/favorites/btn', post: post %>
+<div class="row mb-sm-3 border">
+  <div class="col pl-0">
+    <%= image_tag post.get_thumbnail_image(100, 100) %>
+  </div>
+  <div class="col">
+    <div class="row">
+      <%= post.title %>
+      <div class="col text-right">
+        <%= render 'public/favorites/btn', post: post %>
+      </div>
+    </div>
+    <p class="row my-0">
+      <%= post.catchphrase %>
+    </p>
+    <div class="row small-text">
+      <%= render 'public/users/link', user: post.user %>
+      <div class="my-auto">
+        タグ:
+        <% post.post_tags.each do |post_tag| %>
+          <span class="mr-2 text-secondary">
+          <%= post_tag.tag.name %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

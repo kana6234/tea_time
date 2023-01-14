@@ -1,13 +1,14 @@
 <% if !user_signed_in? %>
   <%= link_to new_user_session_path do %>
-    ♡<%= post.favorites.count %>
+    <i class="fa-regular fa-heart favorite-btn"></i>
   <% end %>
 <% elsif current_user.already_favorited?(post) %>
   <%= link_to favorites_path(post), method: :delete do %>
-    ♥<%= post.favorites.count %>
+    <i class="fa-solid fa-heart unfavorite-btn"></i>
   <% end %>
 <% else %>
   <%= link_to favorites_path(post), method: :post do %>
-    ♡<%= post.favorites.count %>
+    <i class="fa-regular fa-heart favorite-btn"></i>
   <% end %>
 <% end %>
+<%= post.favorites.count %>

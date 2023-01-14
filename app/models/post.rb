@@ -31,4 +31,8 @@ class Post < ApplicationRecord
       PostTag.create!(post_id: self.id, tag_id: new_tag.id)
     end
   end
+
+  def get_thumbnail_image(width, height)
+    thumbnail_image.variant(resize_to_limit: [width, height]).processed
+  end
 end

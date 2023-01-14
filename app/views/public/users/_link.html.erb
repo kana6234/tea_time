@@ -1,4 +1,4 @@
-<%= link_to user_path(user.id) do %>
-  <%= image_tag user.get_profile_image(50, 50) %>
+<%= link_to user_path(user.id), class: "mr-3 text-dark" do %>
+  <%= image_tag user.get_profile_image(30, 30), class: "rounded-circle" %>
   <%= user.name %>
 <% end %>
