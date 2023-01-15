@@ -1,15 +1,22 @@
-<% @favorite_posts.each do |post| %>
-  <% if post.recipe.present? %>
-    <%= link_to recipe_path(post.recipe.id) do %>
-      <%= render 'public/posts/list', post: post %>
+<div class="container">
+  <h4 class="row text-center title">いいね一覧</h4>
+  <div class="row">
+    <% @favorite_posts.each do |post| %>
+      <div class="col-sm-6">
+        <% if post.recipe.present? %>
+          <%= link_to recipe_path(post.recipe.id) do %>
+            <%= render 'public/posts/list', post: post %>
+          <% end %>
+        <% elsif post.shop.present? %>
+          <%= link_to shop_path(post.shop.id) do %>
+            <%= render 'public/posts/list', post: post %>
+          <% end %>
+        <% else %>
+          <%= link_to item_path(post.item.id) do %>
+            <%= render 'public/posts/list', post: post %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
-  <% elsif post.shop.present? %>
-    <%= link_to shop_path(post.shop.id) do %>
-      <%= render 'public/posts/list', post: post %>
-    <% end %>
-  <% else %>
-    <%= link_to item_path(post.item.id) do %>
-      <%= render 'public/posts/list', post: post %>
-    <% end %>
-  <% end %>
-<% end %>
+  </div>
+</div>
