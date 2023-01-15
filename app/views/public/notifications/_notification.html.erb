@@ -1,41 +1,67 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
-<%= link_to user_path(visitor.id) do %>
-  <%= image_tag visitor.get_profile_image(50, 50) %>
-  <%= visitor.name %>
-<% end %>
-さんが
-<% case notification.action %>
-<% when 'favorite' %>
-　<% if notification.post.recipe.present? %>
-    <%= link_to "あなたの投稿", recipe_path(notification.post.recipe.id) %>
-  <% elsif notification.post.shop.present? %>
-    <%= link_to "あなたの投稿", shop_path(notification.post.shop.id) %>
-  <% else %>
-    <%= link_to "あなたの投稿", item_path(notification.post.item.id) %>
-  <% end %>
-  をいいねしました
-<% when 'post_comment' %>
-　<% if notification.post.recipe.present? %>
-    <%= link_to "あなたの投稿", recipe_path(notification.post.recipe.id) %>
-  <% elsif notification.post.shop.present? %>
-    <%= link_to "あなたの投稿", shop_path(notification.post.shop.id) %>
-  <% else %>
-    <%= link_to "あなたの投稿", item_path(notification.post.item.id) %>
-  <% end %>
-  にコメントしました
-  <%= PostComment.find_by(id: notification.post_comment_id)&.comment %>
-<% when 'question_like' %>
-  <%= link_to "あなたの質問", question_path(notification.question.id) %>
-  に共感しました
-<% when 'answer' %>
-  <%= link_to "あなたの質問", question_path(notification.answer.question_id) %>
-  に回答しました
-  <%= Answer.find_by(id: notification.answer_id)&.content %>
-<% when 'answer_like' %>
-  <%= link_to "あなたの回答", question_path(notification.answer.question_id) %>
-  にナイスしました
-<% when 'bookmark' %>
-  <%= link_to "あなたの質問", question_path(notification.question.id) %>
-  をブックマークしました
-<% end %>
+<div class="row border py-2">
+  <div class="col">
+    <% visitor = notification.visitor %>
+    <% visited = notification.visited %>
+    <div class="row">
+      <%= link_to user_path(visitor.id) do %>
+        <%= image_tag visitor.get_profile_image(40, 40), class: "rounded-circle" %>
+      <% end %>
+    </div>
+    <div class="row">
+      <% case notification.action %>
+      <% when 'favorite' %>
+      　<% if notification.post.recipe.present? %>
+          <%= link_to recipe_path(notification.post.recipe.id), class: "text-dark" do %>
+            <%= visitor.name %>さんがあなたの投稿をいいねしました
+          <% end %>
+        <% elsif notification.post.shop.present? %>
+          <%= link_to shop_path(notification.post.shop.id), class: "text-dark" do %>
+            <%= visitor.name %>さんがあなたの投稿をいいねしました
+          <% end %>
+        <% else %>
+          <%= link_to item_path(notification.post.item.id), class: "text-dark" do %>
+            <%= visitor.name %>さんがあなたの投稿をいいねしました
+          <% end %>
+        <% end %>
+      <% when 'post_comment' %>
+      　<% if notification.post.recipe.present? %>
+          <%= link_to recipe_path(notification.post.recipe.id), class: "text-dark" do %>
+            <%= visitor.name %>さんがあなたの投稿にコメントしました
+          <% end %>
+        <% elsif notification.post.shop.present? %>
+          <%= link_to shop_path(notification.post.shop.id), class: "text-dark" do %>
+            <%= visitor.name %>さんがあなたの投稿にコメントしました
+          <% end %>
+        <% else %>
+          <%= link_to item_path(notification.post.item.id), class: "text-dark" do %>
+            <%= visitor.name %>さんがあなたの投稿にコメントしました
+          <% end %>
+        <% end %>
+    </div>
+    <div class="row">
+      <span class="ml-2 text-secondary"><%= PostComment.find_by(id: notification.post_comment_id)&.comment %></span>
+
+
+      <% when 'question_like' %>
+        <%= link_to question_path(notification.question.id), class: "text-dark" do %>
+          <%= visitor.name %>さんがあなたの質問に共感しました
+        <% end %>
+      <% when 'answer' %>
+        <%= link_to question_path(notification.answer.question_id), class: "text-dark" do %>
+          <%= visitor.name %>さんがあなたの質問に回答しました
+        <% end %>
+    </div>
+      <div class="row">
+        <span class="ml-2 text-secondary"><%= Answer.find_by(id: notification.answer_id)&.content %></span>
+      <% when 'answer_like' %>
+        <%= link_to question_path(notification.answer.question_id), class: "text-dark" do %>
+          <span><%= visitor.name %>さんがあなたの回答にナイスしました
+        <% end %>
+      <% when 'bookmark' %>
+        <%= link_to question_path(notification.question.id), class: "text-dark" do %>
+          <%= visitor.name %>さんがあなたの質問をブックマークしました
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

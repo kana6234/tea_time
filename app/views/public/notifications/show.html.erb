@@ -1,5 +1,12 @@
-<% if @notifications.present? %>
-  <%= render @notifications %>
-<% else %>
-  通知はありません
-<% end %>
+<div class="container">
+  <h4 class="row text-center title">通知</h4>
+  <div class="row">
+    <div class="col">
+    <% if @notifications.present? %>
+      <%= render @notifications %>
+    <% else %>
+      <p class="col text-center">通知はありません</p>
+    <% end %>
+    </div>
+  </div>
+</div>
