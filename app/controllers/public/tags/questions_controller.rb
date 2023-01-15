@@ -1,6 +1,6 @@
 class Public::Tags::QuestionsController < ApplicationController
   def index
-    @tags = Tag.joins(:questions).where("questions.id IS NOT NULL").includes(:questions).sort {|a,b| b.questions.size <=> a.questions.size}
+    @tags = Tag.eager_load(:questions).where.not(questions: { id: nil}).sort {|a,b| b.questions.size <=> a.questions.size}
   end
 
   def show

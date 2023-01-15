@@ -55,9 +55,16 @@ li{
   font-size: 10px;}
 
 .favorite-btn {
- color: #808080;}
+  color: #808080;}
 .unfavorite-btn {
- color: #e54747;}
+  color: #e54747;}
+
+.bookmark-btn {
+  color: #808080;
+  margin-right: 3px;}
+.unbookmark-btn {
+  color: #28a745;
+  margin-right: 3px;}
 
 h1, h4{
   font-family: 'komorebi-gothic', sans-serif;}

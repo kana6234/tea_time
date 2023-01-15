@@ -17,6 +17,7 @@ class Public::QuestionsController < Public::BaseController
 
   def index
     @questions = Question.all
+    @tags = Tag.eager_load(:questions).where.not(questions: { id: nil})
   end
 
   def show

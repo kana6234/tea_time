@@ -19,7 +19,7 @@ class Public::ItemsController < Public::BaseController
 
   def index
     @items = Item.all
-    @tags = Tag.where(tea_name: true)
+    @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
   end
 
   def show

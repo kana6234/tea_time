@@ -1,13 +1,14 @@
 <% if !user_signed_in? %>
   <%= link_to new_user_session_path do %>
-    ♡<%= question.bookmarks.count %>
+    <i class="fa-regular fa-bookmark bookmark-btn"></i>
   <% end %>
 <% elsif current_user.already_bookmarked?(question) %>
   <%= link_to bookmarks_path(question), method: :delete do %>
-    ♥<%= question.bookmarks.count %>
+    <i class="fa-solid fa-bookmark unbookmark-btn"></i>
   <% end %>
 <% else %>
   <%= link_to bookmarks_path(question), method: :post do %>
-    ♡<%= question.bookmarks.count %>
+    <i class="fa-regular fa-bookmark bookmark-btn"></i>
   <% end %>
 <% end %>
+<%= question.bookmarks.count %>

@@ -1,7 +1,27 @@
-<%= question.content %>
-<% question.question_tags.each do |question_tag| %>
-  <%= question_tag.tag.name %>
-<% end %>
-<%= question.created_at.strftime('%Y/%m/%d') %>
-<%= render 'public/users/link', user: question.user %>
-<%= render 'public/bookmarks/btn', question: question %>
+<div class="row mb-sm-3 border">
+  <div class="col">
+    <div class="row"><%= question.content %>
+      <div class="col text-right">
+        <%= render 'public/bookmarks/btn', question: question %>
+      </div>
+    </div>
+    <div class="row small-text">
+      <i class="fa-regular fa-comment fa-flip-horizontal mt-1 mr-1 my-auto"></i>
+      <span class="my-auto"><%= question.answers.size %></span>
+      <span class="mx-2 text-secondary my-auto">
+        <%= question.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </span>
+      <%= render 'public/users/link', user: question.user %>
+    </div>
+    <div class="row small-text">
+      <div class="my-auto">
+        タグ:
+        <% question.question_tags.each do |question_tag| %>
+          <span class="mr-2 text-secondary">
+            <%= question_tag.tag.name %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
