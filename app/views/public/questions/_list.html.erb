@@ -1,11 +1,11 @@
-<div class="row mb-sm-3 border">
+<div class="row mb-sm-3 border-bottom">
   <div class="col">
     <div class="row"><%= question.content %>
       <div class="col text-right">
         <%= render 'public/bookmarks/btn', question: question %>
       </div>
     </div>
-    <div class="row small-text">
+    <div class="row small_text">
       <i class="fa-regular fa-comment fa-flip-horizontal mt-1 mr-1 my-auto"></i>
       <span class="my-auto"><%= question.answers.size %></span>
       <span class="mx-2 text-secondary my-auto">
@@ -13,7 +13,7 @@
       </span>
       <%= render 'public/users/link', user: question.user %>
     </div>
-    <div class="row small-text">
+    <div class="row small_text">
       <div class="my-auto">
         タグ:
         <% question.question_tags.each do |question_tag| %>

@@ -1,6 +1,6 @@
-<div class="row mb-sm-3 border">
+<div class="row mb-sm-3 border-bottom">
   <div class="col pl-0">
-    <%= image_tag post.get_thumbnail_image(100, 100) %>
+    <%= image_tag post.get_thumbnail_image(100, 100), class: "rounded" %>
   </div>
   <div class="col">
     <div class="row">
@@ -9,10 +9,10 @@
         <%= render 'public/favorites/btn', post: post %>
       </div>
     </div>
-    <p class="row my-0">
+    <p class="row my-0 text-secondary">
       <%= post.catchphrase %>
     </p>
-    <div class="row small-text">
+    <div class="row small_text">
       <%= render 'public/users/link', user: post.user %>
       <div class="my-auto">
         タグ:

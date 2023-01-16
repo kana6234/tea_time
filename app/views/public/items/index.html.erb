@@ -10,6 +10,13 @@
         <% end %>
       <% end %>
     </div>
-    <%= render 'public/tags/tea_name_list', tags: @tags %>
+    <div class="col-sm-3 col-lg-2 px-0">
+      <div class="border text-center">
+        <p class="border_bottom">紅茶の種類</p>
+        <p><% @tags.each do |tag| %>
+          <%= link_to tag.name, tags_item_path(tag.id), class: "text-dark" %><br>
+        <% end %></p>
+      </div>
+    </div>
   </div>
 </div>

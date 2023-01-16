@@ -35,15 +35,15 @@
       <span class="border_bottom">新着投稿</span>
       <% @posts.each do |post| %>
         <% if post.recipe.present? %>
-          <%= link_to recipe_path(post.recipe.id) do %>
+          <%= link_to recipe_path(post.recipe.id), class: "text-dark" do %>
             <%= render 'public/posts/list', post: post %>
           <% end %>
         <% elsif post.shop.present? %>
-          <%= link_to shop_path(post.shop.id) do %>
+          <%= link_to shop_path(post.shop.id), class: "text-dark" do %>
             <%= render 'public/posts/list', post: post %>
           <% end %>
         <% else %>
-          <%= link_to item_path(post.item.id) do %>
+          <%= link_to item_path(post.item.id), class: "text-dark" do %>
             <%= render 'public/posts/list', post: post %>
           <% end %>
         <% end %>
@@ -52,7 +52,7 @@
     <div class="col-6">
       <span class="border_bottom">新着回答</span>
       <% @answers.each do |answer| %>
-        <%= link_to question_path(answer.question.id) do %>
+        <%= link_to question_path(answer.question.id), class: "text-dark" do %>
           <%= render 'public/questions/list', question: answer.question %>
         <% end %>
       <% end %>

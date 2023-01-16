@@ -37,7 +37,7 @@ li{
   padding: 164px 0px;
   font-size: 60px;}
 
-.border-bottom{
+.border_bottom{
   border-bottom: 2px solid #f15f24 !important;
   margin: 1.5rem 0;
   padding: 0 1rem;
@@ -51,22 +51,22 @@ li{
   display: flex;
   height: 30px;}
 
-.small-text{
+.small_text{
   font-size: 10px;}
 
-.favorite-btn {
+.favorite_btn {
   color: #808080;}
-.unfavorite-btn {
+.unfavorite_btn {
   color: #e54747;}
 
-.bookmark-btn {
+.bookmark_btn {
   color: #808080;
   margin-right: 3px;}
-.unbookmark-btn {
+.unbookmark_btn {
   color: #28a745;
   margin-right: 3px;}
 
-h1, h4{
+h1, h4, .font{
   font-family: 'komorebi-gothic', sans-serif;}
 
 /*ヘッダー*/
@@ -85,7 +85,7 @@ h1, h4{
 @media screen and (max-width: 991px){
 .navbar-nav{
   background-color: #f15f24;}
-.navber-text{
+.navber_text{
   color: #fff;}
 }
 
@@ -152,7 +152,7 @@ header{
         width: 100%;}
     }
 
-.nav-item{
+.nav_item{
   margin-bottom: 28px;
   font-size: 20px;
   white-space: nowrap;
@@ -161,7 +161,7 @@ header{
     cursor: pointer;}
   @media screen and (max-width: 840px){
     .nav_item{
-      margin-left: 0;
+      margin-left: 20px;
       font-size: 18px;}
   }
 

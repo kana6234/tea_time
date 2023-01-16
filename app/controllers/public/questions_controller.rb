@@ -17,7 +17,7 @@ class Public::QuestionsController < Public::BaseController
 
   def index
     @questions = Question.all
-    @tags = Tag.eager_load(:questions).where.not(questions: { id: nil})
+    @tags = Tag.find(QuestionTag.group(:tag_id).order('count(tag_id) desc').limit(10).pluck(:tag_id))
   end
 
   def show
