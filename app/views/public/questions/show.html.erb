@@ -1,52 +1,80 @@
-質問詳細画面
+<div class="container">
+  <h4 class="row text-center title">Q&A</h4>
+  <div class="row border rounded p-3">
+    <div class="col">
+      <div class="row">
+        <%= render 'public/users/link', user: @question.user %>さん
+        <span class="ml-2 text-secondary"><%= @question.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+      </div>
+      <div class="row mb-2">
+        <%= @question.content %>
+      </div>
+      <div class="row">
+        <% @question.question_tags.each do |question_tag| %>
+          <%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id), class: "mr-2 text-secondary" %>
+        <% end %>
+      </div>
+      <div class="row mb-2">
+        <% if !user_signed_in? %>
+          <%= link_to "共感", new_user_session_path, class: "btn btn-outline-secondary btn-sm" %>
+        <% elsif current_user.already_question_liked?(@question) %>
+          <%= link_to "共感", question_likes_path(@question), method: :delete, class: "btn btn-success btn-sm" %>
+        <% else %>
+          <%= link_to "共感", question_likes_path(@question), method: :post, class: "btn btn-outline-secondary btn-sm" %>
+        <% end %>
+        <span class="ml-1 mr-3"><%= @question.question_likes.count %></span>
+        <%= render 'public/bookmarks/btn', question: @question %>
+      </div>
+      <div class="row">
+        <% if @question.user == current_user %>
+          <%= link_to '削除', question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-sm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-  <%= render 'public/users/link', user: @question.user %>
-  <%= @question.created_at.strftime('%Y/%m/%d') %>
-  <%= @question.content %>
-  <% if !user_signed_in? %>
-    <%= link_to new_user_session_path do %>
-      ♡<%= @question.question_likes.count %>
-    <% end %>
-  <% elsif current_user.already_question_liked?(@question) %>
-    <%= link_to question_likes_path(@question), method: :delete do %>
-      ♥<%= @question.question_likes.count %>
-    <% end %>
-  <% else %>
-    <%= link_to question_likes_path(@question), method: :post do %>
-      ♡<%= @question.question_likes.count %>
-    <% end %>
-  <% end %>
-  <%= render 'public/bookmarks/btn', question: @question %>
-  <% @question.question_tags.each do |question_tag| %>
-    <%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id) %>
-  <% end %>
-  <% if @question.user == current_user %>
-    <%= link_to '削除する', question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
-
-回答<%= @question.answers.count %>件
+  <div class="border_bottom">
+    回答 <%= @question.answers.count %>件
+  </div>
   <% @question.answers.each do |answer| %>
-    <%= render 'public/users/link', user: answer.user %>
-    <%= answer.created_at.strftime('%Y/%m/%d') %>
-    <%= answer.content %>
-  <% if !user_signed_in? %>
-    <%= link_to new_user_session_path do %>
-      ♡<%= answer.answer_likes.count %>
-    <% end %>
-  <% elsif current_user.already_answer_liked?(answer) %>
-    <%= link_to answer_likes_path(answer), method: :delete do %>
-      ♥<%= answer.answer_likes.count %>
-    <% end %>
-  <% else %>
-    <%= link_to answer_likes_path(answer), method: :post do %>
-      ♡<%= answer.answer_likes.count %>
-    <% end %>
+    <div class="row mb-2 border-bottom px-0">
+      <div class="col">
+        <div class="row">
+          <%= render 'public/users/link', user: answer.user %>さん
+          <span class="ml-2 text-secondary"><%= answer.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        </div>
+        <div class="row mb-2">
+          <%= answer.content %>
+        </div>
+        <div class="row mb-2">
+          <% if !user_signed_in? %>
+            <%= link_to "ナイス", new_user_session_path, class: "btn btn-outline-secondary btn-sm px-1" %>
+          <% elsif current_user.already_answer_liked?(answer) %>
+            <%= link_to "ナイス", answer_likes_path(answer), method: :delete, class: "btn btn-success btn-sm px-1" %>
+          <% else %>
+            <%= link_to "ナイス", answer_likes_path(answer), method: :post, class: "btn btn-outline-secondary btn-sm px-1" %>
+          <% end %>
+          <span class="ml-1 mr-3"><%= answer.answer_likes.count %></span>
+          <% if answer.user == current_user %>
+            <%= link_to "削除", question_answer_path(@question, answer), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
-    <% if answer.user == current_user %>
-      <%= link_to "削除", question_answer_path(@question, answer), method: :delete %>
-    <% end %>
-  <% end %>
+</div>
+
+<div class="container-fluid border-top px-5" style="background-color:#f15f24;">
   <%= form_with model: [@question, @answer] do |f| %>
-    <%= f.text_area :content, placeholder: "回答内容" %>
-    <%= f.submit "回答する" %>
+    <div class="field">
+      <%= f.text_area :content, placeholder: "回答内容", class: "col-12 mt-3", rows: "3" %>
+    </div>
+    <div class="actions text-center pb-2">
+      <% if user_signed_in? %>
+        <%= f.submit "回答する", class: "btn btn-success px-3" %>
+      <% else %>
+        <%= f.submit "ログインして回答する", class: "btn btn-success px-3" %>
+      <% end %>
+    </div>
   <% end %>
+</div>
