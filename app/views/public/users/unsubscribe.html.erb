@@ -1,3 +1,5 @@
-<p>本当に退会しますか？</p>
-<%= link_to '退会しない', user_path(current_user.id) %>
-<%= link_to '退会する', users_withdraw_path(current_user.id, user: {is_deleted: true}), method: :patch, "data-confirm" => "本当に退会しますか？" %>
+<div class="container text-center" style="margin-top:10%;">
+  <p><strong>本当に退会しますか？</strong></p>
+  <%= link_to '退会しない', user_path(current_user.id), class: "btn btn-sm btn-primary mr-4 px-3" %>
+  <%= link_to '退会する', users_withdraw_path(current_user.id, user: {is_deleted: true}), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-sm btn-danger px-4" %>
+</div>

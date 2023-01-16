@@ -1,17 +1,34 @@
-<p>プロフィール編集</p>
-<%= form_with model: @user, url: users_information_path do |f| %>
-  <%= f.label :name, "ユーザー名" %>
-  <%= f.text_field :name, autofocus: true %>
+<div class="container">
+  <h4 class="border_bottom">プロフィール編集</h4>
+    <div class="row">
+      <div class="col px-5 px-sm-0">
+        <%= form_with model: @user, url: users_information_path do |f| %>
+          <div class="field">
+            <%= f.label :name, "ユーザー名", class: "col-sm-3 offset-sm-2" %>
+            <%= f.text_field :name, autofocus: true, class: "col-sm-4 px-0" %>
+          </div>
 
-  <%= f.label :email, "メールアドレス" %>
-  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <div class="field">
+            <%= f.label :email, "メールアドレス", class: "col-sm-3 offset-sm-2" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-4 px-0" %>
+          </div>
 
-  <%= f.label :profile_image, "プロフィール画像" %>
-  <%= f.file_field :profile_image, accept: "image/*" %>
+          <div class="field">
+            <%= f.label :profile_image, "プロフィール画像", class: "col-sm-3 offset-sm-2" %>
+            <%= f.file_field :profile_image, accept: "image/*", class: "col-sm-4 px-0" %>
+          </div>
 
-  <%= f.label :introduction, "自己紹介" %>
-  <%= f.text_area :introduction, autofocus: true %>
+          <div class="field">
+            <%= f.label :introduction, "自己紹介", class: "col-sm-3 offset-sm-2" %>
+            <%= f.text_area :introduction, autofocus: true, class: "col-sm-4 px-0", rows: "5" %>
+          </div>
 
-  <%= f.submit "変更を保存" %>
-  <%= link_to "退会する", users_unsubscribe_path %>
-<% end %>
+          <div class="actions">
+            <%= f.submit "変更を保存", class: "btn btn-success col-8 offset-2 col-sm-2 offset-sm-4 px-0" %>
+            <%= link_to "退会する", users_unsubscribe_path, class: "btn btn-danger col-8 offset-2 col-sm-2 offset-sm-1 mt-3 mt-sm-0 px-0" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

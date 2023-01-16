@@ -24,15 +24,15 @@
       </div>
     </div>
   </div>
-  <div class="row px-3">
+  <div class="row mb-3 px-3">
     <div class="col-12 col-sm-9 border">
       <div class="text-secondary">自己紹介</div>
       <div class="pb-3"><%= @user.introduction %></div>
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
-      <span class="border_bottom">新着投稿</span>
+    <div class="col-6 border-right">
+      <span class="border_bottom mt-0">新着投稿</span>
       <% @posts.each do |post| %>
         <% if post.recipe.present? %>
           <%= link_to recipe_path(post.recipe.id), class: "text-dark" do %>
@@ -49,8 +49,8 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-6">
-      <span class="border_bottom">新着回答</span>
+    <div class="col-6 border-left">
+      <span class="border_bottom mt-0">新着回答</span>
       <% @answers.each do |answer| %>
         <%= link_to question_path(answer.question.id), class: "text-dark" do %>
           <%= render 'public/questions/list', question: answer.question %>
