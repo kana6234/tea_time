@@ -1,15 +1,61 @@
-<p>マイページ</p>
-<%= image_tag @user.get_profile_image(100,100) %>
-<%= @user.name %>
-<%= @user.introduction %>
-<% if @user == current_user %>
-    <p><%= link_to "プロフィール編集", users_information_edit_path %></p>
-<% end %>
-<%= link_to user_posts_path(@user.id) do %>
-  投稿数:<%= @user.posts.count %>
-<% end %>
-<%= link_to user_answers_path(@user.id) do %>
-  回答数:<%= @user.answers.count %>
-<% end %>
-<%= link_to "いいね一覧", favorites_path %>
-<%= link_to "ブックマーク一覧", bookmarks_path %>
+<div class="container mt-4">
+  <div class="row mb-3">
+    <div class="pl-3">
+      <%= image_tag @user.get_profile_image(120,120) %>
+    </div>
+    <div class="col">
+      <div class="row mb-3 pl-3">
+        <h3 class="mb-0"><%= @user.name %></h3>
+        <% if @user == current_user %>
+          <%= link_to "プロフィール編集", users_information_edit_path, class: "ml-sm-3 btn btn-outline-success btn-sm text-dark" %>
+        <% end %>
+      </div>
+      <div class="row pl-3">
+        <%= link_to user_posts_path(@user.id), class: "border_bottom mr-1 mr-sm-3 my-0 px-2 font text-dark" do %>
+          投稿数:<%= @user.posts.count %>
+        <% end %>
+        <%= link_to user_answers_path(@user.id), class: "border_bottom mr-1 mr-sm-3 my-0 px-2 font text-dark" do %>
+          回答数:<%= @user.answers.count %>
+        <% end %>
+        <% if @user == current_user %>
+        <%= link_to "いいね一覧", favorites_path, class: "border_bottom mr-1 mr-sm-3 my-0 px-2 font text-dark" %>
+        <%= link_to "ブックマーク一覧", bookmarks_path, class: "border_bottom mr-1 my-0 px-2 font text-dark" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row px-3">
+    <div class="col-12 col-sm-9 border">
+      <div class="text-secondary">自己紹介</div>
+      <div class="pb-3"><%= @user.introduction %></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <span class="border_bottom">新着投稿</span>
+      <% @posts.each do |post| %>
+        <% if post.recipe.present? %>
+          <%= link_to recipe_path(post.recipe.id) do %>
+            <%= render 'public/posts/list', post: post %>
+          <% end %>
+        <% elsif post.shop.present? %>
+          <%= link_to shop_path(post.shop.id) do %>
+            <%= render 'public/posts/list', post: post %>
+          <% end %>
+        <% else %>
+          <%= link_to item_path(post.item.id) do %>
+            <%= render 'public/posts/list', post: post %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <span class="border_bottom">新着回答</span>
+      <% @answers.each do |answer| %>
+        <%= link_to question_path(answer.question.id) do %>
+          <%= render 'public/questions/list', question: answer.question %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
