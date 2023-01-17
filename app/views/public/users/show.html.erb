@@ -30,32 +30,39 @@
       <div class="pb-3"><%= @user.introduction %></div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-6 border-right">
-      <span class="border_bottom mt-0">新着投稿</span>
+
+  <% if @posts.present? %>
+    <h4 class="border_bottom mt-0">新着投稿</h4>
+    <div class="row ml-sm-4 mb-3 mb-sm-0 center-block">
       <% @posts.each do |post| %>
-        <% if post.recipe.present? %>
-          <%= link_to recipe_path(post.recipe.id), class: "text-dark" do %>
-            <%= render 'public/posts/list', post: post %>
+        <div class="col-sm-5 mx-sm-3">
+          <% if post.recipe.present? %>
+            <%= link_to recipe_path(post.recipe.id), class: "text-dark" do %>
+              <%= render 'public/posts/list', post: post %>
+            <% end %>
+          <% elsif post.shop.present? %>
+            <%= link_to shop_path(post.shop.id), class: "text-dark" do %>
+              <%= render 'public/posts/list', post: post %>
+            <% end %>
+          <% else %>
+            <%= link_to item_path(post.item.id), class: "text-dark" do %>
+              <%= render 'public/posts/list', post: post %>
+            <% end %>
           <% end %>
-        <% elsif post.shop.present? %>
-          <%= link_to shop_path(post.shop.id), class: "text-dark" do %>
-            <%= render 'public/posts/list', post: post %>
-          <% end %>
-        <% else %>
-          <%= link_to item_path(post.item.id), class: "text-dark" do %>
-            <%= render 'public/posts/list', post: post %>
-          <% end %>
-        <% end %>
+        </div>
       <% end %>
     </div>
-    <div class="col-6 border-left">
-      <span class="border_bottom mt-0">新着回答</span>
+  <% end %>
+  <% if @answers.present? %>
+    <h4 class="border_bottom mt-0">新着回答</h4>
+    <div class="row ml-sm-4">
       <% @answers.each do |answer| %>
-        <%= link_to question_path(answer.question.id), class: "text-dark" do %>
-          <%= render 'public/questions/list', question: answer.question %>
-        <% end %>
+        <div class="col-sm-5 mx-sm-3">
+          <%= link_to question_path(answer.question.id), class: "text-dark" do %>
+            <%= render 'public/questions/list', question: answer.question %>
+          <% end %>
+        </div>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>

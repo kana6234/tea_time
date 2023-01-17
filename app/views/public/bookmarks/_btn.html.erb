@@ -1,14 +1,14 @@
-<% if !user_signed_in? %>
-  <%= link_to new_user_session_path do %>
-    <i class="fa-regular fa-bookmark bookmark_btn"></i>
+  <% if !user_signed_in? %>
+    <%= link_to new_user_session_path do %>
+      <i class="fa-regular fa-bookmark bookmark_btn"></i>
+    <% end %>
+  <% elsif current_user.already_bookmarked?(question) %>
+    <%= link_to bookmarks_path(question), method: :delete do %>
+      <i class="fa-solid fa-bookmark unbookmark_btn"></i>
+    <% end %>
+  <% else %>
+    <%= link_to bookmarks_path(question), method: :post do %>
+      <i class="fa-regular fa-bookmark bookmark_btn"></i>
+    <% end %>
   <% end %>
-<% elsif current_user.already_bookmarked?(question) %>
-  <%= link_to bookmarks_path(question), method: :delete do %>
-    <i class="fa-solid fa-bookmark unbookmark_btn"></i>
-  <% end %>
-<% else %>
-  <%= link_to bookmarks_path(question), method: :post do %>
-    <i class="fa-regular fa-bookmark bookmark_btn"></i>
-  <% end %>
-<% end %>
-<%= question.bookmarks.count %>
+  <%= question.bookmarks.count %>

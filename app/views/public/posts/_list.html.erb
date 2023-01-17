@@ -1,13 +1,12 @@
-<div class="row mb-sm-3 border-bottom">
+<div class="row mb-sm-3 border-bottom list">
   <div class="col pl-0">
     <%= image_tag post.get_thumbnail_image(100, 100), class: "rounded" %>
   </div>
   <div class="col">
     <div class="row">
-      <%= post.title %>
-      <div class="col text-right">
-        <%= render 'public/favorites/btn', post: post %>
-      </div>
+      <span class="font-weight-bold">
+        <%= post.title %>
+      </span>
     </div>
     <p class="row my-0 text-secondary">
       <%= post.catchphrase %>
@@ -15,13 +14,15 @@
     <div class="row small_text">
       <%= render 'public/users/link', user: post.user %>
       <div class="my-auto pl-2">
-        タグ:
         <% post.post_tags.each do |post_tag| %>
           <span class="mr-2 text-secondary">
-            <%= post_tag.tag.name %>
+            #<%= post_tag.tag.name %>
           </span>
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="col-2 col-lg-1 pl-0 text-right">
+    <%= render 'public/favorites/btn', post: post %>
   </div>
 </div>

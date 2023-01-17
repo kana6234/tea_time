@@ -43,9 +43,10 @@ li{
   padding: 0 1rem;
   display: inline-block;}
 
-.title{
+.page_title{
   margin: 1.5rem 0;
   display: block;}
+
 
 .search_form{
   display: flex;
@@ -60,18 +61,33 @@ li{
   color: #e54747;}
 
 .bookmark_btn {
-  color: #808080;
-  margin-right: 3px;}
+  color: #808080;}
 .unbookmark_btn {
-  color: #28a745;
-  margin-right: 3px;}
+  color: #f15f24;}
 
 h1, h4, .font{
   font-family: 'komorebi-gothic', sans-serif;}
 
+.tag_box{
+  border-right: 2px solid #f15f24;}
+.tag_box:nth-child(4n){
+  border: none;}
+@media screen and (max-width: 991px){
+.tag_box:nth-child(even){
+  border: none;}
+}
+@media screen and (max-width: 575px){
+.tag_box{
+  border: none;}
+}
+
+.list{
+  min-height: 100px;}
+
+
 /*ヘッダー*/
 
-.fa-bell, .navber-text{
+.fa-bell, .navber_text{
   color: #f15f24;}
 
 .navbar-light .navbar-toggler-icon{

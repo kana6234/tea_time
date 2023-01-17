@@ -1,33 +1,36 @@
 <div class="container">
-  <h4 class="row text-center title">Q&A</h4>
+  <h4 class="row text-center page_title">Q&A</h4>
   <div class="row border rounded p-3">
     <div class="col">
       <div class="row">
         <%= render 'public/users/link', user: @question.user %>さん
         <span class="ml-2 text-secondary"><%= @question.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        <div class="col text-right">
+          <%= render 'public/bookmarks/btn', question: @question %>
+        </div>
       </div>
       <div class="row mb-2">
         <%= @question.content %>
       </div>
-      <div class="row">
+      <div class="row small_text text-secondary">
         <% @question.question_tags.each do |question_tag| %>
-          <%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id), class: "mr-2 text-secondary" %>
+          #<%= link_to question_tag.tag.name, tags_question_path(question_tag.tag.id), class: "mr-2 text-secondary" %>
         <% end %>
       </div>
       <div class="row mb-2">
         <% if !user_signed_in? %>
-          <%= link_to "共感", new_user_session_path, class: "btn btn-outline-secondary btn-sm" %>
+          <%= link_to "共感する", new_user_session_path, class: "text-secondary border rounded px-1" %>
         <% elsif current_user.already_question_liked?(@question) %>
-          <%= link_to "共感", question_likes_path(@question), method: :delete, class: "btn btn-success btn-sm" %>
+          <%= link_to "共感した", question_likes_path(@question), method: :delete, class: "text-success border rounded px-1" %>
         <% else %>
-          <%= link_to "共感", question_likes_path(@question), method: :post, class: "btn btn-outline-secondary btn-sm" %>
+          <%= link_to "共感する", question_likes_path(@question), method: :post, class: "text-secondary border rounded px-1" %>
         <% end %>
-        <span class="ml-1 mr-3"><%= @question.question_likes.count %></span>
-        <%= render 'public/bookmarks/btn', question: @question %>
-      </div>
-      <div class="row">
+        <span class="ml-1 mr-2"><%= @question.question_likes.count %></span>
         <% if @question.user == current_user %>
-          <%= link_to '削除', question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-sm" %>
+          |
+          <%= link_to question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "text-danger ml-2" do %>
+            削除<i class="fa-solid fa-trash-can"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -48,15 +51,24 @@
         </div>
         <div class="row mb-2">
           <% if !user_signed_in? %>
-            <%= link_to "ナイス", new_user_session_path, class: "btn btn-outline-secondary btn-sm px-1" %>
+            <%= link_to new_user_session_path, class: "text-secondary" do %>
+              <i class="fa-regular fa-thumbs-up"></i>
+            <% end %>
           <% elsif current_user.already_answer_liked?(answer) %>
-            <%= link_to "ナイス", answer_likes_path(answer), method: :delete, class: "btn btn-success btn-sm px-1" %>
+            <%= link_to answer_likes_path(answer), method: :delete, class: "text-success" do %>
+              <i class="fa-solid fa-thumbs-up"></i>
+            <% end %>
           <% else %>
-            <%= link_to "ナイス", answer_likes_path(answer), method: :post, class: "btn btn-outline-secondary btn-sm px-1" %>
+            <%= link_to answer_likes_path(answer), method: :post, class: "text-secondary" do %>
+              <i class="fa-regular fa-thumbs-up"></i>
+            <% end %>
           <% end %>
-          <span class="ml-1 mr-3"><%= answer.answer_likes.count %></span>
+          <span class="ml-1 mr-2"><%= answer.answer_likes.count %></span>
           <% if answer.user == current_user %>
-            <%= link_to "削除", question_answer_path(@question, answer), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-sm" %>
+            |
+            <%= link_to question_answer_path(@question, answer), method: :delete, "data-confirm" => "本当に削除しますか？", class: "text-danger ml-2" do %>
+              削除<i class="fa-solid fa-trash-can"></i>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -64,7 +76,7 @@
   <% end %>
 </div>
 
-<div class="container-fluid border-top px-5" style="background-color:#f15f24;">
+<div class="container border-top px-5" style="background-color:#f15f24;">
   <%= form_with model: [@question, @answer] do |f| %>
     <div class="field">
       <%= f.text_area :content, placeholder: "回答内容", class: "col-12 mt-3", rows: "3" %>

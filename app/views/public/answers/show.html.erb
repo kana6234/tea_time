@@ -1,8 +1,8 @@
 <div class="container">
   <h4 class="row text-center title"><%= @user.name %>の回答履歴</h4>
-  <div class="row">
+  <div class="row ml-sm-4">
     <% @questions.each do |question| %>
-      <div class="col-sm-6">
+      <div class="col-sm-5 mx-sm-3">
         <%= link_to question_path(question.id) do %>
           <%= render 'public/questions/list', question: question %>
         <% end %>
