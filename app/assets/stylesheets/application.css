@@ -85,6 +85,25 @@ h1, h4, .font{
   min-height: 100px;}
 
 
+.swiper {
+  width: 40%;}
+@media screen and (max-width: 575px){
+.swiper {
+  width: 80%;;
+}}
+.swiper-button-prev, .swiper-button-next {
+  color: #f15f24}
+
+:root {
+  --swiper-navigation-color: #000;
+  --swiper-pagination-color: #000;
+}
+.swiper_image{
+  width: 100%;
+  height: 100%;
+}
+
+
 /*ヘッダー*/
 
 .fa-bell, .navber_text{

@@ -1,39 +1,104 @@
-商品詳細画面
-
-  <%= image_tag @item.post.thumbnail_image %>
-  <% if @item.images.attached? %>
-    <% @item.images.each do |image| %>
-      <%= image_tag image %>
+<div class="container">
+  <h4 class="row text-center page_title">茶葉、紅茶用品</h4>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><%= image_tag @item.post.thumbnail_image, class:'swiper_image' %></div>
+      <% if @item.images.attached? %>
+        <% @item.images.each do |image| %>
+          <div class="swiper-slide"><%= image_tag image, class:'swiper_image' %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+  <div class="row mb-2 mx-0">
+    <span class="col font-weight-bold text-center">
+      <%= @item.post.title %>
+    </span>
+  </div>
+  <div class="row mx-0">
+    <%= render 'public/users/link', user: @item.post.user %>
+      <span class="ml-2 text-secondary">
+        <%= @item.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </span>
+    <div class="col">
+      <% @item.post.post_tags.each do |post_tag| %>
+        <span class="mr-2 text-secondary">
+          #<%= link_to post_tag.tag.name, tags_item_path(post_tag.tag.id), class: "text-secondary" %>
+        </span>
+      <% end %>
+    </div>
+    <div>
+      <%= render 'public/favorites/btn', post: @item.post %>
+    </div>
+  </div>
+  <div class="row mx-0">
+    <span class="col text-center text-secondary">
+      <%= @item.post.catchphrase %>
+    </span>
+  </div>
+  <div class="border_bottom mb-3">商品情報</div>
+  <div class="row mx-0">
+    商品URL:<span class="border-bottom ml-2 px-2"><%= @item.website %></span>
+  </div>
+  <div class="border_bottom">紹介</div>
+  <div class="row mb-2 mx-0 border rounded px-3 pb-3">
+    <%= @item.post.introduction %>
+  </div>
+  <div class="row mx-0 mt-3">
+    <% if @item.post.user == current_user %>
+      <%= link_to '編集する', edit_item_path(@item.id), class: "text-success border rounded px-1" %>
     <% end %>
-  <% end %>
-  <%= render 'public/users/link', user: @item.post.user %>
-  <%= @item.created_at.strftime('%Y/%m/%d') %>
-  <%= @item.post.title %>
-  <%= render 'public/favorites/btn', post: @item.post %>
-  <%= @item.post.catchphrase %>
-  <% @item.post.post_tags.each do |post_tag| %>
-    <%= link_to post_tag.tag.name, tags_item_path(post_tag.tag.id) %>
-  <% end %>
-  <%= @item.post.introduction %>
-  <%= @item.website %>
-  <% if @item.post.user == current_user %>
-  <%= link_to '編集する', edit_item_path(@item.id) %>
-  <% end %>
+  </div>
 
-  コメント<%= @item.post_comments.count %>件
+
+  <div class="border_bottom">
+    コメント<%= @item.post_comments.count %>件
+  </div>
   <% @item.post_comments.each do |post_comment| %>
-    <%= render 'public/users/link', user: post_comment.user %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-    <%= post_comment.comment %>
-    <% if post_comment.comment_image.attached? %>
-      <%= image_tag post_comment.comment_image %>
-    <% end %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", item_post_comment_path(@item, post_comment), method: :delete %>
-    <% end %>
+    <div class="row mb-2 mx-0 border-bottom px-0">
+      <div class="col">
+        <div class="row">
+          <%= render 'public/users/link', user: post_comment.user %>
+          <span class="ml-2 text-secondary">
+            <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </span>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <%= post_comment.comment %>
+          </div>
+          <% if post_comment.comment_image.attached? %>
+            <%= image_tag post_comment.get_comment_image(100, 100), class: "mr-sm-3" %>
+          <% end %>
+        </div>
+        <div class="row mb-2">
+          <% if post_comment.user == current_user %>
+            <%= link_to item_post_comment_path(@item, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "text-danger ml-1" do %>
+              削除<i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
+</div>
+
+<div class="container border-top px-5" style="background-color:#f15f24;">
   <%= form_with model: [@item, @post_comment] do |f| %>
-    <%= f.text_area :comment, placeholder: "コメント" %>
-    <%= f.file_field :comment_image, accept: "image/*" %>
-    <%= f.submit "送信する" %>
+    <div class="field">
+      <%= f.text_area :comment, placeholder: "コメント", class: "col-12 mt-3", rows: "3" %>
+    </div>
+    <div class="field">
+      <%= f.file_field :comment_image, accept: "image/*" %>
+    </div>
+    <div class="actions text-center pb-2">
+      <% if user_signed_in? %>
+        <%= f.submit "コメントする", class: "btn btn-success px-3" %>
+      <% else %>
+        <%= f.submit "ログインしてコメントする", class: "btn btn-success px-3", class: "btn btn-success px-3" %>
+      <% end %>
   <% end %>
+</div>

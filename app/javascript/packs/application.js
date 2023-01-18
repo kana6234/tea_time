@@ -14,6 +14,8 @@ import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "script.js"
+import Swiper from 'swiper/swiper-bundle.js';
+import 'swiper/swiper-bundle.css';
 
 Rails.start()
 Turbolinks.start()

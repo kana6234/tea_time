@@ -20,4 +20,8 @@ class PostComment < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+
+  def get_comment_image(width, height)
+    comment_image.variant(resize_to_limit: [width, height]).processed
+  end
 end

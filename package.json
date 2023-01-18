@@ -11,6 +11,7 @@
     "cocoon": "github:nathanvda/cocoon#c24ba53",
     "jquery": "^3.6.3",
     "popper.js": "^1.16.1",
+    "swiper": "^8.4.6",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
