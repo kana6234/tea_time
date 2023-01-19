@@ -14,8 +14,8 @@
     <%= material.name %>
     <%= material.quantity %>
   <% end %>
-  <% @recipe.steps.each do |step| %>
-    <%= step.no %>
+  <% @recipe.steps.each_with_index do |step, i| %>
+    <%= i+1 %>
     <%= step.content %>
   <% end %>
   <% if @recipe.post.user == current_user %>

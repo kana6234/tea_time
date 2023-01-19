@@ -1,6 +1,7 @@
-<div class="nested-fields">
-  <%= f.text_field :no, value: "1" %>
-  <%= f.label :content, "内容" %>
-  <%= f.text_field :content %>
-  <%= link_to_remove_association "remove task", f %>
+<div class="nested-fields mt-3">
+  <%= f.label :content, "内容", class: "col-4 col-sm-2 col-lg-1 offset-sm-3 align-top px-0" %>
+  <%= f.text_area :content, class: "col-7 col-sm-5 px-0", rows: "2" %>
+  <%= f.label :image, "写真(任意)", class: "col-4 col-sm-2 col-lg-1 offset-sm-3 px-0" %>
+  <%= f.file_field :image, class: "col-6 col-sm-5 px-0" %>
+  <%= link_to_remove_association "" , f, class: "fa-solid fa-trash-can ml-2" %>
 </div>
