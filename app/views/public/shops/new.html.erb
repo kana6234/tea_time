@@ -9,36 +9,66 @@
     <% end %>
   </div>
 </div>
-<%= form_with model: @shop do |f| %>
-  <%= f.fields_for :post_attributes do |p| %>
-    <%= p.label :title, "タイトル" %>
-    <%= p.text_field :title %>
-    <%= p.label :catchphrase, "キャッチコピー" %>
-    <%= p.text_field :catchphrase %>
-    <%= p.label :thumbnail_image, "サムネイル画像" %>
-    <%= p.file_field :thumbnail_image, accept: "image/*" %>
-    <%= p.label :introduction, "紹介文" %>
-    <%= p.text_area :introduction %>
+<div class="container">
+  <%= form_with model: @shop do |f| %>
+    <%= f.fields_for :post_attributes do |p| %>
+      <div class="field">
+        <%= p.label :title, "タイトル", class: "col-sm-3" %>
+        <%= p.text_field :title, class: "col-sm-4 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :catchphrase, "キャッチコピー", class: "col-sm-3" %>
+        <%= p.text_field :catchphrase, class: "col-sm-6 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :thumbnail_image, "サムネイル画像", class: "col-sm-3" %>
+        <%= p.file_field :thumbnail_image, accept: "image/*", class: "col-sm-5 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :introduction, "紹介文", class: "col-sm-3 align-top" %>
+        <%= p.text_area :introduction, class: "col-sm-6 px-0", rows: "5" %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :tag_names, "タグ", class: "col-sm-3" %>
+      <%= f.text_field :tag_names, placeholder: "おしゃれ　飲み放題", class: "col-sm-6 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :images, "写真", class: "col-sm-3" %>
+      <%= f.file_field :images, multiple: true, class: "col-sm-5 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :shop_name, "店舗名", class: "col-sm-3" %>
+      <%= f.text_field :shop_name, class: "col-sm-5 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :website, "ホームページ", class: "col-sm-3" %>
+      <%= f.text_field :website, placeholder: "http:/", class: "col-sm-4 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :address, "店舗の住所", class: "col-sm-3 border-bottom" %>
+    </div>
+    <div class="field mb-3">
+      <%= f.label :postcode, "〒(ハイフンなし)", autocomplete: 'postcode', class: "col-7 col-sm-3 col-lg-2 offset-sm-3 px-sm-0" %>
+      <%= f.text_field :postcode, placeholder: "0000000", class: "col-4 col-sm-2 col-lg-1 px-0 mb-3 mb-lg-0" %>
+      <%= f.label :prefecture_name, "都道府県", class: "col-4 col-sm-2 col-lg-1 offset-sm-3 offset-lg-0 px-sm-0 pl-lg-2" %>
+      <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: "col-7 col-sm-3 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :address, "市町村・番地", class: "col-sm-2 offset-sm-3 px-sm-0" %>
+      <%= f.text_field :address, class: "col-sm-5 px-0" %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :business_hours, "営業時間", class: "col-sm-3 border-bottom" %>
+    </div>
+    <%= f.fields_for :business_hours do |b| %>
+      <%= render "business_hour_fields", f: b %>
+    <% end %>
+    <div id="detail-association-insertion-point-business_hour"></div>
+      <%= link_to_add_association "追加", f, :business_hours, data: {association_insertion_node: '#detail-association-insertion-point-business_hour', association_insertion_method: 'after'}, class: "offset-sm-3" %>
+    <div class="actions">
+      <%= f.submit "投稿", class: "btn btn-success col-6 offset-3 col-sm-2 offset-sm-4 px-0" %>
+    </div>
   <% end %>
-  <%= f.label :tag_names, "タグ" %>
-  <%= f.text_field :tag_names %>
-  <%= f.label :images, "写真" %>
-  <%= f.file_field :images, multiple: true %>
-  <%= f.label :shop_name, "店舗名" %>
-  <%= f.text_field :shop_name %>
-  <%= f.label :website, "ホームページ" %>
-  <%= f.text_field :website %>
-  <%= f.label :postcode, "郵便番号", autocomplete: 'postcode' %>
-  <%= f.text_field :postcode %>
-  <%= f.label :prefecture_name, "都道府県" %>
-  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
-  <%= f.label :address, "住所" %>
-  <%= f.text_field :address %>
-
-  <%= f.fields_for :business_hours do |b| %>
-    <%= render "business_hour_fields", f: b %>
-  <% end %>
-  <div id="detail-association-insertion-point-business_hour"></div>
-    <%= link_to_add_association "追加ボタン", f, :business_hours, data: {association_insertion_node: '#detail-association-insertion-point-business_hour', association_insertion_method: 'after'} %>
-  <%= f.submit "新期登録" %>
-<% end %>
+</div>

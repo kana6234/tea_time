@@ -1,7 +1,7 @@
 <div class="nested-fields">
-    <%= f.label :start_at, "開始時間" %>
+    <%= f.label :start_at, "開始時間", class: "col-6 col-sm-2 col-lg-1 offset-sm-3 px-0" %>
     <%= f.time_field :start_at %>
-    <%= f.label :finish_at, "終了時間" %>
+    <%= f.label :finish_at, "終了時間", class: "col-6 col-sm-2 col-lg-1 px-0 pl-sm-2" %>
     <%= f.time_field :finish_at %>
-     <%= link_to_remove_association "remove task", f %>
+     <%= link_to_remove_association "" , f, class: "fa-solid fa-trash-can ml-2" %>
 </div>
