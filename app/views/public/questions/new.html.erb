@@ -3,7 +3,7 @@
     <%= form_with model: @question do |f| %>
       <div class="field">
         <%= f.label :content, "質問内容", class: "mr-sm-3" %>
-        <%= f.text_area :content, class: "col-12", rows: "5" %>
+        <%= f.text_area :content, autofocus: true, class: "col-12", rows: "5" %>
       </div>
       <div class="field">
         <%= f.label :tag_names, "タグ", class: "mr-sm-3" %>

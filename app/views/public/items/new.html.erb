@@ -1,21 +1,47 @@
-商品投稿画面
-
-<%= form_with model: @item do |f| %>
-  <%= f.fields_for :post_attributes do |p| %>
-    <%= p.label :title, "タイトル" %>
-    <%= p.text_field :title %>
-    <%= p.label :catchphrase, "キャッチコピー" %>
-    <%= p.text_field :catchphrase %>
-    <%= p.label :thumbnail_image, "サムネイル画像" %>
-    <%= p.file_field :thumbnail_image, accept: "image/*" %>
-    <%= p.label :introduction, "紹介文" %>
-    <%= p.text_area :introduction %>
+<div class="container_field">
+  <h4 class="row text-center page_title">新規投稿</h4>
+  <div class="tabbar mb-4">
+    <%= link_to "レシピ", new_recipe_path, class: "tabbar_tab tabbar_text border bg-light" %>
+    <%= link_to "お店", new_shop_path, class: "tabbar_tab tabbar_text border bg-light" %>
+    <%= link_to new_item_path, class: "tabbar_tab tabbar_text border border-bottom-0" do %>
+      茶葉<span class="min_hidden">、</span><br class="sp_br">紅茶用品
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <%= form_with model: @item do |f| %>
+    <%= f.fields_for :post_attributes do |p| %>
+      <div class="field">
+        <%= p.label :title, "商品名", class: "col-sm-3" %>
+        <%= p.text_field :title, autofocus: true, class: "col-sm-4 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :catchphrase, "キャッチコピー", class: "col-sm-3" %>
+        <%= p.text_field :catchphrase, placeholder: "セカンドフラッシュのダージリンブレンドです", class: "col-sm-6 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :thumbnail_image, "サムネイル画像", class: "col-sm-3" %>
+        <%= p.file_field :thumbnail_image, accept: "image/*", class: "col-sm-5 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :introduction, "紹介文", class: "col-sm-3 align-top" %>
+        <%= p.text_area :introduction, class: "col-sm-6 px-0", rows: "5" %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :tag_names, "タグ", class: "col-sm-3" %>
+      <%= f.text_field :tag_names, placeholder: "茶葉　ダージリン　お土産", class: "col-sm-6 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :website, "商品URL", class: "col-sm-3" %>
+      <%= f.text_field :website, placeholder: "http:/", class: "col-sm-6 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :images, "商品画像", class: "col-sm-3" %>
+      <%= f.file_field :images, multiple: true %>
+    </div>
+    <div class="actions">
+      <%= f.submit "投稿", class: "btn btn-success col-6 offset-3 col-sm-2 offset-sm-4 px-0" %>
+    </div>
   <% end %>
-  <%= f.label :tag_names, "タグ" %>
-  <%= f.text_field :tag_names %>
-  <%= f.label :website, "商品URL" %>
-  <%= f.text_field :website %>
-  <%= f.label :images, "商品画像" %>
-  <%= f.file_field :images, multiple: true %>
-  <%= f.submit "新規登録" %>
-<% end %>
+</div>

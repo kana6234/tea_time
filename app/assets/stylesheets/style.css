@@ -1,0 +1,215 @@
+ul{
+  padding-left: 0;}
+
+li{
+  list-style: none;}
+
+
+.top_img{
+  width: 100%;
+  height: 400px;
+  background-image: url("top_image.jpg");
+  background-position: left;
+  background-size: cover;
+  color: #f15f24;
+  text-align: center;}
+
+.top_img_content{
+  width: 100%;
+  background-color: rgba(255,255,255,0.3);
+  text-align: center;
+  padding: 164px 0px;
+  font-size: 60px;}
+
+.border_bottom{
+  border-bottom: 2px solid #f15f24 !important;
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+  display: inline-block;}
+
+.page_title{
+  margin: 1.5rem 0;
+  display: block;}
+
+
+.search_form{
+  display: flex;
+  height: 30px;}
+
+.small_text{
+  font-size: 10px;}
+
+.favorite_btn, .bookmark_btn{
+  color: #808080;}
+.unfavorite_btn {
+  color: #e54747;}
+.unbookmark_btn {
+  color: #f15f24;}
+
+h1, h4, .font{
+  font-family: 'komorebi-gothic', sans-serif;}
+
+.tag_box{
+  border-right: 2px solid #f15f24;}
+.tag_box:nth-child(4n){
+  border: none;}
+@media screen and (max-width: 991px){
+.tag_box:nth-child(even){
+  border: none;}
+}
+@media screen and (max-width: 575px){
+.tag_box{
+  border: none;}
+}
+
+.list{
+  min-height: 100px;}
+
+
+.swiper {
+  width: 40%;}
+@media screen and (max-width: 575px){
+.swiper {
+  width: 80%;;
+}}
+.swiper-button-prev, .swiper-button-next, .tabbar_text{
+  color: #f15f24}
+
+:root {
+  --swiper-navigation-color: #000;
+  --swiper-pagination-color: #000;
+}
+.swiper_image{
+  width: 100%;
+  height: 100%;
+}
+
+.tabbar{
+  width: 100%;
+  height: 50px;
+  display:table;
+  text-align: center;
+}
+.tabbar_tab{
+  width: 33%;
+  display:table-cell;
+  vertical-align:middle;
+}
+.sp_br {
+  display: none;
+}
+@media screen and (max-width: 575px) {
+  .sp_br {
+    display: block;}
+  .min_hidden {
+    display: none;}
+}
+
+
+
+/*ヘッダー*/
+
+.fa-bell, .navber_text{
+  color: #f15f24;}
+
+.navbar-light .navbar-toggler-icon{
+  /* 三本線 */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 95, 36, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+
+.navbar-light .navbar-toggler{
+  /* 枠線 */
+  border-color: rgba(0,0,0,0);}
+
+@media screen and (max-width: 991px){
+.navbar-nav{
+  background-color: #f15f24;}
+.navber_text{
+  color: #fff;}
+}
+
+/*会員のヘッダー*/
+.button{
+ background-color: #fff;
+ text-align: center;
+ color: #f15f24;}
+.button:hover{
+ background-color: #f15f24;
+ color: #fff;}
+
+header{
+  position: relative;}
+
+.nav_header{
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  width: auto;
+  height: 50px;
+  text-align: right;
+  display:flex;}
+
+/*ハンバーガーボタン*/
+.el_humburger{
+  cursor: pointer;
+  pointer-events: auto;
+  color: #000;}
+
+@media screen and (max-width: 840px){
+  .el_humburger{
+    display: block;
+    right: 20;
+    top: 20;}
+    #factory .el_humburger {
+      display: none;}
+}
+
+
+.nav{
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: #f15f24;
+  width: 350px;
+  z-index: 3;
+  padding-top: 100px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 600ms ease-out;
+  -o-transition: all 600ms ease-out;
+  transition: all 600ms ease-out;
+  transform:translateZ(0) translateX(100%);
+  overflow: auto;}
+  .js_humburgerOpen .nav{
+    left: auto;
+    transform:translateZ(0) translateX(0);}
+    @media screen and (max-width: 840px){
+      .nav{
+        padding: 100px 5% 0;}
+      .js_humburgerOpen .nav{
+        width: 100%;}
+    }
+
+.nav_item{
+  margin-bottom: 28px;
+  font-size: 20px;
+  white-space: nowrap;
+  margin-left: 90px;}
+  .nav_item.op_innerLink{
+    cursor: pointer;}
+  @media screen and (max-width: 840px){
+    .nav_item{
+      margin-left: 20px;
+      font-size: 18px;}
+  }
+
+/*field*/
+.field{
+  margin-bottom: 20px;
+}
+
+/*fonts*/
+@font-face{
+  font-family: 'komorebi-gothic';
+  src: url('../fonts/omorebi-gothic-P.ttf') format('opentype');
+}

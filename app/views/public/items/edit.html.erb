@@ -1,22 +1,40 @@
-商品情報編集画面
-
-<%= form_with model: @item do |f| %>
-  <%= f.fields_for :post do |p| %>
-    <%= p.label :title, "タイトル" %>
-    <%= p.text_field :title %>
-    <%= p.label :catchphrase, "キャッチコピー" %>
-    <%= p.text_field :catchphrase %>
-    <%= p.label :thumbnail_image, "サムネイル画像" %>
-    <%= p.file_field :thumbnail_image, accept: "image/*" %>
-    <%= p.label :introduction, "紹介文" %>
-    <%= p.text_area :introduction %>
+<div class="container">
+  <h4 class="row text-center page_title">茶葉、紅茶用品</h4>
+  <h4 class="border_bottom">編集</h4>
+  <%= form_with model: @item do |f| %>
+    <%= f.fields_for :post do |p| %>
+      <div class="field">
+        <%= p.label :title, "商品名", class: "col-sm-3" %>
+        <%= p.text_field :title, autofocus: true, class: "col-sm-4 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :catchphrase, "キャッチコピー", class: "col-sm-3" %>
+        <%= p.text_field :catchphrase, class: "col-sm-6 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :thumbnail_image, "サムネイル画像", class: "col-sm-3" %>
+        <%= p.file_field :thumbnail_image, accept: "image/*", class: "col-sm-5 px-0" %>
+      </div>
+      <div class="field">
+        <%= p.label :introduction, "紹介文", class: "col-sm-3 align-top" %>
+        <%= p.text_area :introduction, class: "col-sm-6 px-0", rows: "5" %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :tag_names, "タグ", class: "col-sm-3" %>
+      <%= f.text_field :tag_names, class: "col-sm-6 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :website, "商品URL", class: "col-sm-3" %>
+      <%= f.text_field :website, class: "col-sm-6 px-0" %>
+    </div>
+    <div class="field">
+      <%= f.label :images, "商品画像", class: "col-sm-3" %>
+      <%= f.file_field :images, multiple: true %>
+    </div>
+    <div class="actions">
+      <%= f.submit "変更を保存", class: "btn btn-success col-8 offset-2 col-sm-2 offset-sm-4 px-0" %>
+      <%= link_to '削除する', item_path(@item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger col-8 offset-2 col-sm-2 offset-sm-1 mt-3 mt-sm-0 px-0" %>
+    </div>
   <% end %>
-  <%= f.label :tag_names, "タグ" %>
-  <%= f.text_field :tag_names %>
-  <%= f.label :website, "商品URL" %>
-  <%= f.text_field :website %>
-  <%= f.label :images, "商品画像" %>
-  <%= f.file_field :images, multiple: true %>
-  <%= f.submit "保存する" %>
-<% end %>
-<%= link_to '削除する', item_path(@item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+</div>
