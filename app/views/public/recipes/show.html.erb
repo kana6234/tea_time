@@ -3,6 +3,16 @@
   <div class="row mx-0">
     <%= image_tag @recipe.post.thumbnail_image, class: "thumbnail_img_content rounded" %>
     <div class="col">
+      <div class="row mb-2">
+        <span class="col font-weight-bold text-center">
+          <%= @recipe.post.title %>
+        </span>
+      </div>
+      <div class="row mb-2">
+        <span class="col text-center text-secondary">
+          <%= @recipe.post.catchphrase %>
+        </span>
+      </div>
       <div class="row mx-0">
         <%= render 'public/users/link', user: @recipe.post.user %>
           <span class="px-sm-0 ml-2 text-secondary">
@@ -18,16 +28,6 @@
         <div>
           <%= render 'public/favorites/btn', post: @recipe.post %>
         </div>
-      </div>
-      <div class="row mb-2">
-        <span class="col font-weight-bold text-center">
-          <%= @recipe.post.title %>
-        </span>
-      </div>
-      <div class="row mb-2">
-        <span class="col text-center text-secondary">
-          <%= @recipe.post.catchphrase %>
-        </span>
       </div>
       <div class="row-sm mb-2 mx-0 border rounded px-2 px-lg-3 pb-3">
         <%= @recipe.post.introduction %>

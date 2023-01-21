@@ -1,75 +1,161 @@
-お店詳細画面
-  <%= image_tag @shop.post.thumbnail_image %>
-  <% if @shop.images.attached? %>
-    <% @shop.images.each do |image| %>
-      <%= image_tag image %>
-    <% end %>
-  <% end %>
+<div class="container">
+  <h4 class="row text-center page_title">紅茶のお店</h4>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><%= image_tag @shop.post.thumbnail_image, class:'swiper_image' %></div>
+      <% if @shop.images.attached? %>
+        <% @shop.images.each do |image| %>
+          <div class="swiper-slide">
+            <%= image_tag image, class:'swiper_image' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+  <div class="row mb-2 mx-0">
+    <span class="col font-weight-bold text-center">
+      <%= @shop.post.title %>
+    </span>
+  </div>
+  <div class="row mx-0">
+    <span class="col text-center text-secondary">
+      <%= @shop.post.catchphrase %>
+    </span>
+  </div>
+  <div class="row mx-0">
   <%= render 'public/users/link', user: @shop.post.user %>
-  <%= @shop.created_at.strftime('%Y/%m/%d') %>
-  <%= @shop.post.title %>
-  <%= render 'public/favorites/btn', post: @shop.post %>
-  <%= @shop.post.catchphrase %>
-  <% @shop.post.post_tags.each do |post_tag| %>
-    <%= link_to post_tag.tag.name, tags_shop_path(post_tag.tag.id) %>
-  <% end %>
-  <%= @shop.post.introduction %>
-  <%  @shop.business_hours.each do |business_hour| %>
-    <%= l business_hour.start_at %>
-    <%= l business_hour.finish_at %>
-  <% end %>
-  <%= @shop.website %>
-  <%= @shop.prefecture_name + @shop.address %>
-<script type="text/javascript">
-     function initMap() {
-       var test = {lat: <%= @shop.latitude %>, lng: <%= @shop.longitude %>};
-       var map = new google.maps.Map(document.getElementById('map'), {
-                 zoom: 15,
-                 center: test
-                 });
-       var transitLayer = new google.maps.TransitLayer();
-       transitLayer.setMap(map);
-       var contentString = '住所：<%= @shop.address %>';
-       var infowindow = new google.maps.InfoWindow({
-         content: contentString
-       });
-       var marker = new google.maps.Marker({
-                     position:test,
-                     map: map,
-                     title: contentString
-                   });
-       marker.addListener('click', function() {
-         infowindow.open(map, marker);
-       });
-     }
-   </script>
-   <script async defer
-             src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
-   </script>
-   <style type="text/css">
-     #map { height: 200px;
-           width: 70%;}
-   </style>
-   <div id="map"></div>
+    <span class="ml-2 text-secondary">
+      <%= @shop.created_at.strftime('%Y/%m/%d %H:%M') %>
+    </span>
+    <div class="col px-2">
+      <% @shop.post.post_tags.each do |post_tag| %>
+        <span class="mr-2 text-secondary">
+          #<%= link_to post_tag.tag.name, tags_shop_path(post_tag.tag.id), class: "text-secondary" %>
+        </span>
+      <% end %>
+    </div>
+    <div>
+      <%= render 'public/favorites/btn', post: @shop.post %>
+    </div>
+  </div>
+  <div class="border_bottom mb-3 font-weight-bold">
+    紹介
+  </div>
+  <div class="row mb-2 mx-0 border rounded px-2 px-lg-3 pb-3">
+    <%= @shop.post.introduction %>
+  </div>
+  <div class="border_bottom font-weight-bold">
+    店舗情報
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg">
+      <div class="row mx-0 border-bottom mb-3">
+        <div class="col-5 col-sm-3 px-0">店舗名</div>
+        <div class="col"><%= @shop.shop_name %></div>
+      </div>
+      <div class="row mx-0 border-bottom mb-3">
+        <div class="col-5 col-sm-3 px-0">営業時間</div>
+        <div class="col">
+          <%  @shop.business_hours.each do |business_hour| %>
+            <span class="mr-3"><%= l business_hour.start_at %>~<%= l business_hour.finish_at %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="row mx-0 border-bottom mb-3">
+        <div class="col-5 col-sm-3 px-0">ホームページ</div>
+        <div class="col"><%= @shop.website %></div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 pull-right">
+      <div class="row mx-0 border-bottom mb-3">
+        <div class="col-5 col-sm-3 col-lg-2 px-0">住所</div>
+        <div class="col"><%= @shop.prefecture_name + @shop.address %></div>
+      </div>
+      <div id="map"></div>
+    </div>
+  </div>
 
-  <% if @shop.post.user == current_user %>
-  <%= link_to '編集する', edit_shop_path(@shop.id) %>
-  <% end %>
+  <div class="row mx-0 mt-3">
+    <% if @shop.post.user == current_user %>
+      <%= link_to '編集する', edit_shop_path(@shop.id), class: "text-success border rounded px-1" %>
+    <% end %>
+  </div>
 
-  コメント<%= @shop.post_comments.count %>件
+  <div class="border_bottom font-weight-bold">
+    コメント<%= @shop.post_comments.count %>件
+  </div>
   <% @shop.post_comments.each do |post_comment| %>
-    <%= render 'public/users/link', user: post_comment.user %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-    <%= post_comment.comment %>
-    <% if post_comment.comment_image.attached? %>
-      <%= image_tag post_comment.comment_image %>
-    <% end %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", shop_post_comment_path(@shop, post_comment), method: :delete %>
-    <% end %>
+    <div class="row mb-2 mx-0 border-bottom px-0">
+      <div class="col">
+        <div class="row">
+          <%= render 'public/users/link', user: post_comment.user %>
+          <span class="ml-2 text-secondary">
+            <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </span>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <%= post_comment.comment %>
+          </div>
+          <% if post_comment.comment_image.attached? %>
+            <%= image_tag post_comment.get_comment_image, class: "mr-sm-3 rounded" %>
+          <% end %>
+        </div>
+        <div class="row mb-2">
+          <% if post_comment.user == current_user %>
+            <%= link_to shop_post_comment_path(@shop, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "text-danger ml-1" do %>
+              削除<i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
+</div>
+
+<div class="container border-top px-5" style="background-color:#f15f24;">
   <%= form_with model: [@shop, @post_comment] do |f| %>
-    <%= f.text_area :comment, placeholder: "コメント" %>
-    <%= f.file_field :comment_image, accept: "image/*" %>
-    <%= f.submit "送信する" %>
+    <div class="field">
+      <%= f.text_area :comment, placeholder: "コメント", class: "col-12 mt-3", rows: "3" %>
+    </div>
+    <div class="field">
+      <%= f.file_field :comment_image, accept: "image/*" %>
+    </div>
+    <div class="actions text-center pb-2">
+      <% if user_signed_in? %>
+        <%= f.submit "コメントする", class: "btn btn-success px-3" %>
+      <% else %>
+        <%= f.submit "ログインしてコメントする", class: "btn btn-success px-3", class: "btn btn-success px-3" %>
+      <% end %>
   <% end %>
+</div>
+
+<script type="text/javascript">
+  function initMap() {
+    var test = {lat: <%= @shop.latitude %>, lng: <%= @shop.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 15,
+              center: test
+              });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+    var contentString = '住所：<%= @shop.address %>';
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+                  position:test,
+                  map: map,
+                  title: contentString
+                  });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+</script>

@@ -5,7 +5,9 @@
       <div class="swiper-slide"><%= image_tag @item.post.thumbnail_image, class:'swiper_image' %></div>
       <% if @item.images.attached? %>
         <% @item.images.each do |image| %>
-          <div class="swiper-slide"><%= image_tag image, class:'swiper_image' %></div>
+          <div class="swiper-slide">
+            <%= image_tag image, class:'swiper_image' %>
+          </div>
         <% end %>
       <% end %>
     </div>
@@ -16,6 +18,11 @@
   <div class="row mb-2 mx-0">
     <span class="col font-weight-bold text-center">
       <%= @item.post.title %>
+    </span>
+  </div>
+  <div class="row mx-0">
+    <span class="col text-center text-secondary">
+      <%= @item.post.catchphrase %>
     </span>
   </div>
   <div class="row mx-0">
@@ -33,11 +40,6 @@
     <div>
       <%= render 'public/favorites/btn', post: @item.post %>
     </div>
-  </div>
-  <div class="row mx-0">
-    <span class="col text-center text-secondary">
-      <%= @item.post.catchphrase %>
-    </span>
   </div>
   <div class="border_bottom mb-3 font-weight-bold">
     商品情報
