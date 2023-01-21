@@ -1,41 +1,117 @@
-レシピ詳細画面
-  <%= render 'public/users/link', user: @recipe.post.user %>
-  <%= @recipe.created_at.strftime('%Y/%m/%d') %>
-  <%= @recipe.post.title %>
-  <%= render 'public/favorites/btn', post: @recipe.post %>
-  <%= @recipe.post.catchphrase %>
-  <% @recipe.post.post_tags.each do |post_tag| %>
-    <%= link_to post_tag.tag.name, tags_recipe_path(post_tag.tag.id) %>
-  <% end %>
-  <%= @recipe.post.introduction %>
-  <%= image_tag @recipe.post.thumbnail_image %>
-  <%= @recipe.serves %>
-  <% @recipe.materials.each do |material| %>
-    <%= material.name %>
-    <%= material.quantity %>
-  <% end %>
-  <% @recipe.steps.each_with_index do |step, i| %>
-    <%= i+1 %>
-    <%= step.content %>
-  <% end %>
-  <% if @recipe.post.user == current_user %>
-  <%= link_to '編集する', edit_recipe_path(@recipe.id) %>
-  <% end %>
+<div class="container">
+  <h4 class="row text-center page_title">紅茶のレシピ</h4>
+  <div class="row mx-0">
+    <%= image_tag @recipe.post.thumbnail_image, class: "thumbnail_img_content rounded" %>
+    <div class="col">
+      <div class="row mx-0">
+        <%= render 'public/users/link', user: @recipe.post.user %>
+          <span class="px-sm-0 ml-2 text-secondary">
+            <%= @recipe.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </span>
+        <div class="col-10 col-lg px-2">
+          <% @recipe.post.post_tags.each do |post_tag| %>
+            <span class="mr-2 text-secondary">
+              #<%= link_to post_tag.tag.name, tags_recipe_path(post_tag.tag.id), class: "text-secondary" %>
+            </span>
+          <% end %>
+        </div>
+        <div>
+          <%= render 'public/favorites/btn', post: @recipe.post %>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <span class="col font-weight-bold text-center">
+          <%= @recipe.post.title %>
+        </span>
+      </div>
+      <div class="row mb-2">
+        <span class="col text-center text-secondary">
+          <%= @recipe.post.catchphrase %>
+        </span>
+      </div>
+      <div class="row-sm mb-2 mx-0 border rounded px-2 px-lg-3 pb-3">
+        <%= @recipe.post.introduction %>
+      </div>
+      <div class="row mx-0 mt-3">
+        <% if @recipe.post.user == current_user %>
+          <%= link_to '編集する', edit_recipe_path(@recipe.id), class: "text-success border rounded px-1" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row mx-0">
+    <div class="col-12 col-sm-5 col-lg-3 px-0">
+      <div class="border_bottom mb-3 font-weight-bold">
+        用意するもの (<%= @recipe.serves %>人前)
+      </div>
+      <% @recipe.materials.each do |material| %>
+        <div class="row mx-0 mb-2 border-bottom">
+          <%= material.name %>
+          <span class="col pr-0 text-right"><%= material.quantity %></span>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm">
+      <div class="row mx-sm-0">
+        <div class="border_bottom mb-3 font-weight-bold">
+          手順
+        </div>
+      </div>
+      <% @recipe.steps.each_with_index do |step, i| %>
+        <div class="row mx-sm-0 mb-2 border-bottom">
+          <span class="step_no font-weight-bold"><%= i+1 %></span>
+          <span class="col mb-3"><%= step.content %></span>
+          <%= image_tag step.get_image, class: "my-2 mr-sm-3 rounded" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-  コメント<%= @recipe.post_comments.count %>件
+  <div class="border_bottom font-weight-bold">
+    コメント<%= @recipe.post_comments.count %>件
+  </div>
   <% @recipe.post_comments.each do |post_comment| %>
-    <%= render 'public/users/link', user: post_comment.user %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-    <%= post_comment.comment %>
-    <% if post_comment.comment_image.attached? %>
-      <%= image_tag post_comment.comment_image %>
-    <% end %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", recipe_post_comment_path(@recipe, post_comment), method: :delete %>
-    <% end %>
+    <div class="row mb-2 mx-0 border-bottom px-0">
+      <div class="col">
+        <div class="row">
+          <%= render 'public/users/link', user: post_comment.user %>
+          <span class="ml-2 text-secondary">
+            <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </span>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <%= post_comment.comment %>
+          </div>
+          <% if post_comment.comment_image.attached? %>
+            <%= image_tag post_comment.get_comment_image, class: "mr-sm-3 rounded" %>
+          <% end %>
+        </div>
+        <div class="row mb-2">
+          <% if post_comment.user == current_user %>
+            <%= link_to recipe_post_comment_path(@recipe, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "text-danger ml-1" do %>
+              削除<i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
+</div>
+
+<div class="container border-top px-5" style="background-color:#f15f24;">
   <%= form_with model: [@recipe, @post_comment] do |f| %>
-    <%= f.text_area :comment, placeholder: "コメント" %>
-    <%= f.file_field :comment_image, accept: "image/*" %>
-    <%= f.submit "送信する" %>
+    <div class="field">
+      <%= f.text_area :comment, placeholder: "コメント", class: "col-12 mt-3", rows: "3" %>
+    </div>
+    <div class="field">
+      <%= f.file_field :comment_image, accept: "image/*" %>
+    </div>
+    <div class="actions text-center pb-2">
+      <% if user_signed_in? %>
+        <%= f.submit "コメントする", class: "btn btn-success px-3" %>
+      <% else %>
+        <%= f.submit "ログインしてコメントする", class: "btn btn-success px-3", class: "btn btn-success px-3" %>
+      <% end %>
   <% end %>
+</div>

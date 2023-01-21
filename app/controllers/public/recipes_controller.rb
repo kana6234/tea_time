@@ -63,7 +63,7 @@ class Public::RecipesController < Public::BaseController
   def recipe_params
     params.require(:recipe).permit(:serves,
     post_attributes: [:id, :title, :catchphrase, :thumbnail_image, :introduction],
-    steps_attributes: [:id, :no, :content, :_destroy],
+    steps_attributes: [:id, :content, :image, :_destroy],
     materials_attributes: [:id, :name, :quantity, :_destroy])
   end
 

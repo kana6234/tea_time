@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-3 col-lg-2 px-0">
       <div class="border text-center">
-        <p class="border_bottom">地域</p>
+        <p class="border_bottom font-weight-bold">地域</p>
         <p><% @prefectures.each do |prefecture| %>
           <%= link_to prefecture.prefecture_name, shops_prefecture_path(prefecture.prefecture_code), class: "text-dark" %><br>
         <% end %></p>

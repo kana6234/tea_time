@@ -4,7 +4,9 @@
     <div class="col">
       <div class="row">
         <%= render 'public/users/link', user: @question.user %>さん
-        <span class="ml-2 text-secondary"><%= @question.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        <span class="ml-2 text-secondary">
+          <%= @question.created_at.strftime('%Y/%m/%d %H:%M') %>
+        </span>
         <div class="col text-right">
           <%= render 'public/bookmarks/btn', question: @question %>
         </div>
@@ -36,7 +38,7 @@
     </div>
   </div>
 
-  <div class="border_bottom">
+  <div class="border_bottom font-weight-bold">
     回答 <%= @question.answers.count %>件
   </div>
   <% @question.answers.each do |answer| %>
