@@ -32,7 +32,7 @@ class Post < ApplicationRecord
     end
   end
 
-  def get_thumbnail_image(width, height)
-    thumbnail_image.variant(resize_to_limit: [width, height]).processed
+  def get_thumbnail_image
+    thumbnail_image.variant(resize: "100x100^", gravity: "center", crop: "100x100+0+0").processed
   end
 end

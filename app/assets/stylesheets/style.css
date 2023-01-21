@@ -21,16 +21,23 @@ li{
   padding: 164px 0px;
   font-size: 60px;}
 
-.thumbnail_img_content{
+.header_profile_img{
+  width: 40px;
+  height: 40px;}
+.profile_img{
+  width: 20px;
+  height: 20px;}
+
+.thumbnail_img{
   width: 25%;
   height: 250px;
   text-align: center;}
   @media screen and (max-width: 991px){
-  .thumbnail_img_content{
+  .thumbnail_img{
     width: 41.7%;}
   }
   @media screen and (max-width: 575px){
-  .thumbnail_img_content{
+  .thumbnail_img{
     width: 100%;}
   }
 
@@ -63,13 +70,17 @@ li{
 .unbookmark_btn {
   color: #f15f24;}
 
-h1, h4, .font{
+h1, h4{
   font-family: 'komorebi-gothic', sans-serif;}
 
 .tag_box{
   border-right: 2px solid #f15f24;}
-.tag_box:nth-child(4n){
+@media screen and (min-width: 992px){
+.public.tag_box:nth-child(4n){
   border: none;}
+.admin.tag_box:nth-child(3n){
+  border: none;}
+}
 @media screen and (max-width: 991px){
 .tag_box:nth-child(even){
   border: none;}

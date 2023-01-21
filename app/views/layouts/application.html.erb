@@ -27,7 +27,7 @@
             <ul class="navbar-nav ml-auto pt-4 pr-4">
               <li class="nav_item"><%= link_to '会員一覧', admin_users_path, class: "navber_text" %></li>
               <li class="nav_item"><%= link_to '投稿一覧', admin_top_path, class: "navber_text" %></li>
-              <li class="nav_item"><%= link_to 'Q&A一覧', admin_questions_path, class: "navbertext" %></li>
+              <li class="nav_item"><%= link_to 'Q&A一覧', admin_questions_path, class: "navber_text" %></li>
               <li class="nav_item"><%= link_to 'タグ一覧', admin_tags_path, class: "navber_text" %></li>
               <li class="nav_item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "navber_text" %></li>
             </ul>
@@ -38,7 +38,7 @@
               <i class="fa-solid fa-bell fa-lg"></i>
             <% end %>
             <div class="el_humburger">
-              <%= image_tag current_user.get_profile_image(40, 40), class: "rounded-circle" %>
+              <%= image_tag current_user.get_profile_image, class: " header_profile_img rounded-circle" %>
               <%= current_user.name %>
             </div>
           </div>

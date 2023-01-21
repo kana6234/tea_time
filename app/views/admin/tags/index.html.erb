@@ -1,13 +1,21 @@
-<% @tags.each do |tag| %>
-  <% if tag.tea_name? %>
-    <%= link_to admin_tag_path(tag, tag: {tea_name: false}), method: :patch do %>
-      <i class="fa-solid fa-leaf"></i>
+<div class="container">
+  <h4 class="border_bottom">タグ一覧</h4>
+　<div class="row">
+    <% @tags.each do |tag| %>
+      <div class="col-10 col-sm-6 col-lg-4 offset-1 offset-sm-0 pb-3 admin tag_box border-bottom">
+        <div class="row mx-0">
+        <% if tag.tea_name? %>
+          <%= link_to admin_tag_path(tag, tag: {tea_name: false}), method: :patch do %>
+            <i class="fa-solid fa-leaf"></i>
+          <% end %>
+        <% else %>
+          <%= link_to "＋", admin_tag_path(tag, tag: {tea_name: true}), method: :patch %>
+        <% end %>
+        <span class="col"><%= tag.name %></span>
+        <span class="col-2 px-0 text-right"><%= tag.posts.size %>件</span>
+        <%= link_to "削除", admin_tag_path(tag.id), method: :delete, method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2 px-0 text-right" %>
+        </div>
+      </div>
     <% end %>
-  <% else %>
-    <%= link_to "＋", admin_tag_path(tag, tag: {tea_name: true}), method: :patch %>
-  <% end %>
-  <%= tag.id %>
-  <%= tag.name %>
-  <%= tag.posts.size %>
-  <%= link_to "削除", admin_tag_path(tag.id), method: :delete, method: :delete, "data-confirm" => "本当に削除しますか？" %>
-<% end %>
+  </div>
+</div>

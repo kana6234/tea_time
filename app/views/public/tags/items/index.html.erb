@@ -3,7 +3,7 @@
   <h4 class="border_bottom mt-0">タグ一覧</h4>
 　<div class="row">
     <% @tags.each do |tag| %>
-      <div class="col-10 col-sm-6 col-lg-3 offset-1 offset-sm-0 py-2 tag_box border-bottom">
+      <div class="col-10 col-sm-6 col-lg-3 offset-1 offset-sm-0 py-2 public tag_box border-bottom">
         <%= link_to  tags_item_path(tag.id), class: "row px-3 text-dark" do %>
           <%= tag.name %>
           <span class="col pr-0 text-right"><%= tag.items.size %>件</span>
