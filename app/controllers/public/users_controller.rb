@@ -2,8 +2,8 @@ class Public::UsersController < Public::BaseController
   before_action :check_guest, only:[:update, :withdraw]
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.limit(5).order(created_at: :desc)
-    @answers = @user.answers.limit(5).order(created_at: :desc)
+    @posts = @user.posts.limit(5).recent
+    @answers = @user.answers.limit(5).recent
   end
 
   def edit

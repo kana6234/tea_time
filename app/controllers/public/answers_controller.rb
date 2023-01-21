@@ -12,7 +12,7 @@ class Public::AnswersController < Public::BaseController
   def show
     @user = User.find(params[:user_id])
     answers = Answer.where(user_id: params[:user_id]).pluck(:question_id)
-    @questions = Question.find(answers)
+    @questions = Question.recent.find(answers)
   end
 
   def destroy

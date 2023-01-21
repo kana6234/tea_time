@@ -18,7 +18,7 @@ class Public::ItemsController < Public::BaseController
   end
 
   def index
-    @items = Item.all
+    @items = Item.recent
     @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
   end
 

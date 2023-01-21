@@ -6,7 +6,7 @@ class Public::BookmarksController < Public::BaseController
   end
 
   def show
-    bookmarks = Bookmark.where(user_id: current_user.id).pluck(:question_id)
+    bookmarks = Bookmark.recent.where(user_id: current_user.id).pluck(:question_id)
     @questions = Question.find(bookmarks)
   end
 

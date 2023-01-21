@@ -20,7 +20,7 @@ class Public::RecipesController < Public::BaseController
   end
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.recent
     @tags = Tag.eager_load(:recipes).where(tea_name: true).where.not(recipes: { id: nil})
   end
 

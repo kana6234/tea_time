@@ -1,6 +1,6 @@
 class Admin::TagsController < ApplicationController
   def index
-    @tags = Tag.all
+    @tags = Tag.recent
   end
 
   def update

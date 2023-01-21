@@ -16,7 +16,7 @@ class Public::QuestionsController < Public::BaseController
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.recent
     @tags = Tag.find(QuestionTag.group(:tag_id).order('count(tag_id) desc').limit(10).pluck(:tag_id))
   end
 

@@ -6,7 +6,7 @@ class Public::FavoritesController < Public::BaseController
   end
 
   def show
-    favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
+    favorites = Favorite.recent.where(user_id: current_user.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
   end
 

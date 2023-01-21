@@ -1,6 +1,6 @@
 class Admin::QuestionsController < Admin::BaseController
   def index
-    @questions = Question.all
+    @questions = Question.recent
   end
 
   def show

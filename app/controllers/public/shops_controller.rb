@@ -19,7 +19,7 @@ class Public::ShopsController < Public::BaseController
   end
 
   def index
-    @shops = Shop.all
+    @shops = Shop.recent
     @prefectures = Shop.select(:prefecture_code).distinct
   end
 
