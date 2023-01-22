@@ -7,4 +7,8 @@ class Item < ApplicationRecord
 
   validates :website, presence: true
   validates :post, presence: true
+
+  def get_image(image)
+    image.variant(resize: "100x100^", gravity: "center", crop: "100x100+0+0").processed
+  end
 end

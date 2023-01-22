@@ -104,6 +104,11 @@ h1, h4{
   text-align: center;
 }
 
+@media screen and (max-width: 575px){
+.table{
+  width: 800px;}
+}
+
 /*スワイパー*/
 .swiper {
   width: 40%;}

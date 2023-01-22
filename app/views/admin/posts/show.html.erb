@@ -1,51 +1,177 @@
-<%= @post.id %>
-<%= @post.title %>
-<%= @post.catchphrase %>
-<% @post.post_tags.each do |post_tag| %>
-  <%= post_tag.tag.name %>
-<% end %>
-<%= @post.introduction %>
-<%= link_to @post.user.name, admin_user_path(@post.user.id) %>
-<%= image_tag @post.thumbnail_image %>
+<div class="container">
+  <h4 class="border_bottom">投稿詳細</h4>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">ID</div>
+    <div class="col">
+      <%= @post.id %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">投稿ユーザー</div>
+    <div class="col">
+      <%= link_to @post.user.name, admin_user_path(@post.user.id) %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">投稿日時</div>
+    <div class="col">
+      <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">タイトル</div>
+    <div class="col">
+      <%= @post.title %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">キャッチコピー</div>
+    <div class="col">
+      <%= @post.catchphrase %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">タグ</div>
+    <div class="col">
+      <% @post.post_tags.each do |post_tag| %>
+        #<%= post_tag.tag.name %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mb-5 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">紹介文</div>
+    <div class="col">
+      <%= @post.introduction %>
+    </div>
+  </div>
 
-<% if @post.recipe.present? %>
-  <%= @post.recipe.serves %>
-  <% @post.recipe.materials.each do |material| %>
-    <%= material.name %>
-    <%= material.quantity %>
-  <% end %>
-  <% @post.recipe.steps.each do |step| %>
-    <%= step.no %>
-    <%= step.content %>
-  <% end %>
-<% elsif @post.shop.present? %>
-  <% if @post.shop.images.attached? %>
-    <% @post.shop.images.each do |image| %>
-      <%= image_tag image %>
-    <% end %>
-  <% end %>
-  <%  @post.shop.business_hours.each do |business_hour| %>
-    <%= l business_hour.start_at %>
-    <%= l business_hour.finish_at %>
-  <% end %>
-  <%= @post.shop.website %>
-  <%= @post.shop.prefecture_name + @post.shop.address %>
-<% else %>
-  <% if @post.item.images.attached? %>
-    <% @post.item.images.each do |image| %>
-      <%= image_tag image %>
-    <% end %>
-  <% end %>
-  <%= @post.item.website %>
-<% end %>
-<%= link_to '削除する', admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% if @post.recipe.present? %>
+    <div class="row">
+      <div class="col-12 col-sm-5 col-lg-3 pr-sm-0">
+        <div class="border_bottom mb-3 font-weight-bold">
+          材料 (<%= @post.recipe.serves %>人前)
+        </div>
+        <% @post.recipe.materials.each do |material| %>
+          <div class="row mx-0 mb-2 border-bottom">
+            <%= material.name %>
+            <span class="col pr-0 text-right"><%= material.quantity %></span>
+          </div>
+        <% end %>
+      </div>
+      <div class="col">
+        <div class="row mx-0">
+          <div class="border_bottom mb-3 font-weight-bold">
+            手順
+          </div>
+        </div>
+        <% @post.recipe.steps.each_with_index do |step, i| %>
+          <div class="row mx-0 mb-2 border-bottom">
+            <span class="font-weight-bold pr-0"><%= i+1 %></span>
+            <span class="col mb-3"><%= step.content %></span>
+            <%= image_tag step.get_image %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-コメント<%= @post.post_comments.count %>件
+
+  <% elsif @post.shop.present? %>
+    <div class="border_bottom mb-3 font-weight-bold">
+      店舗情報
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">店舗名</div>
+      <div class="col">
+        <%= @post.shop.shop_name %>
+      </div>
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">営業時間</div>
+      <div class="col">
+    <%  @post.shop.business_hours.each do |business_hour| %>
+      <%= l business_hour.start_at %>
+      <%= l business_hour.finish_at %>
+    <% end %>
+      </div>
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">ホームページ</div>
+      <div class="col">
+    <%= @post.shop.website %>
+      </div>
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">住所</div>
+      <div class="col">
+    <%= @post.shop.prefecture_name + @post.shop.address %>
+      </div>
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">写真</div>
+      <div class="col">
+        <% if @post.shop.images.attached? %>
+          <% @post.shop.images.each do |image| %>
+            <%= image_tag @post.shop.get_image(image) %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+
+  <% else %>
+    <div class="border_bottom mb-3 font-weight-bold">
+      商品情報
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">ホームページ</div>
+      <div class="col">
+        <%= @post.item.website %>
+      </div>
+    </div>
+    <div class="row mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">写真</div>
+      <div class="col">
+        <% if @post.item.images.attached? %>
+          <% @post.item.images.each do |image| %>
+            <%= image_tag @post.item.get_image(image) %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mx-0 mt-3">
+    <%= link_to '削除', admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-lg px-3" %>
+  </div>
+
+
+  <div class="border_bottom mb-3 font-weight-bold">
+    コメント<%= @post.post_comments.count %>件
+  </div>
   <% @post.post_comments.each do |post_comment| %>
-    <%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %>
-    <%= post_comment.comment %>
-    <% if post_comment.comment_image.attached? %>
-      <%= image_tag post_comment.comment_image %>
-    <% end %>
-    <%= link_to "削除", item_post_comment_path(@post, post_comment), method: :delete %>
+    <div class="row mx-0 mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">コメントユーザー</div>
+      <div class="col">
+        <%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">コメント日時</div>
+      <div class="col">
+        <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-2 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">内容</div>
+      <div class="col">
+        <div class="row">
+          <span class="col"><%= post_comment.comment %></span>
+          <% if post_comment.comment_image.attached? %>
+            <%= image_tag post_comment.get_comment_image %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= link_to "削除", item_post_comment_path(@post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "mb-5 btn btn-danger btn-lg px-3" %>
   <% end %>
+</div>

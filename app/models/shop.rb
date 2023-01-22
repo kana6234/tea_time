@@ -31,4 +31,9 @@ class Shop < ApplicationRecord
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
+
+
+  def get_image(image)
+    image.variant(resize: "100x100^", gravity: "center", crop: "100x100+0+0").processed
+  end
 end

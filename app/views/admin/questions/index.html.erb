@@ -1,29 +1,31 @@
 <div class="container">
   <h4 class="border_bottom">Q&A一覧</h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">投稿日時</th>
-        <th scope="col">質問内容</th>
-        <th scope="col">タグ</th>
-        <th scope="col">投稿ユーザー</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @questions.each do |question| %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= question.id %></td>
-          <td><%= question.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= link_to question.content, admin_question_path(question.id) %></td>
-          <td>
-            <% question.question_tags.each do |question_tag| %>
-              <%= question_tag.tag.name %>
-            <% end %>
-          </td>
-          <td><%= question.user.name %></td>
+          <th scope="col">id</th>
+          <th scope="col">投稿日時</th>
+          <th scope="col">質問内容</th>
+          <th scope="col">タグ</th>
+          <th scope="col">投稿ユーザー</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+          <tr>
+            <td><%= question.id %></td>
+            <td><%= question.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+            <td><%= link_to question.content, admin_question_path(question.id) %></td>
+            <td>
+              <% question.question_tags.each do |question_tag| %>
+                <span class="sp_br"><%= question_tag.tag.name %></span>
+              <% end %>
+            </td>
+            <td><%= question.user.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

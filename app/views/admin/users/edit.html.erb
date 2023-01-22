@@ -1,16 +1,46 @@
-<%= flash[:alert] %>
-<%= form_with model: @user, url: admin_user_path(@user.id) do |f| %>
-  <%= @user.id %>
-  <%= f.label :name, "名前" %>
-  <%= f.text_field :name, autofocus: true %>
-  <%= f.label :email, "メールアドレス" %>
-  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  <%= f.label :introduction, "自己紹介" %>
-  <%= f.text_field :introduction, autofocus: true %>
-  <%= f.label :is_active, "ステータス" %>
-  <%= f.radio_button :is_deleted, "false" %>
-  <%= f.label :is_deleted, "有効", for: "customer_is_deleted_false" %>
-  <%= f.radio_button :is_deleted, "true" %>
-  <%= f.label :is_deleted, "退会", for: "customer_is_deleted_true" %>
-  <%= f.submit "変更を保存" %>
-<% end %>
+<div class="container">
+  <h4 class="border_bottom"><%= @user.name %>さんの会員情報編集</h4>
+  <%= form_with model: @user, url: admin_user_path(@user.id) do |f| %>
+  <div class="row">
+    <div class="col px-5 px-sm-0">
+    <div class="field">
+      <div class="row mx-0">
+        <ladel class="col-sm-3 offset-sm-2", for="user_id">ID</ladel>
+        <div class="col-sm-4 px-0",id="user_id"><%= @user.id %></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :name, "名前", class: "col-sm-3 offset-sm-2" %>
+      <%= f.text_field :name, autofocus: true, class: "col-sm-4 px-0" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email, "メールアドレス", class: "col-sm-3 offset-sm-2" %>
+      <%= f.email_field :email, autocomplete: "email", class: "col-sm-4 px-0" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :introduction, "自己紹介", class: "col-sm-3 offset-sm-2" %>
+      <%= f.text_area :introduction, class: "col-sm-4 px-0", rows: "5" %>
+    </div>
+
+    <div class="field">
+      <div class="row mx-0">
+        <%= f.label :is_active, "ステータス", class: "col-sm-3 offset-sm-2" %>
+        <div class="col-sm-5 pt-sm-2 px-0">
+          <%= f.radio_button :is_deleted, "false" %>
+          <%= f.label :is_deleted, "有効", for: "customer_is_deleted_false" %>
+          <%= f.radio_button :is_deleted, "true" %>
+          <%= f.label :is_deleted, "退会", for: "customer_is_deleted_true" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "変更を保存", class: "btn btn-success col-8 offset-2 col-sm-2 offset-sm-4 px-0" %>
+    </div>
+  <% end %>
+    </div>
+  </div>
+</div>

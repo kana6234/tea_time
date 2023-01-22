@@ -1,17 +1,64 @@
-<%= @question.id %>
-<%= link_to @question.user.name, admin_user_path(@question.user.id) %>
-<%= @question.created_at.strftime('%Y/%m/%d') %>
-<%= @question.content %>
-<% @question.question_tags.each do |question_tag| %>
-  <%= question_tag.tag.name %>
-<% end %>
-<%= link_to '削除する', admin_question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<div class="container">
+  <h4 class="border_bottom">Q&A詳細</h4>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">ID</div>
+    <div class="col">
+      <%= @question.id %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">質問ユーザー</div>
+    <div class="col">
+      <%= link_to @question.user.name, admin_user_path(@question.user.id) %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">質問日時</div>
+    <div class="col">
+      <%= @question.created_at.strftime('%Y/%m/%d') %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">内容</div>
+    <div class="col">
+      <%= @question.content %>
+    </div>
+  </div>
+  <div class="row mb-3 border-bottom">
+    <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">タグ</div>
+    <div class="col">
+      <% @question.question_tags.each do |question_tag| %>
+        #<%= question_tag.tag.name %>
+      <% end %>
+    </div>
+  </div>
 
-回答<%= @question.answers.count %>件
-<% @question.answers.each do |answer| %>
-  <%= answer.id %>
-  <%= link_to answer.user.name, admin_user_path(answer.user.id) %>
-  <%= answer.created_at.strftime('%Y/%m/%d') %>
-  <%= answer.content %>
-  <%= link_to "削除", admin_question_answer_path(@question, answer), method: :delete %>
-<% end %>
+  <div class="row mx-0 mt-3">
+    <%= link_to '削除', admin_question_path(@question.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-lg px-3" %>
+  </div>
+
+    <div class="border_bottom mb-3 font-weight-bold">
+      回答<%= @question.answers.count %>件
+    </div>
+  <% @question.answers.each do |answer| %>
+    <div class="row mx-0 mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">回答ユーザー</div>
+      <div class="col">
+        <%= link_to answer.user.name, admin_user_path(answer.user.id) %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-3 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">回答日時</div>
+      <div class="col">
+        <%= answer.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-2 border-bottom">
+      <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">コメント</div>
+      <div class="col">
+    <%= answer.content %>
+      </div>
+    </div>
+    <%= link_to "削除", admin_question_answer_path(@question, answer), method: :delete, "data-confirm" => "本当に削除しますか？", class: "mb-5 btn btn-danger btn-lg px-3" %>
+  <% end %>
+</div>
