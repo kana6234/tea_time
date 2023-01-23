@@ -18,7 +18,8 @@ class Public::ItemsController < Public::BaseController
   end
 
   def index
-    @items = Item.recent
+    @items = Item.all
+    @item = Item.recent.page(params[:page])
     @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
   end
 
@@ -52,6 +53,7 @@ class Public::ItemsController < Public::BaseController
     if params[:keyword].present?
       items = Item.pluck(:post_id)
       @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: items)
+      @post = @posts.recent.page(params[:page])
     else
      redirect_to items_path
     end

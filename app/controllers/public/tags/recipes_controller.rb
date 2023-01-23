@@ -6,5 +6,6 @@ class Public::Tags::RecipesController < ApplicationController
   def show
     tag = Tag.find(params[:id])
     @recipes = tag.recipes
+    @recipe = @recipes.recent.page(params[:page])
   end
 end

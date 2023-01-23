@@ -20,7 +20,8 @@ class Public::RecipesController < Public::BaseController
   end
 
   def index
-    @recipes = Recipe.recent
+    @recipes = Recipe.all
+    @recipe = Recipe.recent.page(params[:page])
     @tags = Tag.eager_load(:recipes).where(tea_name: true).where.not(recipes: { id: nil})
   end
 
@@ -54,6 +55,7 @@ class Public::RecipesController < Public::BaseController
     if params[:keyword].present?
       recipes = Recipe.pluck(:post_id)
       @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: recipes)
+      @post = @posts.recent.page(params[:page])
     else
       redirect_to recipes_path
     end

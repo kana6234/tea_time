@@ -6,5 +6,6 @@ class Public::Tags::ItemsController < ApplicationController
   def show
     tag = Tag.find(params[:id])
     @items = tag.items
+    @item = @items.recent.page(params[:page])
   end
 end

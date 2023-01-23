@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   def index
-    @users = User.recent
+    @users = User.recent.page(params[:page])
   end
 
   def show

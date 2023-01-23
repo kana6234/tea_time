@@ -1,6 +1,8 @@
 <%= render 'public/items/search_form' %>
-<% @items.each do |item| %>
+<%= @items.count %>件
+<% @item.each do |item| %>
   <%= link_to item_path(item.id) do %>
     <%= render 'public/posts/list', post: item.post %>
   <% end %>
 <% end %>
+<%= paginate @item %>

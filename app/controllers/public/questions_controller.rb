@@ -16,7 +16,8 @@ class Public::QuestionsController < Public::BaseController
   end
 
   def index
-    @questions = Question.recent
+    @questions = Question.all
+    @question = Question.recent.page(params[:page])
     @tags = Tag.find(QuestionTag.group(:tag_id).order('count(tag_id) desc').limit(10).pluck(:tag_id))
   end
 
@@ -34,6 +35,7 @@ class Public::QuestionsController < Public::BaseController
   def search
     if params[:keyword].present?
       @questions = Question.where('content LIKE ?', "%#{params[:keyword]}%")
+      @question = @questions.recent.page(params[:page])
     else
       redirect_to questions_path
     end

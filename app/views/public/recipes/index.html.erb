@@ -4,7 +4,7 @@
   <%= @recipes.count %>件
   <div class="row">
     <div class="col-sm-8 mr-sm-3">
-      <% @recipes.each do |recipe| %>
+      <% @recipe.each do |recipe| %>
         <%= link_to recipe_path(recipe.id), class: "text-dark" do %>
           <%= render 'public/posts/list', post: recipe.post %>
         <% end %>
@@ -17,6 +17,11 @@
           <%= link_to tag.name, tags_recipe_path(tag.id), class: "text-dark" %><br>
         <% end %></p>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <%= paginate @recipe %>
     </div>
   </div>
 </div>

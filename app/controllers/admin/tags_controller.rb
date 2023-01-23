@@ -1,6 +1,6 @@
 class Admin::TagsController < ApplicationController
   def index
-    @tags = Tag.recent
+    @tags = Tag.recent.page(params[:page]).per(60)
   end
 
   def update

@@ -4,7 +4,7 @@
   <%= @items.count %>件
   <div class="row">
     <div class="col-sm-8 mr-sm-3">
-      <% @items.each do |item| %>
+      <% @item.each do |item| %>
         <%= link_to item_path(item.id), class: "text-dark" do %>
           <%= render 'public/posts/list', post: item.post %>
         <% end %>
@@ -17,6 +17,11 @@
           <%= link_to tag.name, tags_item_path(tag.id), class: "text-dark" %><br>
         <% end %></p>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <%= paginate @item %>
     </div>
   </div>
 </div>

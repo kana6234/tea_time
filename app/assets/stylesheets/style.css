@@ -248,6 +248,48 @@ header{
       font-size: 18px;}
   }
 
+
+/*ページネーション*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+.page, .first, .last, .prev, .next{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-color: #fff;
+  color: #f15f24;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.15s linear;
+}
+.page a, .first a, .last a, .prev a, .next a{
+ color: #f15f24;
+}
+.page.current {
+  background: #f15f24;
+  color: #fff;
+}
+.pagination-item.active {
+  background: #111;
+  color: #fff;
+  pointer-events: none;
+}
+.pagination-item:not(.active):hover {
+  background: #111;
+  color: #fff;
+}
+.pagination > * + * {
+  margin-left: 8px;
+}
+
 /*field*/
 .field{
   margin-bottom: 20px;

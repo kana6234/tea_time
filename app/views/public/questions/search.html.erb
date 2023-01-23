@@ -1,7 +1,9 @@
 質問一覧画面
 <%= render 'search_form' %>
-<% @questions.each do |question| %>
+<%= @questions.count %>件
+<% @question.each do |question| %>
   <%= link_to question_path(question.id) do %>
     <%= render 'public/questions/list', question: question %>
   <% end %>
 <% end %>
+<%= paginate @question %>

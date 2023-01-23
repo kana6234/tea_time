@@ -70,3 +70,5 @@ gem "geocoder"
 gem 'dotenv-rails'
 
 gem 'enum_help'
+
+gem 'kaminari','~> 1.2.1'

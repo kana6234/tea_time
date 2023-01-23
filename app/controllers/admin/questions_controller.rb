@@ -1,6 +1,6 @@
 class Admin::QuestionsController < Admin::BaseController
   def index
-    @questions = Question.recent
+    @questions = Question.recent.page(params[:page])
   end
 
   def show

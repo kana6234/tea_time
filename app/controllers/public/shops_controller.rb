@@ -19,7 +19,8 @@ class Public::ShopsController < Public::BaseController
   end
 
   def index
-    @shops = Shop.recent
+    @shops = Shop.all
+    @shop = Shop.recent.page(params[:page])
     @prefectures = Shop.select(:prefecture_code).distinct
   end
 
@@ -52,7 +53,8 @@ class Public::ShopsController < Public::BaseController
   def search
     if params[:keyword].present?
       shops = Shop.pluck(:post_id)
-      @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: shops)
+      @posts = Post.recent.page(params[:page]).where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: shops)
+      @post = @posts.recent.page(params[:page])
     else
      redirect_to shops_path
     end
@@ -60,6 +62,7 @@ class Public::ShopsController < Public::BaseController
 
   def prefecture
     @shops = Shop.where(prefecture_code: params[:format])
+    @shop = @shops.recent.page(params[:page])
     @prefectures = Shop.select(:prefecture_code).distinct
   end
 
