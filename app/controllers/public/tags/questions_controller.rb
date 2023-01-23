@@ -7,5 +7,6 @@ class Public::Tags::QuestionsController < ApplicationController
     tag = Tag.find(params[:id])
     @questions = tag.questions
     @question = @questions.recent.page(params[:page])
+    @tags = Tag.find(QuestionTag.group(:tag_id).order('count(tag_id) desc').limit(10).pluck(:tag_id))
   end
 end

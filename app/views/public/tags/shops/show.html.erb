@@ -1,8 +1,29 @@
-<%= render 'public/shops/search_form' %>
-<%= @shops.count %>件
-<% @shop.each do |shop| %>
-  <%= link_to shop_path(shop.id) do %>
-    <%= render 'public/posts/list', post: shop.post %>
-  <% end %>
-<% end %>
-<%= paginate @shop %>
+<div class="container">
+  <h4 class="row text-center page_title">紅茶のお店</h4>
+  <%= render 'public/shops/search_form' %>
+  <%= @shops.count %>件
+  <div class="row">
+    <div class="col-sm-8 mr-sm-3">
+      <% @shop.each do |shop| %>
+        <%= link_to shop_path(shop.id), class: "text-dark" do %>
+          <%= render 'public/posts/list', post: shop.post %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm-3 col-lg-2 px-0">
+      <div class="border text-center">
+        <p class="border_bottom font-weight-bold">地域</p>
+        <p>
+          <% @prefectures.each do |prefecture| %>
+            <%= link_to prefecture.prefecture_name, shops_prefecture_path(prefecture.prefecture_code), class: "text-dark" %><br>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <%= paginate @shop %>
+    </div>
+  </div>
+</div>

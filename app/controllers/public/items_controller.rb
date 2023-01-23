@@ -54,6 +54,7 @@ class Public::ItemsController < Public::BaseController
       items = Item.pluck(:post_id)
       @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: items)
       @post = @posts.recent.page(params[:page])
+      @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
     else
      redirect_to items_path
     end

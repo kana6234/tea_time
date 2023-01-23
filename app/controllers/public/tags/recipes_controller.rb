@@ -7,5 +7,6 @@ class Public::Tags::RecipesController < ApplicationController
     tag = Tag.find(params[:id])
     @recipes = tag.recipes
     @recipe = @recipes.recent.page(params[:page])
+    @tags = Tag.eager_load(:recipes).where(tea_name: true).where.not(recipes: { id: nil})
   end
 end

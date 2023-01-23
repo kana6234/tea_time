@@ -7,5 +7,6 @@ class Public::Tags::ShopsController < ApplicationController
     tag = Tag.find(params[:id])
     @shops = tag.shops
     @shop = @shops.recent.page(params[:page])
+    @prefectures = Shop.select(:prefecture_code).distinct
   end
 end

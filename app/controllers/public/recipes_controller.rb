@@ -56,6 +56,7 @@ class Public::RecipesController < Public::BaseController
       recipes = Recipe.pluck(:post_id)
       @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: recipes)
       @post = @posts.recent.page(params[:page])
+      @tags = Tag.eager_load(:recipes).where(tea_name: true).where.not(recipes: { id: nil})
     else
       redirect_to recipes_path
     end
