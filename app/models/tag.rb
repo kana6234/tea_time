@@ -8,4 +8,8 @@ class Tag < ApplicationRecord
   has_many :questions, through: :question_tags, dependent: :destroy
 
   validates :name, presence: true
+  
+  scope :is_recipe, -> { eager_load(:recipes).where.not(recipes: { id: nil}) }
+  scope :is_item, -> { eager_load(:items).where.not(items: { id: nil}) }
+  scope :tea_name, -> { where(tea_name: true) }
 end

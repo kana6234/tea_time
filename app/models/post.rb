@@ -15,6 +15,8 @@ class Post < ApplicationRecord
   validates :introduction, presence: true
   validates :thumbnail_image, presence: true
 
+  scope :search, ->(keyword) { where('catchphrase || title LIKE ?', "%#{keyword}%") }
+
   def save_tags(sent_tag_names)
     current_tag_names = self.tags.pluck(:name)
     new_tag_names = sent_tag_names - current_tag_names

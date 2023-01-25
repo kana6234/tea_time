@@ -22,7 +22,7 @@ class Public::RecipesController < Public::BaseController
   def index
     @recipes = Recipe.all
     @recipe = Recipe.recent.page(params[:page])
-    @tags = Tag.eager_load(:recipes).where(tea_name: true).where.not(recipes: { id: nil})
+    @tags = Tag.tea_name.is_recipe
   end
 
   def show
@@ -53,10 +53,10 @@ class Public::RecipesController < Public::BaseController
 
   def search
     if params[:keyword].present?
-      recipes = Recipe.pluck(:post_id)
-      @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: recipes)
-      @post = @posts.recent.page(params[:page])
-      @tags = Tag.eager_load(:recipes).where(tea_name: true).where.not(recipes: { id: nil})
+      posts = Post.search(params[:keyword])
+      @recipes = Recipe.where(post_id: posts.ids)
+      @recipe = @recipes.recent.page(params[:page])
+      @tags = Tag.tea_name.is_recipe
     else
       redirect_to recipes_path
     end

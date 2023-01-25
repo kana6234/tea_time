@@ -52,9 +52,9 @@ class Public::ShopsController < Public::BaseController
 
   def search
     if params[:keyword].present?
-      shops = Shop.pluck(:post_id)
-      @posts = Post.recent.page(params[:page]).where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: shops)
-      @post = @posts.recent.page(params[:page])
+      posts = Post.search(params[:keyword])
+      @shops = Shop.where(post_id: posts.ids)
+      @shop = @shops.recent.page(params[:page])
       @prefectures = Shop.select(:prefecture_code).distinct
     else
      redirect_to shops_path

@@ -20,7 +20,7 @@ class Public::ItemsController < Public::BaseController
   def index
     @items = Item.all
     @item = Item.recent.page(params[:page])
-    @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
+    @tags = Tag.tea_name.is_item
   end
 
   def show
@@ -51,10 +51,10 @@ class Public::ItemsController < Public::BaseController
 
   def search
     if params[:keyword].present?
-      items = Item.pluck(:post_id)
-      @posts = Post.where('catchphrase || title LIKE ?', "%#{params[:keyword]}%").where(id: items)
-      @post = @posts.recent.page(params[:page])
-      @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
+      posts = Post.search(params[:keyword])
+      @items = Item.where(post_id: posts.ids)
+      @item = @items.recent.page(params[:page])
+      @tags = Tag.tea_name.is_item
     else
      redirect_to items_path
     end

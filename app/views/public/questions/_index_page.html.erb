@@ -1,0 +1,40 @@
+<div class="container">
+  <h4 class="row text-center page_title">Q&A</h4>
+  <div class="row mb-4">
+    <div class="col-8 col-sm-7 offset-sm-1">
+      <%= form_with url: questions_search_path, local: true, method: :get, class: "search_form" do |f| %>
+        <%= f.text_field :keyword, class: "form-control" %>
+        <button type="submit" class="btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      <% end %>
+    </div>
+    <%= link_to "質問する", new_question_path, class: "mx-auto ml-sm-5 btn btn-outline-success text-dark" %>
+  </div>
+  <%= @questions.size %>件
+  <div class="row">
+    <div class="col-sm-8 mr-sm-3">
+      <% @question.each do |question| %>
+        <%= link_to question_path(question.id), class: "text-dark" do %>
+          <%= render 'public/questions/list', question: question %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm-3 col-lg-2 px-0">
+      <div class="border text-center">
+        <p class="border_bottom font-weight-bold">タグ</p>
+        <p>
+          <% @tags.each do |tag| %>
+            <%= link_to tag.name, tags_question_path(tag.id), class: "text-dark" %><br>
+          <% end %>
+        </p>
+        <%= link_to "全てのタグを見る>", tags_questions_path, class: "border-top pt-2 text-dark" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <%= paginate @question %>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,6 @@ class Public::Tags::ItemsController < ApplicationController
     tag = Tag.find(params[:id])
     @items = tag.items
     @item = @items.recent.page(params[:page])
-    @tags = Tag.eager_load(:items).where(tea_name: true).where.not(items: { id: nil})
+    @tags = Tag.tea_name.is_item
   end
 end
