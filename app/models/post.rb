@@ -10,8 +10,8 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  validates :title, presence: true
-  validates :catchphrase, presence: true
+  validates :title, presence: true, length: { maximum: 30 }
+  validates :catchphrase, presence: true, length: { maximum: 60 }
   validates :introduction, presence: true
   validates :thumbnail_image, presence: true
 
@@ -28,9 +28,11 @@ class Post < ApplicationRecord
         old_post_tag.destroy
       end
     end
-    new_tag_names.each do |new_tag_name|
+    new_tag_names.uniq.each do |new_tag_name|
       new_tag = Tag.find_or_create_by(name: new_tag_name)
-      PostTag.create!(post_id: self.id, tag_id: new_tag.id)
+      if new_tag.name.length <= 20 then
+        PostTag.create!(post_id: self.id, tag_id: new_tag.id)
+      end
     end
   end
 

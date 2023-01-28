@@ -8,8 +8,10 @@ class Public::ItemsController < Public::BaseController
   def create
     @item = Item.new(item_params)
     @item.post.user_id = current_user.id
-    if params[:item][:tag_names].present? && @item.save
-      sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif @item.save
       @item.post.save_tags(sent_tag_names)
       redirect_to item_path(@item.id)
     else
@@ -34,8 +36,10 @@ class Public::ItemsController < Public::BaseController
 
   def update
     @item = Item.find(params[:id])
-    if params[:item][:tag_names].present? && @item.update(item_params)
-      sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif @item.update(item_params)
       @item.post.save_tags(sent_tag_names)
       redirect_to item_path(@item.id)
     else

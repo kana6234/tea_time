@@ -6,8 +6,10 @@ class Public::QuestionsController < Public::BaseController
 
   def create
     @question = current_user.questions.new(question_params)
-    if params[:question][:tag_names].present? && @question.save
-      sent_tag_names = params[:question][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:question][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif  @question.save
       @question.save_tags(sent_tag_names)
       redirect_to question_path(@question.id)
     else

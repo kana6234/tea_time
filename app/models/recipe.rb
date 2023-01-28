@@ -6,7 +6,7 @@ class Recipe < ApplicationRecord
   has_many :post_comments, through: :post
   accepts_nested_attributes_for :post, :steps, :materials, allow_destroy: true, update_only: true
 
-  validates :serves, presence: true
+  validates :serves, presence: true, length: { in: 1..5 }
   validates :post, presence: true
   validates :steps, presence: true
   validates :materials, presence: true

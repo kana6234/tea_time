@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   has_many :post_comments, through: :post
   accepts_nested_attributes_for :post, allow_destroy: true, update_only: true
 
-  validates :website, presence: true
+  validates :website, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/
   validates :post, presence: true
 
   def get_image(image)

@@ -6,9 +6,10 @@ class Shop < ApplicationRecord
   has_many :post_comments, through: :post
   accepts_nested_attributes_for :post, :business_hours, allow_destroy: true, update_only: true
 
-  validates :shop_name, presence: true
-  validates :postcode, presence: true
-  validates :prefecture_code, presence: true
+  validates :shop_name, presence: true, length: { maximum: 30 }
+  validates :website, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/
+  validates :postcode, presence: true, length: { is: 7 }
+  validates :prefecture_code, presence: true, length: { in: 1..47 }
   validates :address, presence: true
   validates :post, presence: true
   validates :business_hours, presence: true

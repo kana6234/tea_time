@@ -10,8 +10,10 @@ class Public::RecipesController < Public::BaseController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.post.user_id = current_user.id
-    if params[:recipe][:tag_names].present? && @recipe.save
-      sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif @recipe.save
       @recipe.post.save_tags(sent_tag_names)
       redirect_to recipe_path(@recipe.id)
     else
@@ -36,8 +38,10 @@ class Public::RecipesController < Public::BaseController
 
   def update
     @recipe = Recipe.find(params[:id])
-    if params[:recipe][:tag_names].present? && @recipe.update(recipe_params)
-      sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif @recipe.update(recipe_params)
       @recipe.post.save_tags(sent_tag_names)
       redirect_to recipe_path(@recipe.id)
     else

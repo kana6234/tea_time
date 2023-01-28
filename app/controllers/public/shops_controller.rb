@@ -9,8 +9,10 @@ class Public::ShopsController < Public::BaseController
   def create
     @shop = Shop.new(shop_params)
     @shop.post.user_id = current_user.id
-    if params[:shop][:tag_names].present? && @shop.save
-      sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif @shop.save
       @shop.post.save_tags(sent_tag_names)
       redirect_to shop_path(@shop.id)
     else
@@ -35,8 +37,10 @@ class Public::ShopsController < Public::BaseController
 
   def update
     @shop = Shop.find(params[:id])
-    if params[:shop][:tag_names].present? && @shop.update(shop_params)
-      sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
+    sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
+    if sent_tag_names.blank? || sent_tag_names.size > 10
+      render :new
+    elsif @shop.update(shop_params)
       @shop.post.save_tags(sent_tag_names)
       redirect_to shop_path(@shop.id)
     else
