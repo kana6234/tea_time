@@ -48,7 +48,7 @@
             </div>
             <div class="nav_inner">
               <div class="nav_item"><%= link_to '投稿する', new_recipe_path, class: "text-light" %></div>
-              <div class="nav_item"><%= link_to '自分のページ', user_path(current_user), class: "text-light" %></div>
+              <div class="nav_item"><%= link_to 'マイページ', user_path(current_user), class: "text-light" %></div>
               <div class="nav_item"><%= link_to 'プロフィール編集', users_information_edit_path, class: "text-light" %></div>
               <div class="nav_item"><%= link_to 'いいね一覧', favorites_path, class: "text-light" %></div>
               <div class="nav_item"><%= link_to 'Q&Aブックマーク一覧', bookmarks_path, class: "text-light" %></div>

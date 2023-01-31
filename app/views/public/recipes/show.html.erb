@@ -61,7 +61,9 @@
         <div class="row mx-sm-0 mb-2 border-bottom">
           <span class="step_no font-weight-bold"><%= i+1 %></span>
           <span class="col mb-3"><%= step.content %></span>
-          <%= image_tag step.get_image, class: "my-2 mr-sm-3 rounded" %>
+          <% if step.image.attached? %>
+            <%= image_tag step.get_image, class: "my-2 mr-sm-3 rounded" %>
+          <% end %>
         </div>
       <% end %>
     </div>

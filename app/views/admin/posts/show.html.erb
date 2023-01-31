@@ -68,7 +68,9 @@
           <div class="row mx-0 mb-2 border-bottom">
             <span class="font-weight-bold pr-0"><%= i+1 %></span>
             <span class="col mb-3"><%= step.content %></span>
-            <%= image_tag step.get_image %>
+            <% if step.image.attached? %>
+              <%= image_tag step.get_image %>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -172,6 +174,6 @@
         </div>
       </div>
     </div>
-    <%= link_to "削除", item_post_comment_path(@post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "mb-5 btn btn-danger btn-lg px-3" %>
+    <%= link_to "削除", admin_post_post_comment_path(@post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "mb-5 btn btn-danger btn-lg px-3" %>
   <% end %>
 </div>

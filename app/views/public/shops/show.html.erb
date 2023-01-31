@@ -2,11 +2,11 @@
   <h4 class="row text-center page_title">紅茶のお店</h4>
   <div class="swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide"><%= image_tag @shop.post.thumbnail_image, class:'swiper_image' %></div>
+      <div class="swiper-slide"><%= image_tag @shop.post.get_thumbnail_image, class:'swiper_image' %></div>
       <% if @shop.images.attached? %>
         <% @shop.images.each do |image| %>
           <div class="swiper-slide">
-            <%= image_tag image, class:'swiper_image' %>
+            <%= image_tag @shop.get_image(image), class:'swiper_image' %>
           </div>
         <% end %>
       <% end %>
