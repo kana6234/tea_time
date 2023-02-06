@@ -8,7 +8,7 @@ li{
 .top_img{
   width: 100%;
   height: 400px;
-  background-image: url("top_image.jpg");
+  background-image: image-url("top_image.jpg");
   background-position: left;
   background-size: cover;
   color: #f15f24;
@@ -159,7 +159,7 @@ h1, h4{
 
 .navbar-light .navbar-toggler-icon{
   /* 三本線 */
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 95, 36, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+  background-image: image-url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 95, 36, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
 
 .navbar-light .navbar-toggler{
   /* 枠線 */
