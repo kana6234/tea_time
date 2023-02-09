@@ -57,7 +57,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
-gem 'pry-byebug', group: :development
+group :development, :test do
+  gem 'pry-byebug'
+end
 
 gem 'cocoon'
 
