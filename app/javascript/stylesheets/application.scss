@@ -1,2 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+/*fonts*/
+@font-face {
+  font-family: 'komorebi-gothic';
+  src: url('../fonts/omorebi-gothic-P.ttf') format('opentype');
+}
