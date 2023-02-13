@@ -3,7 +3,7 @@
   <div class="row ml-sm-4">
     <% @questions.each do |question| %>
       <div class="col-sm-5 mx-sm-3">
-        <%= link_to question_path(question.id) do %>
+        <%= link_to question_path(question.id), class: "text-dark" do %>
           <%= render 'public/questions/list', question: question %>
         <% end %>
       </div>

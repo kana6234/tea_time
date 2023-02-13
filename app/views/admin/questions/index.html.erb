@@ -16,13 +16,13 @@
           <tr>
             <td><%= question.id %></td>
             <td><%= question.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-            <td><%= link_to question.content, admin_question_path(question.id) %></td>
+            <td><%= link_to question.content, admin_question_path(question.id), class: "text-dark" %></td>
             <td>
               <% question.question_tags.each do |question_tag| %>
-                <span class="sp_br"><%= question_tag.tag.name %></span>
+                <span class="d-block"><%= question_tag.tag.name %></span>
               <% end %>
             </td>
-            <td><%= question.user.name %></td>
+            <td><%= link_to question.user.name, admin_user_path(question.user.id), class: "text-dark" %></td>
           </tr>
         <% end %>
       </tbody>

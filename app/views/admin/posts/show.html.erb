@@ -9,7 +9,7 @@
   <div class="row mb-3 border-bottom">
     <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">投稿ユーザー</div>
     <div class="col">
-      <%= link_to @post.user.name, admin_user_path(@post.user.id) %>
+      <%= link_to @post.user.name, admin_user_path(@post.user.id), class: "text-dark" %>
     </div>
   </div>
   <div class="row mb-3 border-bottom">
@@ -90,22 +90,23 @@
     <div class="row mb-3 border-bottom">
       <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">営業時間</div>
       <div class="col">
-    <%  @post.shop.business_hours.each do |business_hour| %>
-      <%= l business_hour.start_at %>
-      <%= l business_hour.finish_at %>
-    <% end %>
+        <%  @post.shop.business_hours.each do |business_hour| %>
+          <%= l business_hour.start_at %>
+          <%= l business_hour.finish_at %>
+        <% end %>
       </div>
     </div>
     <div class="row mb-3 border-bottom">
       <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">ホームページ</div>
       <div class="col">
-    <%= @post.shop.website %>
+        <%= @post.shop.website %>
       </div>
     </div>
     <div class="row mb-3 border-bottom">
       <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">住所</div>
       <div class="col">
-    <%= @post.shop.prefecture_name + @post.shop.address %>
+        〒<%= @post.shop.postcode %><br>
+        <%= @post.shop.prefecture_name + @post.shop.address %>
       </div>
     </div>
     <div class="row mb-3 border-bottom">
@@ -154,7 +155,7 @@
     <div class="row mx-0 mb-3 border-bottom">
       <div class="col-5 col-sm-3 col-lg-2 pr-0 border-right">コメントユーザー</div>
       <div class="col">
-        <%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %>
+        <%= link_to post_comment.user.name, admin_user_path(post_comment.user.id), class: "text-dark" %>
       </div>
     </div>
     <div class="row mx-0 mb-3 border-bottom">

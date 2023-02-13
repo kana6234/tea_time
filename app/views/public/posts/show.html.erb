@@ -4,15 +4,15 @@
     <% @posts.each do |post| %>
       <div class="col-sm-5 mx-sm-3">
         <% if post.recipe.present? %>
-          <%= link_to recipe_path(post.recipe.id) do %>
+          <%= link_to recipe_path(post.recipe.id), class: "text-dark" do %>
             <%= render 'public/posts/list', post: post %>
           <% end %>
         <% elsif post.shop.present? %>
-          <%= link_to shop_path(post.shop.id) do %>
+          <%= link_to shop_path(post.shop.id), class: "text-dark" do %>
             <%= render 'public/posts/list', post: post %>
           <% end %>
         <% else %>
-          <%= link_to item_path(post.item.id) do %>
+          <%= link_to item_path(post.item.id), class: "text-dark" do %>
             <%= render 'public/posts/list', post: post %>
           <% end %>
         <% end %>

@@ -5,15 +5,15 @@
       <div class="col-10 col-sm-6 col-lg-4 offset-1 offset-sm-0 pb-3 admin tag_box border-bottom">
         <div class="row mx-0">
         <% if tag.tea_name? %>
-          <%= link_to admin_tag_path(tag, tag: {tea_name: false}), method: :patch do %>
+          <%= link_to admin_tag_path(tag, tag: {tea_name: false}), method: :patch, class: "text-success" do %>
             <i class="fa-solid fa-leaf"></i>
           <% end %>
         <% else %>
-          <%= link_to "＋", admin_tag_path(tag, tag: {tea_name: true}), method: :patch %>
+          <%= link_to "＋", admin_tag_path(tag, tag: {tea_name: true}), method: :patch, class: "text-success" %>
         <% end %>
         <span class="col"><%= tag.name %></span>
-        <span class="col-2 px-0 text-right"><%= tag.posts.size %>件</span>
-        <%= link_to "削除", admin_tag_path(tag.id), method: :delete, method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2 px-0 text-right" %>
+        <span class="col-2 px-0 text-right"><%= tag.posts.size + tag.questions.size %>件</span>
+        <%= link_to "削除", admin_tag_path(tag.id), method: :delete, method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2 px-0 text-right text-danger" %>
         </div>
       </div>
     <% end %>
