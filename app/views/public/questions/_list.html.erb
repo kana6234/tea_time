@@ -5,13 +5,17 @@
         <%= question.content %>
       </span>
     </div>
-    <div class="row small_text">
-      <i class="fa-regular fa-comment fa-flip-horizontal mt-1 mr-1 my-auto"></i>
-      <span class="my-auto"><%= question.answers.size %></span>
-      <span class="mx-2 text-secondary my-auto">
-        <%= question.created_at.strftime('%Y/%m/%d %H:%M') %>
-      </span>
-      <%= render 'public/users/link', user: question.user %>
+    <div class="row">
+      <div col="col small_text">
+        <i class="fa-regular fa-comment fa-flip-horizontal mt-1 mr-1 my-auto"></i>
+        <span class="my-auto"><%= question.answers.size %></span>
+      </div>
+      <div col="col small_text">
+        <span class="mx-2 text-secondary my-auto">
+          <%= question.created_at.strftime('%Y/%m/%d %H:%M') %>
+        </span>
+        <%= render 'public/users/link', user: question.user %>
+      </div>
     </div>
     <div class="row small_text">
       <div class="my-auto">
