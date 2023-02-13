@@ -6,15 +6,15 @@
       </span>
     </div>
     <div class="row">
-      <i class="fa-regular fa-comment fa-flip-horizontal mt-1 mr-1 my-auto"></i>
-      <span class="my-auto small_text"><%= question.answers.size %></span>
+      <i class="fa-regular fa-comment fa-flip-horizontal fa-lg mr-1 my-auto"></i>
+      <span class="my-auto"><%= question.answers.size %></span>
       <span class="mx-2 text-secondary my-auto small_text">
         <%= question.created_at.strftime('%Y/%m/%d %H:%M') %>
       </span>
     </div>
     <div class="row small_text">
       <%= render 'public/users/link', user: question.user %>
-      <div class="my-auto">
+      <div class="my-auto pl-2">
         <% question.question_tags.each do |question_tag| %>
           <span class="mr-2 text-secondary">
             #<%= question_tag.tag.name %>
