@@ -39,7 +39,7 @@ class Public::ShopsController < Public::BaseController
     @shop = Shop.find(params[:id])
     sent_tag_names = params[:shop][:tag_names].split(/[[:blank:]]+/)
     if sent_tag_names.blank? || sent_tag_names.size > 10
-      render :new
+      render :edit
     elsif @shop.update(shop_params)
       @shop.post.save_tags(sent_tag_names)
       redirect_to shop_path(@shop.id)

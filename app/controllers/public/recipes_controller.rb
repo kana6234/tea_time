@@ -40,7 +40,7 @@ class Public::RecipesController < Public::BaseController
     @recipe = Recipe.find(params[:id])
     sent_tag_names = params[:recipe][:tag_names].split(/[[:blank:]]+/)
     if sent_tag_names.blank? || sent_tag_names.size > 10
-      render :new
+      render :edit
     elsif @recipe.update(recipe_params)
       @recipe.post.save_tags(sent_tag_names)
       redirect_to recipe_path(@recipe.id)

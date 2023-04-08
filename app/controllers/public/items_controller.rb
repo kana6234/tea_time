@@ -38,7 +38,7 @@ class Public::ItemsController < Public::BaseController
     @item = Item.find(params[:id])
     sent_tag_names = params[:item][:tag_names].split(/[[:blank:]]+/)
     if sent_tag_names.blank? || sent_tag_names.size > 10
-      render :new
+      render :edit
     elsif @item.update(item_params)
       @item.post.save_tags(sent_tag_names)
       redirect_to item_path(@item.id)
