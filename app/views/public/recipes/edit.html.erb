@@ -22,7 +22,7 @@
     <% end %>
     <div class="field">
       <%= f.label :tag_names, "タグ", class: "col-sm-3" %>
-      <%= f.text_field :tag_names, class: "col-sm-6 px-0" %>
+      <%= f.text_field :tag_names, value: @tags, class: "col-sm-6 px-0" %>
     </div>
     <div class="field">
       <%= f.label :materials, "材料", class: "col-3 col-sm-3 border-bottom" %>

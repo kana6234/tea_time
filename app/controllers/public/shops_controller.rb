@@ -33,6 +33,7 @@ class Public::ShopsController < Public::BaseController
 
   def edit
     @shop = Shop.find(params[:id])
+    @tags = @shop.post.tags.tags_join
   end
 
   def update

@@ -34,6 +34,7 @@ class Public::RecipesController < Public::BaseController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    @tags = @recipe.post.tags.tags_join
   end
 
   def update

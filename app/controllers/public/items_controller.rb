@@ -32,6 +32,7 @@ class Public::ItemsController < Public::BaseController
 
   def edit
     @item = Item.find(params[:id])
+    @tags = @item.post.tags.tags_join
   end
 
   def update
