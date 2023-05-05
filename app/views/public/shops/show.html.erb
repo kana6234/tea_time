@@ -72,7 +72,10 @@
     <div class="col-12 col-lg-6 pull-right">
       <div class="row mx-0 border-bottom mb-3">
         <div class="col-5 col-sm-3 col-lg-2 px-0">住所</div>
-        <div class="col"><%= @shop.prefecture_name + @shop.address %></div>
+        <div class="col">
+          〒<%= @shop.postcode %><br>
+          <%= @shop.prefecture_name + @shop.address %>
+        </div>
       </div>
       <div id="map"></div>
     </div>
