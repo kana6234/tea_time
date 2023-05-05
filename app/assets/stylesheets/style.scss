@@ -194,7 +194,21 @@ h1, h4 {
 
 /*ヘッダー*/
 
-.fa-bell, .navber_text {
+.fa-stack {
+  line-height: 1em;
+}
+
+.fa-circle {
+  left: 17px;
+  font-size: 10px;
+  color: #f15f24;
+}
+
+.fa-bell {
+  color: #343a40;
+}
+
+.navber_text {
   color: #f15f24;
 }
 

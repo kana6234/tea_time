@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/c20f320e9b.js" crossorigin="anonymous"></script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kit.fontawesome.com/c20f320e9b.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -36,7 +36,14 @@
         <% elsif user_signed_in? %>
           <div class="nav_header">
             <%= link_to notifications_path, class: "mt-2 mr-3" do %>
-              <i class="fa-solid fa-bell fa-lg"></i>
+              <% if unchecked_notifications.any? %>
+                <span class="fa-stack">
+                  <i class="fa-regular fa-bell" style="font-size: 1.5em;"></i>
+                  <i class="fa-solid fa-circle fa-stack-2x"></i>
+                </span>
+              <% else %>
+                <span><i class="fa-regular fa-bell" style="font-size: 1.5em;"></i></span>
+              <% end %>
             <% end %>
             <div class="el_humburger">
               <%= image_tag current_user.get_profile_image, class: " header_profile_img rounded-circle" %>
