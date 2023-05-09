@@ -10,7 +10,7 @@ class Shop < ApplicationRecord
   validates :website, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/
   validates :postcode, presence: true, length: { is: 7 }
   validates :prefecture_code, presence: true, length: { in: 1..47 }
-  validates :address, presence: true
+  validates :address, presence: true, numericality: { only_integer: true }
   validates :post, presence: true
   validates :business_hours, presence: true
 

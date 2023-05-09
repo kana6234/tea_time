@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 20 }
+  validates :email, presence: true
   validates :introduction, length: { maximum: 200 }
 
   def active_for_authentication?
