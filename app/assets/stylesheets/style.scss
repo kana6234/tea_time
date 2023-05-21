@@ -8,11 +8,17 @@ li {
 
 .field_with_errors input{
   border-radius: 3px;
-  border-color: red;
+  border-color: #ff0000;
 }
 
 .error_message {
-  color: red;
+  color: #ff0000;
+}
+
+.alert {
+  color: #ff0000;
+  text-align: center;
+  padding: 0px;
 }
 
 .top_img {
