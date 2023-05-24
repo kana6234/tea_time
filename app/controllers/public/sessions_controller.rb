@@ -36,6 +36,7 @@ class Public::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.valid_password?(params[:user][:password])
       if @user.is_deleted?
+        flash[:alert] = "このアカウントは既に退会しています"
         redirect_to "/users/sign_up"
       end
     end
