@@ -6,11 +6,13 @@
           <div class="field">
             <%= f.label :name, "ユーザー名", class: "col-sm-3 offset-sm-2" %>
             <%= f.text_field :name, autofocus: true, class: "col-sm-4 px-0" %>
+            <%= render "layouts/error_messages", model: @user, attribute: :name %>
           </div>
 
           <div class="field">
             <%= f.label :email, "メールアドレス", class: "col-sm-3 offset-sm-2" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-4 px-0" %>
+            <%= render "layouts/error_messages", model: @user, attribute: :email %>
           </div>
 
           <div class="field">
@@ -21,6 +23,7 @@
           <div class="field">
             <%= f.label :introduction, "自己紹介", class: "col-sm-3 offset-sm-2" %>
             <%= f.text_area :introduction, autofocus: true, class: "col-sm-4 px-0", rows: "5" %>
+            <%= render "layouts/error_messages", model: @user, attribute: :introduction %>
           </div>
 
           <div class="actions">

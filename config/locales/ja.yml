@@ -16,6 +16,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 再入力パスワード
+        introduction: 自己紹介
       admin:
         email: メールアドレス
         password: パスワード
