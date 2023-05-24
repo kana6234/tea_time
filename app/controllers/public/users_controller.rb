@@ -26,6 +26,7 @@ class Public::UsersController < Public::BaseController
     @user = User.find(current_user.id)
     @user.update(deleted_params)
     reset_session
+    flash[:notice] = "退会が完了しました"
     redirect_to root_path
   end
 
