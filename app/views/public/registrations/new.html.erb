@@ -8,25 +8,33 @@
         <div class="field">
           <%= f.label :name, "ユーザー名", class: "col-sm-3 offset-sm-2" %>
           <%= f.text_field :name, autofocus: true, class: "col-sm-4 px-0" %>
-          <%= render "layouts/error_messages", model: @user, attribute: :name %>
+          <div class="offset-sm-5">
+            <%= render "layouts/error_messages", model: @user, attribute: :name %>
+          </div>
         </div>
 
         <div class="field">
           <%= f.label :email, "メールアドレス", class: "col-sm-3 offset-sm-2" %>
           <%= f.email_field :email, autocomplete: "email", class: "col-sm-4 px-0" %>
-          <%= render "layouts/error_messages", model: @user, attribute: :email %>
+          <div class="offset-sm-5">
+            <%= render "layouts/error_messages", model: @user, attribute: :email %>
+          </div>
         </div>
 
         <div class="field">
           <%= f.label :password, "パスワード(6文字以上)", class: "col-sm-3 offset-sm-2 form-label" %>
           <%= f.password_field :password, autocomplete: "new-password", class: "col-sm-4 px-0" %>
-          <%= render "layouts/error_messages", model: @user, attribute: :password %>
+          <div class="offset-sm-5">
+            <%= render "layouts/error_messages", model: @user, attribute: :password %>
+          </div>
         </div>
 
         <div class="field">
           <%= f.label :password_confirmation, "パスワード(確認用)", class: "col-sm-3 offset-sm-2" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-sm-4 px-0" %>
-          <%= render "layouts/error_messages", model: @user, attribute: :password_confirmation %>
+          <div class="offset-sm-5">
+            <%= render "layouts/error_messages", model: @user, attribute: :password_confirmation %>
+          </div>
         </div>
 
         <div class="actions">

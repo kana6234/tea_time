@@ -6,6 +6,10 @@ li {
   list-style: none;
 }
 
+.field_with_errors {
+  display: contents;
+}
+
 .field_with_errors input,
 .field_with_errors textarea{
   border-radius: 3px;
