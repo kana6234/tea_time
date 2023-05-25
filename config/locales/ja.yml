@@ -20,6 +20,8 @@ ja:
       admin:
         email: メールアドレス
         password: パスワード
+      question:
+        content: 質問内容
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
